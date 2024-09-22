@@ -1,5 +1,5 @@
 # mobile-mesh-ews
-## System architecture proposal for a Mobile Edge Sensors System for Early Warning Systems
+## System architecture proposal for a Mobile Edge Sensors Swarm System for Early Warning Systems
 
 #### Innovative usage of vehicles (equipped with sensors for reporting conditions and acquisition of data from different environments), as part of an IoT Edge Cloud Network, autonomously mimicking swarm intelligence, and ready to be integrated to other Early Warning Systems.
 
