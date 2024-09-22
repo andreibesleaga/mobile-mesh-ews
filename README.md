@@ -1,12 +1,12 @@
 # mobile-mesh-ews
-## System architecture proposal for a Mobile Edge Sensors Swarm System for Early Warning Systems
+## System architecture integration proposal for a Live Mobile Edge Sensors Swarm System for Early Warnings and other Climate Systems
 
-#### Innovative usage of vehicles (equipped with sensors for reporting conditions and acquisition of data from different environments), as part of an IoT Edge Cloud Network, autonomously mimicking swarm intelligence, and ready to be integrated to other Early Warning Systems.
+#### Innovative usage of mobile parts (equipped with sensors for reporting conditions and acquisition of data from different environments), as part of an IoT Edge Cloud Network, autonomously mimicking swarm intelligence, and ready to be integrated or corroborated with other Early Warning Systems or Climate Systems.
 
-Part of the idea proposed in the article: https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9 , current repository contains diagramming for such a system (higher-level systems architecture specs) and this presentation (documentation).
+Part of the initial idea proposed in the article: https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9 , current repository contains diagramming for such a system (higher-level systems architecture specs) and this presentation (documentation).
 <br>
 
-A distributed network of mobile devices, from vehicles on the ground (EVs, Cars, etc.), water (ships), air (drones, planes), to special designed robots with sensors (used in special cases scenarios and environments), can be deployed as mobile sensors to monitor and respond to various climate issues, forming a mesh network mimicking swarm intelligence, to be an integral part of other multiple early warning systems.
+A distributed network of mobile devices, from vehicles on the ground (EVs, Cars, etc.), water (ships), air (drones, planes), to special designed robots with sensors (used in special cases scenarios and environments), and real-world tracked flora (used as sensors for pollution, weather anomalies) and fauna (tracked animals and existing statistics databases of their movement and habits), can be deployed as mobile sensors to monitor and respond to various climate issues, forming a mesh network mimicking swarm intelligence, to be used as a part of other systems, or used modularly, within a plugin based approach, for different kind of actions from different services integrated.
 
 
 #### 1. Data Collection and Monitoring
@@ -27,6 +27,9 @@ A distributed network of mobile devices, from vehicles on the ground (EVs, Cars,
 
 ##### Special designed robots:
 - Used for any of the above, in hardly accessible environments.
+
+##### Monitored flora and fauna and existing statistics:
+- Used for specific cases for swarm intelligence - from direct input by monitored flora or animal world (tracked animals, existing stats, directly affected, used as "sensors", to detect anomalies).
 
 
 #### 2. Integration and Communication
