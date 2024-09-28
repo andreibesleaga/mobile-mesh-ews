@@ -14,7 +14,7 @@ A distributed network of mobile devices, from vehicles on the ground (EVs, Cars,
 
 ![SwarmSystem](https://github.com/user-attachments/assets/aa38d42f-d696-476c-9833-723eda018769)
 
-
+This repository contains system proposal descriptions and general diagrams for general, scaling, security, data flow, architecture of such a system.
 
 #### 1. Data Collection and Monitoring
 
