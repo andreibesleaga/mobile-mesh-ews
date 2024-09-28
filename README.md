@@ -45,3 +45,8 @@ A distributed network of mobile devices, from vehicles on the ground (EVs, Cars,
 - Real-Time Assessments: Data from drones and ships can aid in disaster response by providing up-to-date information on affected areas, facilitating rescue and relief operations.
 - Resource Deployment: Optimize the deployment of emergency resources based on real-time data.
 - Analysis and algorithms based on swarm models (both statistical and AI supported on specific trained data in dynamic scenarios), to make faster decisions of the mesh parts, and disaster response itself.
+
+#### Generic System Overview
+
+![SwarmSystem](https://github.com/user-attachments/assets/aa38d42f-d696-476c-9833-723eda018769)
+
