@@ -9,6 +9,13 @@ Part of the initial idea proposed in the article: https://medium.com/@andrei-bes
 A distributed network of mobile devices, from vehicles on the ground (EVs, Cars, etc.), water (ships), air (drones, planes), to special designed robots with sensors (used in special cases scenarios and environments), and real-world tracked flora (used as sensors for pollution, weather anomalies) and fauna (tracked animals and existing statistics databases of their movement and habits), can be deployed as mobile sensors to monitor and respond to various climate issues, forming a mesh network mimicking swarm intelligence, to be used as a part of other systems, or used modularly, within a plugin based approach, for different kind of actions from different services integrated.
 
 
+
+#### Generic System Overview
+
+![SwarmSystem](https://github.com/user-attachments/assets/aa38d42f-d696-476c-9833-723eda018769)
+
+
+
 #### 1. Data Collection and Monitoring
 
 ##### EVs and Cars:
@@ -46,7 +53,10 @@ A distributed network of mobile devices, from vehicles on the ground (EVs, Cars,
 - Resource Deployment: Optimize the deployment of emergency resources based on real-time data.
 - Analysis and algorithms based on swarm models (both statistical and AI supported on specific trained data in dynamic scenarios), to make faster decisions of the mesh parts, and disaster response itself.
 
-#### Generic System Overview
+#### 4. AI Improved Algorithms
 
-![SwarmSystem](https://github.com/user-attachments/assets/aa38d42f-d696-476c-9833-723eda018769)
+- Special trained AI models can improve the statistical decision algorithms that take decisions both on the system itself (where are the sensors needed to be sent in the system, or how the mobile mesh swarm network evoluates in time), and to the incident response teams or systems, as they can know, based on forecasting, where and when they can action, before critical events.
+
+#### Conclusion
+This work in progress is a proposal as to the article idea, with maybe only some things that can be improved in current systems, or thought of as from a different perspective, with their example higher level architectures, while the final complete architectures and implementations might be depending on many other factors.
 
