@@ -1,5 +1,5 @@
 # mobile-mesh-ews
-## System architecture integration proposal for a Live Mobile Edge Sensors Swarm System for Early Warnings and other Climate Systems
+## System Architecture proposal on Live Mobile Edge Sensors Swarm System for Early Warnings and other Climate Systems
 
 #### Innovative usage of mobile parts (equipped with sensors for reporting conditions and acquisition of data from different environments), as part of an IoT Edge Cloud Network, autonomously mimicking swarm intelligence, and ready to be integrated or corroborated with other Early Warning Systems or Climate Systems.
 
