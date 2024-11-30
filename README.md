@@ -58,5 +58,4 @@ This repository contains system proposal descriptions and general diagrams for g
 - Special trained AI models can improve the statistical decision algorithms that take decisions both on the system itself (where are the sensors needed to be sent in the system, or how the mobile mesh swarm network evoluates in time), and to the incident response teams or systems, as they can know, based on forecasting, where and when they can action, before critical events.
 
 #### Conclusion
-This work in progress is a proposal as to the article idea, with maybe only some things that can be improved in current systems, or thought of as from a different perspective, with their example higher level architectures, while the final complete architectures and implementations might be depending on many other factors.
-
+This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level architectures, while the final complete architectures and implementations might be depending on many other factors.
