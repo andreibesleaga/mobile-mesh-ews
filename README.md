@@ -59,5 +59,12 @@ This repository contains system proposal descriptions and general diagrams for g
 
 - Special trained AI models can improve the statistical decision algorithms that take decisions both on the system itself (where are the sensors needed to be sent in the system, or how the mobile mesh swarm network evoluates in time), and to the incident response teams or systems, as they can know, based on forecasting, where and when they can action, before critical events.
 
+#### 5. AI Improved Algorithms by External Systems Aggregated Data
+
+- External available resources could be used in the training of the AI models or immediate decision combination in the decision algorithm.
+As examples, extensive publicly available data from **Google Earth AI** and **NASA Earth AI** can provide already pre-trained models for weighing the decison and the routing part of the system to most critical areas and most likely predicted with problems from
+before AI system training, by using their interconnected data for forecasting.
+
+
 #### Conclusion
 This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level architectures, while the final complete architectures and implementations might be depending on many other factors.
