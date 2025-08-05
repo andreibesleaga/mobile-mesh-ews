@@ -14,7 +14,7 @@ A distributed network of mobile devices, from vehicles on the ground (EVs, Cars,
 
 #### Generic System Overview
 
-![SwarmSystem](https://github.com/user-attachments/assets/aa38d42f-d696-476c-9833-723eda018769)
+![SwarmSystem](https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/SwarmSystem.png)
 
 This repository contains system proposal descriptions and general diagrams for general, scaling, security, data flow, architecture of such a system.
 
