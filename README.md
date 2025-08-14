@@ -62,7 +62,7 @@ This repository contains system proposal descriptions and general diagrams for g
 #### 5. AI Improved Algorithms by External Systems Aggregated Data
 
 - External available resources could be used in the training of the AI models or immediate decision combination in the decision algorithm.
-As examples, extensive publicly available data from **Google Earth AI** and **NASA Earth AI** can provide already pre-trained models for weighing the decison and the routing part of the system to most critical areas and most likely predicted with problems from before AI system training, by using their interconnected data for forecasting, for the pre-setup of the system (eg: limit to most probable certain areas conditions), or advanced use combining real-time results of the system with pre-known data
+As examples, extensive publicly available data from **Google Earth AI** and **NASA Earth AI** can provide already pre-trained models for weighing the decison and the routing part of the system to most critical areas and most likely predicted with problems from before AI system training, by using their interconnected data for forecasting, for the pre-setup of the system (eg: limit to most probable certain areas conditions), or advanced use combining real-time results of the system with pre-known data.
 
 
 #### Conclusion
