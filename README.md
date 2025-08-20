@@ -1,22 +1,24 @@
 # mobile-mesh-ews
 ## System Architecture of Live Mobile Edge Sensors Swarm System for Early Warnings and other Climate Systems
 
-https://medium.com/@andrei-besleaga/innovative-swarm-system-architecture-with-live-mobile-edge-sensors-for-climate-monitoring-and-eb0124e7b451
+[Article on Swarm System Architecture With Live Mobile Sensors for Climate Monitoring](https://medium.com/@andrei-besleaga/innovative-swarm-system-architecture-with-live-mobile-edge-sensors-for-climate-monitoring-and-eb0124e7b451)
 
 #### Innovative usage of mobile parts (equipped with sensors for reporting conditions and acquisition of data from different environments), as part of an IoT Edge Cloud Network, autonomously mimicking swarm intelligence, and ready to be integrated or corroborated with other Early Warning Systems or Climate Systems.
 
-Part of the initial idea proposed in the article: https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9 , current repository contains diagramming for such a system (higher-level systems architecture specs) and this presentation (documentation).
+Part of the initial idea proposed in [the article](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9), current repository contains diagramming for such a system (higher-level systems architecture specs) and this presentation, other documentations, proposals, and implementations.
 <br>
 
 A distributed network of mobile devices, from vehicles on the ground (EVs, Cars, etc.), water (ships), air (drones, planes), to special designed robots with sensors (used in special cases scenarios and environments), and real-world tracked flora (used as sensors for pollution, weather anomalies) and fauna (tracked animals and existing statistics databases of their movement and habits), can be deployed as mobile sensors to monitor and respond to various climate issues, forming a mesh network mimicking swarm intelligence, to be used as a part of other systems, or used modularly, within a plugin based approach, for different kind of actions from different services integrated.
 
+
+A separate implementation of the architecture part for the Decision Brain of the System, using BigQuery AI, is listed in the subdirectory: [BigData AI E2E Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/BigData%20AI%20E2E%20Decision%20System/).
 
 
 #### Generic System Overview
 
 ![SwarmSystem](https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/SwarmSystem.png)
 
-This repository contains system proposal descriptions and general diagrams for general, scaling, security, data flow, architecture of such a system.
+This repository contains system proposal descriptions variants and general diagrams for general, scaling, security, data flow, architecture of such a system and it's parts.
 
 #### 1. Data Collection and Monitoring
 
