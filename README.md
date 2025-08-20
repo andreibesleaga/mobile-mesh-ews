@@ -11,7 +11,7 @@ Part of the initial idea proposed in [the article](https://medium.com/@andrei-be
 A distributed network of mobile devices, from vehicles on the ground (EVs, Cars, etc.), water (ships), air (drones, planes), to special designed robots with sensors (used in special cases scenarios and environments), and real-world tracked flora (used as sensors for pollution, weather anomalies) and fauna (tracked animals and existing statistics databases of their movement and habits), can be deployed as mobile sensors to monitor and respond to various climate issues, forming a mesh network mimicking swarm intelligence, to be used as a part of other systems, or used modularly, within a plugin based approach, for different kind of actions from different services integrated.
 
 
-A separate implementation of the architecture part for the Decision Brain of the System, using BigQuery AI, is listed in the subdirectory: [BigData AI E2E Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/BigData%20AI%20E2E%20Decision%20System/).
+A separate implementation of the architecture part for the Decision Brain of the System, using BigQuery AI, is listed in the subdirectory: [BigData AI E2E Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData%20AI%20E2E%20Decision%20System).
 
 
 #### Generic System Overview
