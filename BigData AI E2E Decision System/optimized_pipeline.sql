@@ -1,4 +1,7 @@
--- Optimized decison engine pipeline
+-- Optimized decision engine pipeline
+-- This SQL script creates a view for the climate AI decision engine
+-- that combines sensor data, imagery, forecasts, and risk scoring
+-- to provide actionable insights for wildfire and flood risks.
 CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds and weights (centralized config)
     config AS (
         SELECT 0.70 AS fire_idx_high,
@@ -45,8 +48,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
     -- 3) Imagery risk (last 12h)
     imagery_risk AS (
         SELECT location_id,
-            MAX(fire_index) AS max_fire_index,
-            MAX(flood_index) AS max_flood_index
+            SAFE.MAX(fire_index) AS max_fire_index,
+            SAFE.MAX(flood_index) AS max_flood_index
         FROM `climate_ai.imagery_metadata`
         WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
         GROUP BY location_id
@@ -54,9 +57,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
     -- 4) Short-horizon forecasts (next 6h) from hourly history
     forecast_temp AS (
         SELECT h.location_id,
-            -- Average of the next-6h forecast values for stability
             (
-                SELECT AVG(f.value)
+                SELECT AVG(predicted_value)
                 FROM UNNEST(
                         AI.FORECAST(
                             MODEL => 'linear_regression',
@@ -69,7 +71,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                             ),
                             HORIZON => 6
                         )
-                    ) AS f
+                    )
             ) AS fc_temp_next6h
         FROM (
                 SELECT DISTINCT location_id
@@ -79,7 +81,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
     forecast_precip AS (
         SELECT h.location_id,
             (
-                SELECT AVG(f.value)
+                SELECT AVG(predicted_value)
                 FROM UNNEST(
                         AI.FORECAST(
                             MODEL => 'linear_regression',
@@ -92,7 +94,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                             ),
                             HORIZON => 6
                         )
-                    ) AS f
+                    )
             ) AS fc_precip_next6h
         FROM (
                 SELECT DISTINCT location_id
@@ -121,7 +123,6 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
     -- 6) Risk scoring (0–100) with simple normalization and weights
     scored AS (
         SELECT j.*,
-            -- Normalize components into 0–1 bands against config thresholds
             LEAST(GREATEST(j.avg_temp / c.temp_hot_c, 0), 1) AS n_temp_now,
             LEAST(GREATEST(j.fc_temp_next6h / c.temp_hot_c, 0), 1) AS n_temp_fc,
             LEAST(GREATEST(j.max_fire_index, 0), 1) AS n_fire_idx,
@@ -140,14 +141,12 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
     ),
     risk AS (
         SELECT s.*,
-            -- Wildfire risk combines hot temps (current + forecast) and fire index
             ROUND(
                 100 * (
                     s.wildfire_weight_temp * 0.5 * (s.n_temp_now + s.n_temp_fc) + s.wildfire_weight_fireidx * s.n_fire_idx
                 ),
                 1
             ) AS wildfire_risk_score,
-            -- Flood risk combines precip (current + forecast) and flood index
             ROUND(
                 100 * (
                     s.flood_weight_precip * 0.5 * (s.n_precip_now + s.n_precip_fc) + s.flood_weight_floodidx * s.n_flood_idx
@@ -164,15 +163,15 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                     r.max_fire_index >= r.fire_idx_high
                     AND r.fc_temp_next6h >= r.temp_hot_c
                 )
-                OR r.wildfire_risk_score >= 75 THEN '🔥 High Wildfire Risk'
+                OR r.wildfire_risk_score >= 75 THEN 'High Wildfire Risk'
                 WHEN (
                     r.max_flood_index >= r.flood_idx_high
                     AND r.fc_precip_next6h >= r.precip_heavy_mm_6h
                 )
-                OR r.flood_risk_score >= 75 THEN '🌊 High Flood Risk'
-                WHEN r.wildfire_risk_score BETWEEN 50 AND 74 THEN '⚠️ Moderate Wildfire Risk'
-                WHEN r.flood_risk_score BETWEEN 50 AND 74 THEN '⚠️ Moderate Flood Risk'
-                ELSE '✅ Low Risk'
+                OR r.flood_risk_score >= 75 THEN 'High Flood Risk'
+                WHEN r.wildfire_risk_score BETWEEN 50 AND 74 THEN 'Moderate Wildfire Risk'
+                WHEN r.flood_risk_score BETWEEN 50 AND 74 THEN 'Moderate Flood Risk'
+                ELSE 'Low Risk'
             END AS risk_classification,
             CASE
                 WHEN (
@@ -185,9 +184,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                         AND r.fc_precip_next6h >= r.precip_extreme_mm_6h
                     )
                 )
-                OR (
-                    GREATEST(r.wildfire_risk_score, r.flood_risk_score) >= 85
-                ) THEN 'CRITICAL'
+                OR GREATEST(r.wildfire_risk_score, r.flood_risk_score) >= 85 THEN 'CRITICAL'
                 WHEN GREATEST(r.wildfire_risk_score, r.flood_risk_score) >= 60 THEN 'WARNING'
                 ELSE 'NORMAL'
             END AS alert_level
@@ -222,9 +219,9 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                 )
             ) AS alert_message,
             CASE
-                WHEN d.risk_classification LIKE '🔥%' THEN 'Pre-stage fire crews; issue burn bans; inspect power lines; prepare evacuation messaging.'
-                WHEN d.risk_classification LIKE '🌊%' THEN 'Pre-position pumps/sandbags; clear drains; warn low-lying areas; prepare shelter resources.'
-                WHEN d.risk_classification LIKE '⚠️%' THEN 'Increase monitoring; notify local authorities; verify comms and equipment readiness.'
+                WHEN d.risk_classification = 'High Wildfire Risk' THEN 'Pre-stage fire crews; issue burn bans; inspect power lines; prepare evacuation messaging.'
+                WHEN d.risk_classification = 'High Flood Risk' THEN 'Pre-position pumps/sandbags; clear drains; warn low-lying areas; prepare shelter resources.'
+                WHEN d.risk_classification LIKE 'Moderate%' THEN 'Increase monitoring; notify local authorities; verify comms and equipment readiness.'
                 ELSE 'Routine monitoring; no immediate action.'
             END AS recommended_action,
             TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AS alert_expires_at
@@ -251,5 +248,10 @@ SELECT location_id,
     recommended_action,
     alert_expires_at
 FROM enriched
-ORDER BY alert_level DESC,
+ORDER BY CASE
+        alert_level
+        WHEN 'CRITICAL' THEN 1
+        WHEN 'WARNING' THEN 2
+        ELSE 3
+    END,
     GREATEST(wildfire_risk_score, flood_risk_score) DESC;

@@ -1,71 +1,103 @@
--- BigQuery SQL to trigger alerts based on thresholds and generate summaries using AI.GENERATE
--- It can be integrated into a decision-making system for climate AI applications and dashboards.
-WITH recent_sensor AS (
-    SELECT location_id,
+-- ========================================
+-- Climate AI: Alerting Pipeline + QA Checks
+-- ========================================
+INSERT INTO `climate_ai.sensor_alert_logs` (
+        location_id,
         lat,
         lon,
-        AVG(temperature) AS avg_temp,
-        AVG(precipitation) AS avg_precip,
-        AVG(pressure) AS avg_pressure
-    FROM sensor_data
-    WHERE timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-    GROUP BY location_id,
-        lat,
-        lon
-),
-forecasted_risk AS (
-    SELECT location_id,
-        AI.FORECAST(
-            MODEL => 'linear_regression',
-            TABLE => (
-                SELECT TIMESTAMP_TRUNC(timestamp, HOUR) AS time,
-                    AVG(temperature) AS value
-                FROM sensor_data
-                WHERE location_id IS NOT NULL
-                GROUP BY time
-            ),
-            HORIZON => 6
-        ) AS temp_forecast
-),
-imagery_risk AS (
-    SELECT location_id,
-        MAX(fire_index) AS max_fire_index,
-        MAX(flood_index) AS max_flood_index
-    FROM imagery_metadata
-    WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
-    GROUP BY location_id
-),
-decision_engine AS (
-    SELECT s.location_id,
-        s.lat,
-        s.lon,
-        s.avg_temp,
-        s.avg_precip,
-        s.avg_pressure,
-        f.temp_forecast,
-        i.max_fire_index,
-        i.max_flood_index,
-        CASE
-            WHEN i.max_fire_index > 0.7
-            AND s.avg_temp > 35 THEN '🔥 High Wildfire Risk'
-            WHEN i.max_flood_index > 0.7
-            AND s.avg_precip > 80 THEN '🌊 High Flood Risk'
-            WHEN s.avg_temp > 30
-            AND s.avg_pressure < 1000 THEN '⚠️ Moderate Wildfire Risk'
-            WHEN s.avg_precip > 50 THEN '⚠️ Moderate Flood Risk'
-            ELSE '✅ Low Risk'
-        END AS risk_classification,
-        CASE
-            WHEN i.max_fire_index > 0.7
-            AND s.avg_temp > 35 THEN 'CRITICAL'
-            WHEN i.max_flood_index > 0.7
-            AND s.avg_precip > 80 THEN 'CRITICAL'
-            WHEN s.avg_temp > 30
-            OR s.avg_precip > 50 THEN 'WARNING'
-            ELSE 'NORMAL'
-        END AS alert_level
-)
-SELECT *,
+        avg_temp,
+        avg_precip,
+        avg_pressure,
+        temp_forecast,
+        max_fire_index,
+        max_flood_index,
+        risk_classification,
+        alert_level,
+        alert_message,
+        log_timestamp
+    ) WITH recent_sensor AS (
+        SELECT location_id,
+            lat,
+            lon,
+            SAFE.AVG(temperature) AS avg_temp,
+            SAFE.AVG(precipitation) AS avg_precip,
+            SAFE.AVG(pressure) AS avg_pressure
+        FROM `climate_ai.sensor_data`
+        WHERE timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+        GROUP BY location_id,
+            lat,
+            lon
+    ),
+    forecasted_risk AS (
+        -- Forecast per location
+        SELECT location_id,
+            SAFE.AVG(predicted_value) AS temp_forecast
+        FROM AI.FORECAST(
+                MODEL => 'linear_regression',
+                TABLE => (
+                    SELECT location_id,
+                        TIMESTAMP_TRUNC(timestamp, HOUR) AS time,
+                        SAFE.AVG(temperature) AS value
+                    FROM `climate_ai.sensor_data`
+                    GROUP BY location_id,
+                        time
+                ),
+                HORIZON => 6
+            )
+        GROUP BY location_id
+    ),
+    imagery_risk AS (
+        SELECT location_id,
+            SAFE.MAX(fire_index) AS max_fire_index,
+            SAFE.MAX(flood_index) AS max_flood_index
+        FROM `climate_ai.imagery_metadata`
+        WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
+        GROUP BY location_id
+    ),
+    decision_engine AS (
+        SELECT s.location_id,
+            s.lat,
+            s.lon,
+            s.avg_temp,
+            s.avg_precip,
+            s.avg_pressure,
+            f.temp_forecast,
+            i.max_fire_index,
+            i.max_flood_index,
+            CASE
+                WHEN IFNULL(i.max_fire_index, 0) > 0.7
+                AND s.avg_temp > 35 THEN 'High Wildfire Risk'
+                WHEN IFNULL(i.max_flood_index, 0) > 0.7
+                AND s.avg_precip > 80 THEN 'High Flood Risk'
+                WHEN s.avg_temp > 30
+                AND s.avg_pressure < 1000 THEN 'Moderate Wildfire Risk'
+                WHEN s.avg_precip > 50 THEN 'Moderate Flood Risk'
+                ELSE 'Low Risk'
+            END AS risk_classification,
+            CASE
+                WHEN IFNULL(i.max_fire_index, 0) > 0.7
+                AND s.avg_temp > 35 THEN 'CRITICAL'
+                WHEN IFNULL(i.max_flood_index, 0) > 0.7
+                AND s.avg_precip > 80 THEN 'CRITICAL'
+                WHEN s.avg_temp > 30
+                OR s.avg_precip > 50 THEN 'WARNING'
+                ELSE 'NORMAL'
+            END AS alert_level
+        FROM recent_sensor s
+            LEFT JOIN forecasted_risk f USING (location_id)
+            LEFT JOIN imagery_risk i USING (location_id)
+    )
+SELECT location_id,
+    lat,
+    lon,
+    avg_temp,
+    avg_precip,
+    avg_pressure,
+    temp_forecast,
+    max_fire_index,
+    max_flood_index,
+    risk_classification,
+    alert_level,
     AI.GENERATE(
         MODEL => 'gemini-pro',
         PROMPT => CONCAT(
@@ -74,15 +106,52 @@ SELECT *,
             ' with classification ',
             risk_classification,
             ', temperature ',
-            CAST(avg_temp AS STRING),
+            CAST(IFNULL(avg_temp, -999) AS STRING),
             ', precipitation ',
-            CAST(avg_precip AS STRING),
+            CAST(IFNULL(avg_precip, -999) AS STRING),
             ', fire index ',
-            CAST(max_fire_index AS STRING),
+            CAST(IFNULL(max_fire_index, -1) AS STRING),
             ', flood index ',
-            CAST(max_flood_index AS STRING),
+            CAST(IFNULL(max_flood_index, -1) AS STRING),
             '.'
         )
-    ) AS alert_message
+    ) AS alert_message,
+    CURRENT_TIMESTAMP() AS log_timestamp
 FROM decision_engine
-ORDER BY alert_level DESC;
+ORDER BY CASE
+        alert_level
+        WHEN 'CRITICAL' THEN 1
+        WHEN 'WARNING' THEN 2
+        ELSE 3
+    END;
+-- ============================
+-- QA / Guardrail Checks
+-- ============================
+-- Count of new alerts by severity
+SELECT alert_level,
+    COUNT(*) AS alerts_created
+FROM `climate_ai.sensor_alert_logs`
+WHERE log_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 5 MINUTE)
+GROUP BY alert_level;
+-- Check for out-of-range averages
+SELECT *
+FROM `climate_ai.sensor_alert_logs`
+WHERE (
+        avg_temp < -90
+        OR avg_temp > 60
+    )
+    OR (
+        max_fire_index < 0
+        OR max_fire_index > 1
+    )
+    OR (
+        max_flood_index < 0
+        OR max_flood_index > 1
+    )
+ORDER BY log_timestamp DESC;
+-- Look for missing forecast values
+SELECT *
+FROM `climate_ai.sensor_alert_logs`
+WHERE temp_forecast IS NULL
+ORDER BY log_timestamp DESC
+LIMIT 10;

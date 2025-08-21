@@ -7,10 +7,13 @@ This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision Sy
 ## Features
 
 - **Real-time Sensor Data Processing**: Ingests temperature, precipitation, pressure, humidity, and wind data from IoT sensors
-- **Satellite Image Analysis**: Processes earth imagery with multimodal AI embeddings for risk assessment
+- **Satellite Image Analysis**: Processes earth imagery with multimodal AI embeddings for risk assessment using Google Earth Engine
 - **AI-Powered Risk Classification**: Uses machine learning models to classify wildfire and flood risks
 - **Intelligent Alerting**: Generates natural language alert messages using Gemini AI
 - **Scalable Architecture**: Built on BigQuery with partitioned tables for high-performance analytics
+- **Large-scale Testing**: Mock data generators for comprehensive system validation
+- **Quality Assurance**: Built-in validation and performance monitoring tools
+- **Earth Engine Integration**: Seamless satellite imagery processing and metadata management
 
 ## System Components
 
@@ -23,6 +26,14 @@ This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision Sy
 - **`alerting.sql`**: Main AI alerting logic with risk classification and message generation
 - **`alerts_sink.sql`**: Alert storage and management system
 - **`select.sql`**: Query templates for data analysis
+- **`earthAI.sql`**: Google Earth Engine and BigQuery integration for satellite imagery processing
+- **`mock_data_generator.sql`**: Large-scale mock data generation for testing and development
+- **`optimized_pipeline_checks.sql`**: Quality assurance and validation checks for the decision engine
+
+### Earth Engine Integration
+
+- **`earthAi.js`**: Google Earth Engine JavaScript code for satellite image export and processing
+- **`earthAI.md`**: Complete documentation and tutorial for Earth Engine integration with step-by-step instructions
 
 ### Documentation
 
@@ -52,16 +63,21 @@ The system automatically classifies locations into risk categories:
 - **BigQuery ML**: Machine learning and AI model hosting
 - **Gemini AI**: Natural language alert generation
 - **Google Cloud Storage**: Satellite imagery storage
-- **Multimodal Embedding Models**: Image analysis and feature extraction (Google Earth AI)
+- **Google Earth Engine**: Satellite imagery processing and analysis
+- **Multimodal Embedding Models**: Image analysis and feature extraction
+- **JavaScript**: Earth Engine scripting and automation (Google Earth AI)
 
 ## Quick Start
 
-1. Set up BigQuery dataset and run `create.sql` to initialize tables
-2. Populate with sample data using `data_population.sql`
-3. Create optimized views with `views.sql`
-4. Deploy the decision engine pipeline with `optimized_pipeline.sql`
-5. Run alerting queries with `alerting.sql`
-6. Set up alert storage with `alerts_sink.sql`
+1. **Initialize Database**: Set up BigQuery dataset and run `create.sql` to initialize tables
+2. **Generate Test Data**: Use `mock_data_generator.sql` to create large-scale test datasets
+3. **Set up Earth Engine**: Follow instructions in `earthAI.md` and use `earthAi.js` for satellite data integration
+4. **Create Views**: Deploy optimized views with `views.sql`
+5. **Deploy Pipeline**: Set up the decision engine pipeline with `optimized_pipeline.sql`
+6. **Validate System**: Run quality checks with `optimized_pipeline_checks.sql`
+7. **Enable Alerting**: Deploy alerting logic with `alerting.sql`
+8. **Configure Storage**: Set up alert persistence with `alerts_sink.sql`
+9. **Integrate Earth AI**: Use `earthAI.sql` to connect satellite imagery processing
 
 (note: you can populate with mock data the tables by modifying and running  `mock_data_generator.sql`)
 
@@ -73,6 +89,18 @@ The system automatically classifies locations into risk categories:
 - Emergency response coordination
 - Climate change impact assessment
 - Smart city environmental monitoring
+- Large-scale disaster preparedness testing
+- Satellite-based environmental monitoring
+- Multi-modal AI research and development
+
+## Development & Testing
+
+The system includes comprehensive development tools:
+
+- **Mock Data Generation**: Use `mock_data_generator.sql` to create realistic test datasets at scale (5000+ sensor readings, 2000+ imagery records)
+- **Quality Assurance**: Run `optimized_pipeline_checks.sql` to validate data quality, detect anomalies, and verify system performance
+- **Earth Engine Tutorial**: Complete step-by-step guide in `earthAI.md` for satellite data integration
+- **Performance Monitoring**: Built-in checks for out-of-range values, alert distribution analysis, and system health monitoring
 
 ---
 

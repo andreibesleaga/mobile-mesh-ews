@@ -1,7 +1,10 @@
 -- Optional: BigQuery SQL script to create and manage alerts for a mobile mesh EWS (Early Warning System)
 -- One-time setup
+-- Needs optimized pipeline to be run first
+-- This script creates a table to store alerts based on the decision engine's output
+-- and sets up a scheduled insert to populate it with critical alerts.
 CREATE TABLE IF NOT EXISTS `climate_ai.alerts` (
-    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     location_id STRING NOT NULL,
     lat FLOAT64,
     lon FLOAT64,
@@ -14,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `climate_ai.alerts` (
     alert_expires_at TIMESTAMP
 ) PARTITION BY DATE(inserted_at) CLUSTER BY alert_level,
 location_id;
--- Scheduled insert (e.g., every 15 minutes)
+-- Populate from decision engine (to be run on a schedule)
 INSERT INTO `climate_ai.alerts` (
         location_id,
         lat,
