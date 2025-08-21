@@ -12,22 +12,24 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             0.60 AS flood_weight_precip,
             0.40 AS flood_weight_floodidx
     ),
-    -- 2) Latest hourly aggregates per location
+    -- 2) Latest hourly aggregates per location (grouped)
     base_hourly AS (
         SELECT location_id,
             ANY_VALUE(lat) AS lat,
             ANY_VALUE(lon) AS lon,
             hour_bucket,
-            readings_count,
-            avg_temp,
-            avg_precip,
-            avg_pressure,
+            COUNT(*) AS readings_count,
+            AVG(avg_temp) AS avg_temp,
+            AVG(avg_precip) AS avg_precip,
+            AVG(avg_pressure) AS avg_pressure,
             ROW_NUMBER() OVER (
                 PARTITION BY location_id
                 ORDER BY hour_bucket DESC
             ) AS rn
         FROM `climate_ai.vw_sensor_hourly`
         WHERE hour_bucket >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR)
+        GROUP BY location_id,
+            hour_bucket
     ),
     latest_hourly AS (
         SELECT location_id,
@@ -226,4 +228,6 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
 SELECT location_id,
     lat,
     lon,
-    geog_point
+    geog_point,
+    latest_hour,
+    readings

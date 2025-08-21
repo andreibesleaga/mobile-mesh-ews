@@ -57,42 +57,48 @@ FROM `climate_ai.sensor_data` s
     LEFT JOIN `climate_ai.imagery_objects` img ON ABS(s.lat - img.lat) < 0.01
     AND ABS(s.lon - img.lon) < 0.01
     AND TIMESTAMP_DIFF(s.timestamp, img.tstamp, MINUTE) BETWEEN -10 AND 10;
--- 6. Simulated embedding model output
+-- 6. Simulated embedding model output table (no model required yet)
 CREATE OR REPLACE TABLE `climate_ai.multimodal_embedding_model` (
         input STRING,
         ml_generate_embedding_result ARRAY < FLOAT64 >
     );
--- 7. Earth image embeddings
+-- =========================================================
+-- ORIGINAL ML.GENERATE_EMBEDDING (commented until model exists)
+-- ---------------------------------------------------------
+-- CREATE OR REPLACE MODEL `climate_ai.multimodal_embedding_model`
+-- OPTIONS(
+--   MODEL_TYPE = 'EMBEDDING',
+--   REMOTE_MODEL = 'vertexai.multimodalembedding',
+--   ENDPOINT = 'multimodalembedding@001'
+-- ) AS
+-- SELECT
+--   uri AS image_uri,
+--   ref AS metadata_json
+-- FROM `climate_ai.earth_images`;
+-- =========================================================
+-- 7. Earth image embeddings (stub array, matching shape)
 CREATE OR REPLACE TABLE `climate_ai.earth_image_embeddings` AS
-SELECT *
-FROM ML.GENERATE_EMBEDDING(
-        MODEL `climate_ai.multimodal_embedding_model`,
-        (
-            SELECT *
-            FROM `climate_ai.earth_images`
-            WHERE content_type = 'image/jpeg'
-        )
-    );
--- 8. Fire signature query embedding
+SELECT uri,
+    ARRAY(
+        SELECT 0.0
+        FROM UNNEST(GENERATE_ARRAY(1, 512))
+    ) AS ml_generate_embedding_result
+FROM `climate_ai.earth_images`
+WHERE content_type = 'image/jpeg';
+-- 8. Fire signature query embedding (stub)
 CREATE OR REPLACE TABLE `climate_ai.fire_signature_query_embedding` AS
-SELECT *
-FROM ML.GENERATE_EMBEDDING(
-        MODEL `climate_ai.multimodal_embedding_model`,
-        (
-            SELECT "visible wildfire signature: plume, heat, smoke" AS content
-        )
-    );
--- 9. Fire image candidates
+SELECT "visible wildfire signature: plume, heat, smoke" AS content,
+    ARRAY(
+        SELECT 0.0
+        FROM UNNEST(GENERATE_ARRAY(1, 512))
+    ) AS ml_generate_embedding_result;
+-- 9. Fire image candidates (stub, no VECTOR_SEARCH until model is ready)
 CREATE OR REPLACE TABLE `climate_ai.fire_image_candidates` AS
-SELECT base.uri AS gcs_uri,
-    distance
-FROM VECTOR_SEARCH(
-        TABLE `climate_ai.earth_image_embeddings`,
-        'ml_generate_embedding_result',
-        TABLE `climate_ai.fire_signature_query_embedding`,
-        'ml_generate_embedding_result',
-        top_k => 5
-    );
+SELECT uri AS gcs_uri,
+    RAND() AS distance
+FROM `climate_ai.earth_images`
+WHERE content_type = 'image/jpeg'
+LIMIT 5;
 -- 10. Fire forecast
 CREATE OR REPLACE TABLE `climate_ai.fire_forecast` (
         lat FLOAT64,
@@ -150,3 +156,14 @@ CREATE OR REPLACE TABLE `climate_ai.sensor_alert_logs` (
         log_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
     ) PARTITION BY DATE(log_timestamp) CLUSTER BY alert_level,
     location_id;
+-- Disaster event forecast
+CREATE OR REPLACE TABLE `climate_ai.disaster_event_forecast` (
+        event_type STRING NOT NULL,
+        lat FLOAT64 NOT NULL,
+        lon FLOAT64 NOT NULL,
+        forecast_time TIMESTAMP NOT NULL,
+        forecast_value FLOAT64,
+        confidence FLOAT64,
+        ai_status STRING,
+        action_required BOOL
+    ) PARTITION BY DATE(forecast_time) CLUSTER BY event_type;
