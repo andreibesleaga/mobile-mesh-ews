@@ -1,4 +1,7 @@
--- CONFIG: Set scale for each table
+-- ========================================
+-- Climate AI: Mock Data Population Script
+-- ========================================
+-- CONFIG
 DECLARE num_sensor_rows INT64 DEFAULT 5000;
 DECLARE num_imagery_rows INT64 DEFAULT 2000;
 DECLARE num_embeddings_rows INT64 DEFAULT 2000;
@@ -26,8 +29,8 @@ INSERT INTO `climate_ai.sensor_data` (
         source,
         image_ref
     ) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_sensor_rows)) AS x
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_sensor_rows)) AS idx
     )
 SELECT CONCAT('SEN-', LPAD(CAST(id AS STRING), 5, '0')),
     TIMESTAMP_SUB(
@@ -43,30 +46,21 @@ SELECT CONCAT('SEN-', LPAD(CAST(id AS STRING), 5, '0')),
         LPAD(CAST(FLOOR(RAND() * 50) + 1 AS STRING), 3, '0')
     ),
     44.0 + RAND() * 3.0,
-    -- lat ~ Romania area
     23.0 + RAND() * 4.0,
-    -- lon ~ Romania area
     100 + RAND() * 1500,
     15 + RAND() * 25,
-    -- temperature
     10 + RAND() * 90,
-    -- humidity
     RAND() * 15,
-    -- wind speed
     RAND() * 360,
-    -- wind dir
     RAND() * 100,
-    -- precipitation
     980 + RAND() * 40,
-    -- pressure
     IF(RAND() < 0.98, 'OK', 'CHECK'),
     15 + RAND() * 25,
-    -- value
     CONCAT(
         'SOURCE-',
         LPAD(CAST(FLOOR(RAND() * 50) + 1 AS STRING), 3, '0')
     ),
-    NULL
+    CAST(NULL AS STRUCT < uri STRING, tstamp TIMESTAMP >)
 FROM seq;
 -- IMAGERY METADATA
 INSERT INTO `climate_ai.imagery_metadata` (
@@ -77,8 +71,8 @@ INSERT INTO `climate_ai.imagery_metadata` (
         fire_index,
         flood_index
     ) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows))
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows)) AS idx
     )
 SELECT CONCAT('IMG-', LPAD(CAST(id AS STRING), 6, '0')),
     CONCAT(
@@ -94,22 +88,26 @@ SELECT CONCAT('IMG-', LPAD(CAST(id AS STRING), 6, '0')),
         CAST(id AS STRING),
         '.jpg'
     ),
-    RAND(),
-    RAND()
+    ROUND(RAND(), 2),
+    ROUND(RAND(), 2)
 FROM seq;
 -- EARTH IMAGES
-INSERT INTO `climate_ai.earth_images` (uri, ref, lat, lon, tstamp, content_type) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows))
+INSERT INTO `climate_ai.earth_images` (uri, ref, tstamp, content_type) WITH seq AS (
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows)) AS idx
     )
 SELECT CONCAT(
         'gs://climate-ai-bucket/images/',
         CAST(id AS STRING),
         '.jpg'
     ),
-    CONCAT('IMG-', LPAD(CAST(id AS STRING), 6, '0')),
-    44.0 + RAND() * 3.0,
-    23.0 + RAND() * 4.0,
+    TO_JSON_STRING(
+        STRUCT(
+            44.0 + RAND() * 3.0 AS lat,
+            23.0 + RAND() * 4.0 AS lon,
+            CONCAT('IMG-', LPAD(CAST(id AS STRING), 6, '0')) AS image_id
+        )
+    ),
     TIMESTAMP_SUB(
         CURRENT_TIMESTAMP(),
         INTERVAL CAST(FLOOR(RAND() * 1440) AS INT64) MINUTE
@@ -118,8 +116,8 @@ SELECT CONCAT(
 FROM seq;
 -- IMAGE EMBEDDINGS
 INSERT INTO `climate_ai.earth_image_embeddings` (uri, ml_generate_embedding_result) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_embeddings_rows))
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_embeddings_rows)) AS idx
     )
 SELECT CONCAT(
         'gs://climate-ai-bucket/images/',
@@ -131,7 +129,7 @@ SELECT CONCAT(
         FROM UNNEST(GENERATE_ARRAY(1, 512))
     )
 FROM seq;
--- FIRE SIGNATURE EMBEDDING (single reference vector)
+-- FIRE SIGNATURE EMBEDDING
 TRUNCATE TABLE `climate_ai.fire_signature_query_embedding`;
 INSERT INTO `climate_ai.fire_signature_query_embedding` (ml_generate_embedding_result)
 SELECT ARRAY(
@@ -139,18 +137,21 @@ SELECT ARRAY(
         FROM UNNEST(GENERATE_ARRAY(1, 512))
     );
 -- FIRE IMAGE CANDIDATES
-INSERT INTO `climate_ai.fire_image_candidates` (gcs_uri, distance)
+INSERT INTO `climate_ai.fire_image_candidates` (gcs_uri, distance) WITH seq AS (
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows)) AS idx
+    )
 SELECT CONCAT(
         'gs://climate-ai-bucket/images/',
         CAST(id AS STRING),
         '.jpg'
     ),
     RAND()
-FROM UNNEST(GENERATE_ARRAY(1, num_imagery_rows)) AS id;
+FROM seq;
 -- FIRE FORECAST
 INSERT INTO `climate_ai.fire_forecast` (lat, lon, forecast_value) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_fire_forecast_rows))
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_fire_forecast_rows)) AS idx
     )
 SELECT 44.0 + RAND() * 3.0,
     23.0 + RAND() * 4.0,
@@ -176,7 +177,6 @@ SELECT 'fire',
     )
 FROM `climate_ai.fire_forecast`
 WHERE forecast_value > 0.85;
--- existing INSERTS for sensor_data, imagery_metadata, earth_images, etc. here…
 -- DISASTER EVENT FORECAST
 INSERT INTO `climate_ai.disaster_event_forecast` (
         event_type,
@@ -188,14 +188,14 @@ INSERT INTO `climate_ai.disaster_event_forecast` (
         ai_status,
         action_required
     ) WITH event_types AS (
-        SELECT *
-        FROM UNNEST(['fire', 'flood']) AS event_type
+        SELECT et AS event_type
+        FROM UNNEST(['fire', 'flood']) AS et
     ),
     seq AS (
-        SELECT x AS id
+        SELECT idx AS id
         FROM UNNEST(
                 GENERATE_ARRAY(1, num_disaster_event_forecast_rows)
-            ) AS x
+            ) AS idx
     )
 SELECT e.event_type,
     44.0 + RAND() * 3.0,
@@ -219,18 +219,18 @@ INSERT INTO `climate_ai.emergency_routing_output` (
         dispatch_type,
         rationale
     ) WITH event_types AS (
-        SELECT *
-        FROM UNNEST(['fire', 'flood']) AS event_type
+        SELECT et AS event_type
+        FROM UNNEST(['fire', 'flood']) AS et
     ),
     dispatch_types AS (
-        SELECT *
-        FROM UNNEST(['emergency_team', 'sensor_mobile']) AS dispatch_type
+        SELECT dt AS dispatch_type
+        FROM UNNEST(['emergency_team', 'sensor_mobile']) AS dt
     ),
     seq AS (
-        SELECT x AS id
+        SELECT idx AS id
         FROM UNNEST(
                 GENERATE_ARRAY(1, num_emergency_routing_output_rows)
-            ) AS x
+            ) AS idx
     )
 SELECT e.event_type,
     44.0 + RAND() * 3.0,
@@ -270,45 +270,11 @@ INSERT INTO `climate_ai.sensor_alert_logs` (
         alert_message,
         log_timestamp
     ) WITH seq AS (
-        SELECT x AS id
-        FROM UNNEST(GENERATE_ARRAY(1, num_sensor_alert_logs_rows)) AS x
+        SELECT idx AS id
+        FROM UNNEST(GENERATE_ARRAY(1, num_sensor_alert_logs_rows)) AS idx
     )
 SELECT CONCAT(
         'LOC-',
         LPAD(CAST(FLOOR(RAND() * 50) + 1 AS STRING), 3, '0')
     ),
-    44.0 + RAND() * 3.0,
-    23.0 + RAND() * 4.0,
-    ROUND(15 + RAND() * 25, 2),
-    ROUND(RAND() * 100, 2),
-    ROUND(980 + RAND() * 40, 2),
-    ROUND(15 + RAND() * 25, 2),
-    ROUND(RAND(), 2),
-    ROUND(RAND(), 2),
-    CASE
-        WHEN RAND() > 0.8 THEN 'High Wildfire Risk'
-        WHEN RAND() > 0.6 THEN 'High Flood Risk'
-        WHEN RAND() > 0.4 THEN 'Moderate Wildfire Risk'
-        WHEN RAND() > 0.2 THEN 'Moderate Flood Risk'
-        ELSE 'Low Risk'
-    END,
-    CASE
-        WHEN RAND() > 0.8 THEN 'CRITICAL'
-        WHEN RAND() > 0.4 THEN 'WARNING'
-        ELSE 'NORMAL'
-    END,
-    CONCAT(
-        "Alert for location ",
-        CAST(FLOOR(RAND() * 1000) AS STRING),
-        ": conditions indicate ",
-        CASE
-            WHEN RAND() > 0.8 THEN 'severe risk — immediate action required.'
-            WHEN RAND() > 0.4 THEN 'moderate concern — monitor closely.'
-            ELSE 'low risk — no immediate action.'
-        END
-    ),
-    TIMESTAMP_SUB(
-        CURRENT_TIMESTAMP(),
-        INTERVAL CAST(RAND() * 1440 AS INT64) MINUTE
-    )
-FROM seq;
+    44.0 + RAND() * 3.

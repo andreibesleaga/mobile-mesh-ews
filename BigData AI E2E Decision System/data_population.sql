@@ -37,7 +37,7 @@ VALUES (
         'OK',
         39.5,
         'temperature',
-        NULL
+        CAST(NULL AS STRUCT < uri STRING, tstamp TIMESTAMP >)
     ),
     (
         'SEN-002',
@@ -56,7 +56,7 @@ VALUES (
         'OK',
         41.0,
         'temperature',
-        NULL
+        CAST(NULL AS STRUCT < uri STRING, tstamp TIMESTAMP >)
     ),
     (
         'SEN-003',
@@ -75,7 +75,7 @@ VALUES (
         'OK',
         28.0,
         'temperature',
-        NULL
+        CAST(NULL AS STRUCT < uri STRING, tstamp TIMESTAMP >)
     ),
     (
         'SEN-004',
@@ -94,7 +94,7 @@ VALUES (
         'OK',
         29.5,
         'temperature',
-        NULL
+        CAST(NULL AS STRUCT < uri STRING, tstamp TIMESTAMP >)
     );
 -- ==============================
 -- 2. Imagery metadata table

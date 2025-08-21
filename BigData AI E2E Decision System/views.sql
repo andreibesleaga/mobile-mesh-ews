@@ -9,11 +9,11 @@ SELECT location_id,
     lon,
     TIMESTAMP_TRUNC(timestamp, HOUR) AS hour_bucket,
     COUNT(*) AS readings_count,
-    SAFE.AVG(temperature) AS avg_temp,
-    SAFE.AVG(precipitation) AS avg_precip,
-    SAFE.AVG(pressure) AS avg_pressure,
-    SAFE.AVG(humidity) AS avg_humidity,
-    SAFE.AVG(wind_speed) AS avg_wind_speed
+    AVG(temperature) AS avg_temp,
+    AVG(precipitation) AS avg_precip,
+    AVG(pressure) AS avg_pressure,
+    AVG(humidity) AS avg_humidity,
+    AVG(wind_speed) AS avg_wind_speed
 FROM `climate_ai.sensor_data`
 WHERE timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
 GROUP BY location_id,
@@ -27,12 +27,12 @@ SELECT location_id,
     lon,
     DATE(timestamp) AS date,
     COUNT(*) AS readings_count,
-    SAFE.AVG(temperature) AS avg_temp,
-    SAFE.MAX(temperature) AS max_temp,
-    SAFE.MIN(temperature) AS min_temp,
-    SAFE.AVG(precipitation) AS avg_precip,
-    SAFE.SUM(precipitation) AS total_precip,
-    SAFE.AVG(pressure) AS avg_pressure
+    AVG(temperature) AS avg_temp,
+    MAX(temperature) AS max_temp,
+    MIN(temperature) AS min_temp,
+    AVG(precipitation) AS avg_precip,
+    SUM(precipitation) AS total_precip,
+    AVG(pressure) AS avg_pressure
 FROM `climate_ai.sensor_data`
 WHERE timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 90 DAY)
 GROUP BY location_id,
@@ -45,9 +45,9 @@ CREATE OR REPLACE VIEW `climate_ai.vw_climate_risk_joined` AS WITH recent_sensor
             lat,
             lon,
             TIMESTAMP_TRUNC(timestamp, HOUR) AS hour_bucket,
-            SAFE.AVG(temperature) AS avg_temp,
-            SAFE.AVG(precipitation) AS avg_precip,
-            SAFE.AVG(pressure) AS avg_pressure
+            AVG(temperature) AS avg_temp,
+            AVG(precipitation) AS avg_precip,
+            AVG(pressure) AS avg_pressure
         FROM `climate_ai.sensor_data`
         WHERE timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
         GROUP BY location_id,
@@ -57,8 +57,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_climate_risk_joined` AS WITH recent_sensor
     ),
     recent_imagery AS (
         SELECT location_id,
-            SAFE.MAX(fire_index) AS max_fire_index,
-            SAFE.MAX(flood_index) AS max_flood_index
+            MAX(fire_index) AS max_fire_index,
+            MAX(flood_index) AS max_flood_index
         FROM `climate_ai.imagery_metadata`
         WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
         GROUP BY location_id
@@ -105,11 +105,12 @@ CREATE OR REPLACE VIEW `climate_ai.event_decision_view` AS WITH radius_rules AS 
         FROM `climate_ai.emergency_routing_output`
     ),
     imagery AS (
+        -- Use the parsed lat/lon from the view to form points
         SELECT uri,
             CAST(ref AS STRING) AS ref_str,
             ST_GEOGPOINT(lon, lat) AS image_point,
             TIMESTAMP_TRUNC(tstamp, HOUR) AS event_hour
-        FROM `climate_ai.earth_images`
+        FROM `climate_ai.imagery_objects`
     )
 SELECT f.event_type,
     ST_Y(f.event_point) AS lat,

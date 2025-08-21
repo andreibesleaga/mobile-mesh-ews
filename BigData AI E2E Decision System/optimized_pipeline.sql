@@ -1,8 +1,4 @@
--- Optimized decision engine pipeline
--- This SQL script creates a view for the climate AI decision engine
--- that combines sensor data, imagery, forecasts, and risk scoring
--- to provide actionable insights for wildfire and flood risks.
-CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds and weights (centralized config)
+CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds and weights
     config AS (
         SELECT 0.70 AS fire_idx_high,
             0.70 AS flood_idx_high,
@@ -16,7 +12,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             0.60 AS flood_weight_precip,
             0.40 AS flood_weight_floodidx
     ),
-    -- 2) Latest hourly aggregates per location (last 24h, pick most recent hour)
+    -- 2) Latest hourly aggregates per location
     base_hourly AS (
         SELECT location_id,
             ANY_VALUE(lat) AS lat,
@@ -45,7 +41,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
         FROM base_hourly
         WHERE rn = 1
     ),
-    -- 3) Imagery risk (last 12h)
+    -- 3) Imagery risk
     imagery_risk AS (
         SELECT location_id,
             SAFE.MAX(fire_index) AS max_fire_index,
@@ -54,7 +50,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
         WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
         GROUP BY location_id
     ),
-    -- 4) Short-horizon forecasts (next 6h) from hourly history
+    -- 4) Short-horizon forecasts
     forecast_temp AS (
         SELECT h.location_id,
             (
@@ -101,7 +97,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                 FROM `climate_ai.vw_sensor_hourly`
             ) h
     ),
-    -- 5) Combine sensor, imagery, and forecasts
+    -- 5) Combine
     joined AS (
         SELECT l.location_id,
             l.lat,
@@ -120,7 +116,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             LEFT JOIN forecast_temp ft USING (location_id)
             LEFT JOIN forecast_precip fp USING (location_id)
     ),
-    -- 6) Risk scoring (0–100) with simple normalization and weights
+    -- 6) Risk scoring
     scored AS (
         SELECT j.*,
             LEAST(GREATEST(j.avg_temp / c.temp_hot_c, 0), 1) AS n_temp_now,
@@ -155,7 +151,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             ) AS flood_risk_score
         FROM scored s
     ),
-    -- 7) Classification and alerting
+    -- 7) Classification
     decisions AS (
         SELECT r.*,
             CASE
@@ -190,7 +186,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             END AS alert_level
         FROM risk r
     ),
-    -- 8) Proactive recommendations and messages
+    -- 8) Enriched
     enriched AS (
         SELECT d.*,
             ST_GEOGPOINT(d.lon, d.lat) AS geog_point,
@@ -226,32 +222,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             END AS recommended_action,
             TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AS alert_expires_at
         FROM decisions d
-    )
+    ) -- Final view output
 SELECT location_id,
     lat,
     lon,
-    geog_point,
-    latest_hour,
-    readings_count,
-    avg_temp,
-    avg_precip,
-    avg_pressure,
-    max_fire_index,
-    max_flood_index,
-    fc_temp_next6h,
-    fc_precip_next6h,
-    wildfire_risk_score,
-    flood_risk_score,
-    risk_classification,
-    alert_level,
-    alert_message,
-    recommended_action,
-    alert_expires_at
-FROM enriched
-ORDER BY CASE
-        alert_level
-        WHEN 'CRITICAL' THEN 1
-        WHEN 'WARNING' THEN 2
-        ELSE 3
-    END,
-    GREATEST(wildfire_risk_score, flood_risk_score) DESC;
+    geog_point

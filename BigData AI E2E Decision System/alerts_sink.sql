@@ -3,20 +3,20 @@
 -- Needs optimized pipeline to be run first
 -- This script creates a table to store alerts based on the decision engine's output
 -- and sets up a scheduled insert to populate it with critical alerts.
-CREATE TABLE IF NOT EXISTS `climate_ai.alerts` (
-    inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    location_id STRING NOT NULL,
-    lat FLOAT64,
-    lon FLOAT64,
-    alert_level STRING NOT NULL,
-    risk_classification STRING NOT NULL,
-    wildfire_risk_score FLOAT64,
-    flood_risk_score FLOAT64,
-    alert_message STRING,
-    recommended_action STRING,
-    alert_expires_at TIMESTAMP
-) PARTITION BY DATE(inserted_at) CLUSTER BY alert_level,
-location_id;
+CREATE OR REPLACE TABLE `climate_ai.alerts` (
+        inserted_at TIMESTAMP NOT NULL,
+        location_id STRING NOT NULL,
+        lat FLOAT64,
+        lon FLOAT64,
+        alert_level STRING NOT NULL,
+        risk_classification STRING NOT NULL,
+        wildfire_risk_score FLOAT64,
+        flood_risk_score FLOAT64,
+        alert_message STRING,
+        recommended_action STRING,
+        alert_expires_at TIMESTAMP
+    ) PARTITION BY DATE(inserted_at) CLUSTER BY alert_level,
+    location_id;
 -- Populate from decision engine (to be run on a schedule)
 INSERT INTO `climate_ai.alerts` (
         location_id,
