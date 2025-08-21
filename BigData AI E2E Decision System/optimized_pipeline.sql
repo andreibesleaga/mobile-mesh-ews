@@ -12,7 +12,7 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             0.60 AS flood_weight_precip,
             0.40 AS flood_weight_floodidx
     ),
-    -- 2) Latest hourly aggregates per location (grouped)
+    -- 2) Latest hourly aggregates per location (grouped, null-safe)
     base_hourly AS (
         SELECT location_id,
             ANY_VALUE(lat) AS lat,
@@ -28,6 +28,9 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
             ) AS rn
         FROM `climate_ai.vw_sensor_hourly`
         WHERE hour_bucket >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR)
+            AND avg_temp IS NOT NULL
+            AND avg_precip IS NOT NULL
+            AND avg_pressure IS NOT NULL
         GROUP BY location_id,
             hour_bucket
     ),
@@ -43,16 +46,16 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
         FROM base_hourly
         WHERE rn = 1
     ),
-    -- 3) Imagery risk
+    -- 3) Imagery risk (safe-cast + proper aggregation)
     imagery_risk AS (
         SELECT location_id,
-            SAFE.MAX(fire_index) AS max_fire_index,
-            SAFE.MAX(flood_index) AS max_flood_index
+            MAX(SAFE_CAST(fire_index AS FLOAT64)) AS max_fire_index,
+            MAX(SAFE_CAST(flood_index AS FLOAT64)) AS max_flood_index
         FROM `climate_ai.imagery_metadata`
         WHERE capture_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 HOUR)
         GROUP BY location_id
     ),
-    -- 4) Short-horizon forecasts
+    -- 4) Short-horizon forecasts (null-safe inputs; keep time/value names)
     forecast_temp AS (
         SELECT h.location_id,
             (
@@ -65,7 +68,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                                     avg_temp AS value
                                 FROM `climate_ai.vw_sensor_hourly`
                                 WHERE location_id = h.location_id
-                                ORDER BY time
+                                    AND hour_bucket IS NOT NULL
+                                    AND avg_temp IS NOT NULL
                             ),
                             HORIZON => 6
                         )
@@ -88,7 +92,8 @@ CREATE OR REPLACE VIEW `climate_ai.vw_decision_engine` AS WITH -- 1) Thresholds 
                                     avg_precip AS value
                                 FROM `climate_ai.vw_sensor_hourly`
                                 WHERE location_id = h.location_id
-                                ORDER BY time
+                                    AND hour_bucket IS NOT NULL
+                                    AND avg_precip IS NOT NULL
                             ),
                             HORIZON => 6
                         )
@@ -230,4 +235,19 @@ SELECT location_id,
     lon,
     geog_point,
     latest_hour,
-    readings
+    readings_count,
+    avg_temp,
+    avg_precip,
+    avg_pressure,
+    max_fire_index,
+    max_flood_index,
+    fc_temp_next6h,
+    fc_precip_next6h,
+    wildfire_risk_score,
+    flood_risk_score,
+    risk_classification,
+    alert_level,
+    alert_message,
+    recommended_action,
+    alert_expires_at
+FROM enriched;

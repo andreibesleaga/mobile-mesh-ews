@@ -31,6 +31,14 @@ CREATE OR REPLACE TABLE `climate_ai.earth_images` (
         tstamp TIMESTAMP,
         content_type STRING
     );
+-- Insert dummy image
+INSERT INTO `climate_ai.earth_images` (uri, ref, tstamp, content_type)
+VALUES (
+        'gs://dummy/image1.jpg',
+        '{"lat": 45.0, "lon": 25.0}',
+        CURRENT_TIMESTAMP(),
+        'image/jpeg'
+    );
 -- 3. Imagery view
 CREATE OR REPLACE VIEW `climate_ai.imagery_objects` AS
 SELECT uri,
@@ -48,35 +56,38 @@ CREATE OR REPLACE TABLE `climate_ai.imagery_metadata` (
         fire_index FLOAT64,
         flood_index FLOAT64
     );
+INSERT INTO `climate_ai.imagery_metadata`
+VALUES (
+        'img_1',
+        'loc_1',
+        CURRENT_TIMESTAMP(),
+        'gs://dummy/image1.jpg',
+        0.3,
+        0.2
+    );
 -- 5. Sensor data enriched with nearest satellite image
 CREATE OR REPLACE TABLE `climate_ai.sensor_data_with_images` AS
 SELECT s.*,
     img.uri AS image_uri,
-    img.ref AS image_ref_json -- renamed to avoid clash with struct
+    img.ref AS image_ref_json
 FROM `climate_ai.sensor_data` s
     LEFT JOIN `climate_ai.imagery_objects` img ON ABS(s.lat - img.lat) < 0.01
     AND ABS(s.lon - img.lon) < 0.01
     AND TIMESTAMP_DIFF(s.timestamp, img.tstamp, MINUTE) BETWEEN -10 AND 10;
--- 6. Simulated embedding model output table (no model required yet)
-CREATE OR REPLACE TABLE `climate_ai.multimodal_embedding_model` (
-        input STRING,
-        ml_generate_embedding_result ARRAY < FLOAT64 >
-    );
--- =========================================================
--- ORIGINAL ML.GENERATE_EMBEDDING (commented until model exists)
--- ---------------------------------------------------------
--- CREATE OR REPLACE MODEL `climate_ai.multimodal_embedding_model`
--- OPTIONS(
---   MODEL_TYPE = 'EMBEDDING',
---   REMOTE_MODEL = 'vertexai.multimodalembedding',
---   ENDPOINT = 'multimodalembedding@001'
--- ) AS
--- SELECT
---   uri AS image_uri,
---   ref AS metadata_json
--- FROM `climate_ai.earth_images`;
--- =========================================================
--- 7. Earth image embeddings (stub array, matching shape)
+-- 6. Embedding model placeholder — commented until ready
+/*
+ CREATE OR REPLACE MODEL `climate_ai.multimodal_embedding_model`
+ OPTIONS(
+ MODEL_TYPE = 'EMBEDDING',
+ REMOTE_MODEL = 'vertexai.multimodalembedding',
+ ENDPOINT = 'multimodalembedding@001'
+ ) AS
+ SELECT
+ uri AS image_uri,
+ ref AS metadata_json
+ FROM `climate_ai.earth_images`;
+ */
+-- 7. Earth image embeddings (stub array)
 CREATE OR REPLACE TABLE `climate_ai.earth_image_embeddings` AS
 SELECT uri,
     ARRAY(
@@ -92,7 +103,7 @@ SELECT "visible wildfire signature: plume, heat, smoke" AS content,
         SELECT 0.0
         FROM UNNEST(GENERATE_ARRAY(1, 512))
     ) AS ml_generate_embedding_result;
--- 9. Fire image candidates (stub, no VECTOR_SEARCH until model is ready)
+-- 9. Fire image candidates (stub)
 CREATE OR REPLACE TABLE `climate_ai.fire_image_candidates` AS
 SELECT uri AS gcs_uri,
     RAND() AS distance
@@ -105,6 +116,8 @@ CREATE OR REPLACE TABLE `climate_ai.fire_forecast` (
         lon FLOAT64,
         forecast_value FLOAT64
     );
+INSERT INTO `climate_ai.fire_forecast`
+VALUES (45.0, 25.0, 0.9);
 -- 11. Emergency routing (fires)
 CREATE OR REPLACE TABLE `climate_ai.emergency_routing` AS
 SELECT 'fire' AS event_type,
@@ -113,7 +126,7 @@ SELECT 'fire' AS event_type,
     CURRENT_TIMESTAMP() AS route_time,
     'emergency_team' AS dispatch_type,
     CONCAT(
-        'AI forecast high fire risk. Temperature:',
+        'AI forecast high fire risk. Temperature: ',
         CAST(forecast_value AS STRING)
     ) AS rationale
 FROM `climate_ai.fire_forecast`
@@ -156,14 +169,3 @@ CREATE OR REPLACE TABLE `climate_ai.sensor_alert_logs` (
         log_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
     ) PARTITION BY DATE(log_timestamp) CLUSTER BY alert_level,
     location_id;
--- Disaster event forecast
-CREATE OR REPLACE TABLE `climate_ai.disaster_event_forecast` (
-        event_type STRING NOT NULL,
-        lat FLOAT64 NOT NULL,
-        lon FLOAT64 NOT NULL,
-        forecast_time TIMESTAMP NOT NULL,
-        forecast_value FLOAT64,
-        confidence FLOAT64,
-        ai_status STRING,
-        action_required BOOL
-    ) PARTITION BY DATE(forecast_time) CLUSTER BY event_type;
