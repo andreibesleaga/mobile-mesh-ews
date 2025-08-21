@@ -1,0 +1,106 @@
+-- =========================================
+-- Climate AI: Execution Order Guide
+-- =========================================
+-- This file documents the correct execution order for all SQL scripts
+-- to avoid dependency errors and ensure proper system setup.
+-- EXECUTION ORDER:
+-- 1. create.sql          - Create all base tables and schema (ML models commented out)
+-- 2. mock_data_generator.sql - Insert random sample/test data
+-- 3. create_ml_models.sql - Optional: Create ML models AFTER data is populated
+-- 4. views.sql           - Create aggregation views (vw_sensor_hourly, etc.)
+-- 5. optimized_pipeline.sql - Create vw_decision_engine view (CRITICAL)
+-- 6. alerts_sink.sql     - Create alerts table and populate from vw_decision_engine
+-- 7. alerting.sql        - Create alerting logic
+-- 8. select.sql          - Analytics, forecasting queries + AI.GENERATE examples
+-- 9. export.sql          - AI-powered export reports and intelligence generation
+-- 10. mobile_sensor_routing.sql - Mobile sensor deployment optimization
+-- 11. emergency_team_routing.sql - Emergency response team dispatch routing
+-- 12. optimized_pipeline_checks.sql - Quality assurance checks
+-- 11. earthAI.sql         - Optional: Earth Engine integration
+-- 12. train_multimodal_model.sql - Optional: Advanced AI model training
+-- CRITICAL DEPENDENCIES:
+-- • create_ml_models.sql REQUIRES data in sensor_data table (run after step 2)
+-- • alerts_sink.sql REQUIRES vw_decision_engine (created in optimized_pipeline.sql)
+-- • optimized_pipeline.sql REQUIRES vw_sensor_hourly (created in views.sql)
+-- • export.sql REQUIRES all tables and views (run after step 8)
+-- AI.GENERATE INNOVATIONS:
+-- • select.sql now includes 4 innovative AI.GENERATE use cases:
+--   - Executive briefings, meteorological analysis, emergency JSON, SMS alerts
+-- • export.sql provides 5 AI-powered export tables:
+--   - Executive reports, geographic intelligence, predictive analytics,
+--     crisis communications, resource optimization
+-- • All AI functions require proper connection_id setup for production
+-- • See AI_GENERATE_INNOVATION.md for detailed implementation guide
+-- OPERATIONAL ROUTING SYSTEMS:
+-- • mobile_sensor_routing.sql provides intelligent sensor deployment optimization:
+--   - Data gap analysis, risk-weighted prioritization, geographic clustering
+--   - Equipment planning, cost estimation, deployment duration planning
+-- • emergency_team_routing.sql provides emergency response dispatch optimization:
+--   - Imminent danger scoring, team composition planning, evacuation modeling
+--   - Multi-hazard analysis, resource allocation, incident complexity assessment
+-- • Both systems depend on vw_decision_engine (run after optimized_pipeline.sql)
+-- • views.sql REQUIRES sensor_data table (created in create.sql)
+-- AI.FORECAST REQUIREMENTS:
+-- • Requires time series data with time and value columns
+-- • Needs sufficient historical data (7+ days recommended)
+-- • Uses STRUCT(horizon AS 6) for forecast parameters
+-- • Requires ORDER BY time clause in subqueries
+-- To execute all scripts in order, run them one by one:
+-- BigQuery Console > New Query > Paste script content > Run
+--
+-- =========================================
+-- AI.FORECAST SYNTAX REFERENCE
+-- =========================================
+-- Correct syntax:
+-- AI.FORECAST(
+--   (SELECT time, value FROM table ORDER BY time),
+--   STRUCT(6 AS horizon)
+-- )
+-- Key requirements:
+-- • Time series must be ordered by time
+-- • Need sufficient historical data points
+-- • Value column must be numeric
+-- • Time column must be TIMESTAMP
+SELECT 'Execution order guide loaded. Follow the numbered sequence above.' AS status;
+-- =========================================
+-- SQL VERIFICATION QUERIES
+-- =========================================
+-- Test the fixed decision engine:
+-- SELECT * FROM `climate_ai.vw_decision_engine` LIMIT 5;
+-- Test the simplified forecasting:
+-- SELECT location_id, temp_forecast, precip_forecast 
+-- FROM (SELECT * FROM `climate_ai.vw_decision_engine`) 
+-- WHERE temp_forecast IS NOT NULL LIMIT 10;
+-- Test AI.FORECAST calls that should still work:
+-- SELECT * FROM (
+--   WITH test_forecast AS (
+--     SELECT * FROM AI.FORECAST(
+--       (SELECT TIMESTAMP_TRUNC(timestamp, HOUR) AS time, AVG(temperature) AS value
+--        FROM `climate_ai.sensor_data` 
+--        WHERE location_id = 'RO-CAMPULUNG-01' 
+--        GROUP BY time ORDER BY time LIMIT 100),
+--       STRUCT(6 AS horizon)
+--     )
+--   ) SELECT * FROM test_forecast
+-- ) LIMIT 5;
+-- =========================================
+-- SQL FINAL ARCHITECTURE
+-- =========================================
+-- Core Components:
+-- Data Layer: sensor_data, imagery_metadata, alert_logs
+-- ML Layer: temp_forecast_model, precip_forecast_model  
+-- Logic Layer: vw_decision_engine with simplified forecasting
+-- Alert Layer: Automated risk detection and notification
+-- Forecasting Strategy:
+-- - Static locations: Use AI.FORECAST (Sonoma, Romania, Câmpulung for example only)
+-- - Dynamic locations: Use statistical trend analysis (decision engine)
+-- - Hybrid approach maintains AI capabilities while avoiding BigQuery limitations
+-- =========================================
+-- SUCCESS CRITERIA
+-- =========================================
+-- All SQL scripts parse without syntax errors
+-- Complete execution sequence completes successfully  
+-- Decision engine produces risk classifications
+-- AI.FORECAST calls return valid predictions where used
+-- Alert system triggers on high-risk conditions
+-- ML models provide temperature/precipitation forecasts

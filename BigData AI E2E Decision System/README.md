@@ -4,6 +4,8 @@
 
 This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision System and Routing Layer, built on Google BigQuery that processes real-time sensor data and satellite imagery to generate intelligent climate risk alerts. The system combines sensor telemetry, satellite image analysis, and AI models to provide automated decision-making for wildfire and flood risk assessment.
 
+This project uses new features from BigQuery AI like: Generative AI in SQL, Vector Search in SQL, Multimodal Features in SQL.
+
 ## Features
 
 - **Real-time Sensor Data Processing**: Ingests temperature, precipitation, pressure, humidity, and wind data from IoT sensors
@@ -46,10 +48,10 @@ This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision Sy
 
 The system automatically classifies locations into risk categories:
 
-- 🔥 **High Wildfire Risk**: Fire index > 0.7 and temperature > 35°C
-- 🌊 **High Flood Risk**: Flood index > 0.7 and precipitation > 80mm
-- ⚠️ **Moderate Risks**: Various threshold combinations for temperature, pressure, and precipitation
-- ✅ **Low Risk**: Normal conditions
+- **High Wildfire Risk**: Fire index > 0.7 and temperature > 35°C
+- **High Flood Risk**: Flood index > 0.7 and precipitation > 80mm
+- **Moderate Risks**: Various threshold combinations for temperature, pressure, and precipitation
+- **Low Risk**: Normal conditions
 
 ## Alert Levels
 
@@ -104,4 +106,4 @@ The system includes comprehensive development tools:
 
 ---
 
-*This system is a demo and not tested in the wild and is designed for scalable, real-time environmental monitoring and can be adapted for various climate and weather-related early warning applications.*
+*This system is a demo and not tested in the wild (only on limited GCP account with live BigQuery AI and mock datasets) and is designed for scalable, real-time environmental monitoring and can be adapted for various climate and weather-related early warning applications.*

@@ -277,4 +277,28 @@ SELECT CONCAT(
         'LOC-',
         LPAD(CAST(FLOOR(RAND() * 50) + 1 AS STRING), 3, '0')
     ),
-    44.0 + RAND() * 3.
+    -- location_id
+    44.0 + RAND() * 3.0,
+    -- lat
+    23.0 + RAND() * 4.0,
+    -- lon
+    15 + RAND() * 25,
+    -- avg_temp
+    RAND() * 100,
+    -- avg_precip
+    980 + RAND() * 40,
+    -- avg_pressure
+    15 + RAND() * 25,
+    -- temp_forecast
+    ROUND(RAND(), 2),
+    -- max_fire_index
+    ROUND(RAND(), 2),
+    -- max_flood_index
+    IF(RAND() > 0.7, 'HIGH', 'LOW'),
+    -- risk_classification
+    IF(RAND() > 0.9, 'RED', 'GREEN'),
+    -- alert_level
+    'Simulated alert message',
+    -- alert_message
+    CURRENT_TIMESTAMP() -- log_timestamp
+FROM seq;

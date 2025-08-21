@@ -169,3 +169,47 @@ CREATE OR REPLACE TABLE `climate_ai.sensor_alert_logs` (
         log_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
     ) PARTITION BY DATE(log_timestamp) CLUSTER BY alert_level,
     location_id;
+-- =========================================
+-- ML Models for Forecasting (Optional)
+-- =========================================
+-- NOTE: These models require data in sensor_data table
+-- Run data_population.sql or mock_data_generator.sql first
+-- If you get "Input data doesn't contain any rows" error,
+-- comment out these model creations and use the system without ML models
+-- Temperature forecasting model (commented until data is available)
+-- Uncomment after populating data:
+/*
+ CREATE OR REPLACE MODEL `climate_ai.linear_regression_temp_model`
+ OPTIONS(
+ model_type='linear_reg',
+ input_label_cols=['value']
+ ) AS
+ SELECT
+ TIMESTAMP_TRUNC(timestamp, HOUR) AS time,
+ temperature AS value,
+ location_id
+ FROM `climate_ai.sensor_data`
+ WHERE temperature IS NOT NULL
+ AND timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY);
+ 
+ -- Precipitation forecasting model (commented until data is available)  
+ CREATE OR REPLACE MODEL `climate_ai.linear_regression_precip_model`
+ OPTIONS(
+ model_type='linear_reg',
+ input_label_cols=['value']
+ ) AS
+ SELECT
+ TIMESTAMP_TRUNC(timestamp, HOUR) AS time,
+ precipitation AS value,
+ location_id
+ FROM `climate_ai.sensor_data`
+ WHERE precipitation IS NOT NULL
+ AND timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY);
+ */
+-- Model Training Placeholder
+-- CREATE OR REPLACE MODEL `climate_ai.gemini_flash`
+-- REMOTE WITH CONNECTION `us.my-vertexai-connection`
+-- OPTIONS(
+-- ENDPOINT = 'publishers/google/models/gemini-1.5-flash-001',
+--   REMOTE_SERVICE_TYPE = 'CLOUD_AI'
+-- );
