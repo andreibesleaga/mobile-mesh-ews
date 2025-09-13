@@ -18,7 +18,7 @@ A separate implementation of the architecture part for the Decision Brain of the
 
 ![SwarmSystem](https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/SwarmSystem.png)
 
-This repository contains system proposal descriptions variants and general diagrams for general, scaling, security, data flow, architecture of such a system and it's parts.
+This repository contains system proposal variants descriptions, general diagrams for general, scaling, security, data flow, architecture of such a system and it's parts.
 
 #### 1. Data Collection and Monitoring
 
@@ -64,8 +64,8 @@ This repository contains system proposal descriptions variants and general diagr
 #### 5. AI Improved Algorithms by External Systems Aggregated Data
 
 - External available resources could be used in the training of the AI models or immediate decision combination in the decision algorithm.
-As examples, extensive publicly available data from **Google Earth AI** and **NASA Earth AI** can provide already pre-trained models for weighing the decision and the routing part of the system to most critical areas and most likely predicted with problems from before AI system training, by using their interconnected data for forecasting, for the pre-setup of the system (eg: limit to most probable certain areas conditions), or advanced use combining real-time results of the system with pre-known data.
+As examples, extensive publicly available data from **Google Earth AI** and others (NASA, Telecomms special APIs, etc), can provide already pre-trained models for weighing the decision and the routing part of the system to most critical areas and most likely predicted with problems from before AI system training, by using their interconnected data for forecasting, for the pre-setup of the system (eg: limit to most probable certain areas conditions), or advanced use combining real-time results of the system with pre-known data.
 
 
 #### Conclusion
-This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level architectures, while the final complete architectures and implementations might be depending on many other factors.
+This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level software architectures, while the final complete system architectures and implementations might be depending on many other factors, but can be assemblied from the parts and implementations of the presented system.
