@@ -68,4 +68,4 @@ As examples, extensive publicly available data from **Google Earth AI** and othe
 
 
 #### Conclusion
-This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level software architectures, while the final complete system architectures and implementations might be depending on many other factors, but can be assemblied from the parts and implementations of the presented system.
+This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level software architectures, while the final complete system architectures and implementations might be depending on many other factors, but can be assemblied from the parts and implementations of presented system.
