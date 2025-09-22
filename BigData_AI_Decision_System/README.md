@@ -4,7 +4,7 @@
 
 This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision System and Routing Layer, built on Google BigQuery that processes real-time sensor data and satellite imagery to generate intelligent climate risk alerts. The system combines sensor telemetry, satellite image analysis, and AI models to provide automated decision-making for wildfire and flood risk assessment.
 
-This project uses new features from BigQuery AI like: Generative AI in SQL, Vector Search in SQL, Multimodal Features in SQL.
+This project uses new features from BigQuery AI like: Generative AI in SQL, Vector Search in SQL, Multimodal Features in SQL, and it can be run as a separate domain system, outside of main EWS system imlementation, or embbeded in the general system architecture, when completed.
 
 ## Features
 
@@ -20,6 +20,7 @@ This project uses new features from BigQuery AI like: Generative AI in SQL, Vect
 ## System Components
 
 ### Core SQL Scripts
+[demo production ready - beta testing in Kaggle/GCP]
 
 - **`create.sql`**: Database schema creation for sensor data, satellite imagery, and AI models
 - **`data_population.sql`**: Sample data insertion for testing and demonstration
@@ -38,8 +39,9 @@ This project uses new features from BigQuery AI like: Generative AI in SQL, Vect
 - **`earthAI.md`**: Complete documentation and tutorial for Earth Engine integration with step-by-step instructions
 
 ### Documentation
+[Final Drafts]
 
-- **`Business Case - EWS BigQuery AI System.pdf`**: Business justification and requirements
+- **`Business Case - EWS BigQuery AI System.pdf`**: Sample Business Plan - justification and requirements
 - **`EWS BigQuery AI System Prototype.pdf`**: Technical architecture and implementation details
 - **`DataflowDiagram.png`**: Visual representation of the data flow
 - **`EWS_BigQueryAI.png`**: System architecture diagram
