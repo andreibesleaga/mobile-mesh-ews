@@ -1,1 +1,1 @@
-ITU.GENIE.AI with related frameworks and tech systems integration in the system
+ITU.GENIE.AI with related frameworks and tech systems integrations
