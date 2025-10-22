@@ -66,6 +66,15 @@ This repository contains system proposal variants descriptions, general diagrams
 - External available resources could be used in the training of the AI models or immediate decision combination in the decision algorithm.
 As examples, extensive publicly available data from **Google Earth AI** and others (NASA, Telecomms special APIs, etc), can provide already pre-trained models for weighing the decision and the routing part of the system to most critical areas and most likely predicted with problems from before AI system training, by using their interconnected data for forecasting, for the pre-setup of the system (eg: limit to most probable certain areas conditions), or advanced use combining real-time results of the system with pre-known data.
 
+#### 6. Other APIs & System parts
+
+Libraries and implementations of other external and internal engines and APIs for different specific parts of the system. Examples (not final) include the following:
+- BigData_AI_Decision_System - Decision engine variant of the system, as a complete SQL implementation for Google Cloud Datawarehouse & BigQueryAI optimized AI enhanced search for the multitude multi-modal sources of Big Data, to combine and get the best results;
+- Communications_APIs - external communications libraries via multiple channels;
+- Distributed_Ledgers_Operations - libraries and system for storing eventual external events in need of a Distributed ledger / Blockchain / etc.;
+- GENIEAI Framework (OPEA/Haystack/GovStack) - integration of the system with an AI framework which includes multiple capabilities and standards;
+- IoT_Operations - IoT / SIM specific operations libraries and system for specific external communications and operations (eg: telecom, robots, edge cases, etc.);
+
 
 #### Conclusion
 This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level software architectures, while the final complete system architectures and implementations might be depending on many other factors, but can be assemblied from the parts and implementations of presented system.
