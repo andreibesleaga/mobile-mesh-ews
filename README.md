@@ -72,7 +72,7 @@ Libraries and implementations of other external and internal engines and APIs fo
 - BigData_AI_Decision_System - Decision engine variant of the system, as a complete SQL implementation for Google Cloud Datawarehouse & BigQueryAI optimized AI enhanced search for the multitude multi-modal sources of Big Data, to combine and get the best results;
 - Communications_APIs - external communications libraries via multiple channels;
 - Distributed_Ledgers_Operations - libraries and system for storing eventual external events in need of a Distributed ledger / Blockchain / etc.;
-- GENIEAI Framework (OPEA/Haystack/GovStack) - integration of the system with an AI framework which includes multiple capabilities and standards;
+- AI Framework (GENIEAI/OPEA/Haystack/GovStack/etc.) - integration of the system with an AI framework which includes multiple capabilities and standards;
 - IoT_Operations - IoT / SIM specific operations libraries and system for specific external communications and operations (eg: telecom, robots, edge cases, etc.);
 
 
