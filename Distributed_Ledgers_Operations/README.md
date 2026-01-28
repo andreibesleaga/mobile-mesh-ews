@@ -1,1 +1,2 @@
-System part to use a Distributed Ledger / Blockchain, for specific operations.
+System part for Distributed Ledger / Blockchain specific operations (audit/trust/etc.).
+(eg: Hyperledger, Ethereum, etc.)
