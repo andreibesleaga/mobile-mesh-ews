@@ -69,12 +69,12 @@ As examples, extensive publicly available data from **Google Earth AI** and othe
 #### 6. Other APIs & System parts
 
 Libraries and implementations of other external and internal engines and APIs for different specific parts of the system. Examples (not final) include the following:
-- BigData_AI_Decision_System - Decision engine variant of the system, as a complete SQL implementation for Google Cloud Datawarehouse & BigQueryAI optimized AI enhanced search for the multitude multi-modal sources of Big Data, to combine and get the best results;
-- Communications_APIs - external communications libraries via multiple channels;
-- Distributed_Ledgers_Operations - libraries and system for storing eventual external events in need of a Distributed ledger / Blockchain / etc.;
+- BigData_AI_Decision_System - Decision engine variant of the system, as a complete SQL implementation for Google Cloud Datawarehouse & BigQueryAI optimized AI enhanced search for the multitude multi-modal sources of Big Data (including data from sensors & available Earth satellite imagery), to combine and get the best results;
 - AI Framework (GENIEAI/OPEA/Haystack/GovStack/etc.) - integration of the system with an AI framework which includes multiple capabilities and standards;
-- IoT_Operations - IoT / SIM specific operations libraries and system for specific external communications and operations (eg: telecom, robots, edge cases, etc.);
-
+- Communications_APIs - external communications libraries via multiple channels to admins/users/3rdparties;
+- CAMARA_Telecom_Operations - CAMARA Mobile Network APIs Integration for specific context warning usage (eg: urban settings, population density, mobile checks and geofencing);
+- IoT_Operations - IoT/SIM specific operations libraries and system for specific external communications and operations (eg: telecom, robots, edge cases, etc.);
+- Distributed_Ledgers_Operations - libraries and system for storing eventual external events in need of a Distributed ledger / Blockchain / etc.;
 
 #### Conclusion
 This work in progress is a proposal as to the article idea, with things that can be improved in current systems, or thought of as from a different perspective, with their example higher level software architectures, while the final complete system architectures and implementations might be depending on many other factors, but can be assemblied from the parts and implementations of presented system.
