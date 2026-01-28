@@ -70,7 +70,7 @@ As examples, extensive publicly available data from **Google Earth AI** and othe
 
 Libraries and implementations of other external and internal engines and APIs for different specific parts of the system. Examples (not final) include the following:
 - BigData_AI_Decision_System - Decision engine variant of the system, as a complete SQL implementation for Google Cloud Datawarehouse & BigQueryAI optimized AI enhanced search for the multitude multi-modal sources of Big Data (including data from sensors & available Earth satellite imagery), to combine and get the best results;
-- AI Framework (GENIEAI/OPEA/Haystack/GovStack/etc.) - integration of the system with an AI framework which includes multiple capabilities and standards;
+- AI Framework (GENIEAI/OPEA/Haystack/GovStack/etc.) - system integration with an AI framework that includes multiple capabilities/standards for complete AI pipelines services;
 - Communications_APIs - external communications libraries via multiple channels to admins/users/3rdparties;
 - CAMARA_Telecom_Operations - CAMARA Mobile Network APIs Integration for specific context warning usage (eg: urban settings, population density, mobile checks and geofencing);
 - IoT_Operations - IoT/SIM specific operations libraries and system for specific external communications and operations (eg: telecom, robots, edge cases, etc.);
