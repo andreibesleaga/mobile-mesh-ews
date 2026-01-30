@@ -22,7 +22,7 @@ The system is specified and architected in the following documents:
 
 | Component | Document | Description |
 |-----------|----------|-------------|
-| **Product Specs** | [**PRD_Swarm_System_Requirements.md**](./PRD_Swarm_System_Requirements_Specification.md) | Full functional & non-functional requirements |
+| **Product Specs** | [**PRD_Swarm_System_Requirements.md**](./PRD_Swarm_System_Requirements_Specification.md) | Functional & non-functional requirements |
 | **Integrations** | [**PRD_Other_Integrations.md**](./PRD_Other_Integrations.md) | Specs for AI, CAP, VisualGrid, and external APIs |
 | **Architecture** | [**ARCHITECTURE_INDEX.md**](./ARCHITECTURE/ARCHITECTURE_INDEX.md) | **MAIN ENTRY POINT**: C4 diagrams, flows, security, protocols |
 
