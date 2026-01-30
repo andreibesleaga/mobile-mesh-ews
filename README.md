@@ -3,8 +3,8 @@
 
 ## 🌍 Overview
 
-**Live Mobile Swarm Mesh for Early Warnings and Climate Monitoring**
-**System Requirements and Specs, Architecture Proposals & Parts Implementations**
+- **Live Mobile Swarm Mesh for Early Warnings and Climate Monitoring**
+- **System Requirements and Specs, Architecture Proposals & Parts Implementations**
 
 > [ Innovative Swarm System Architecture with Live Mobile Edge Sensors for Climate Monitoring](https://medium.com/@andrei-besleaga/innovative-swarm-system-architecture-with-live-mobile-edge-sensors-for-climate-monitoring-and-eb0124e7b451)
 
