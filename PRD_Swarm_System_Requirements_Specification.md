@@ -52,7 +52,7 @@ The defining characteristic of the Swarm System is its ability to operate withou
 
 To optimize bandwidth and power, the system distinguishes between "routed" and "non-routed" sensors.
 
-* **REQ-EDGE-001:** The system shall support **"Routed" Swarm Intelligent Sensors**. These nodes must possess high computational and transmission capabilities to act as mesh routers, forwarding data for other nodes and participating in distributed decision-making.16  
+* **REQ-EDGE-001:** The system shall support **"Routed" Swarm Intelligent Sensors**. These nodes must possess high computational and transmission capabilities to act as mobile mesh routers, forwarding data for other nodes and participating in distributed decision-making.16  
 * **REQ-EDGE-002:** The system shall support **"Non-Routed" Flora/Fauna Sensors**. These are ultra-low-power, acquire-only endpoints (e.g., biological sensors on animals, static soil moisture sensors) that transmit data only to the nearest routed node. They do not route traffic for others.16  
 * **REQ-EDGE-003:** All sensor nodes must implement **Edge Pre-processing**. Raw sensor data (e.g., high-definition video, raw seismic waveforms) must be processed locally to extract features (e.g., "smoke detected," "vibration magnitude") before transmission, significantly reducing bandwidth requirements.20
 
