@@ -18,7 +18,7 @@ Part of the concept proposed in [this article on multi-hazard EWS](https://mediu
 
 ## 📚 Core Documentation
 
-The system is fully specified and architected in the following documents:
+The system is specified and architected in the following documents:
 
 | Component | Document | Description |
 |-----------|----------|-------------|
@@ -66,7 +66,7 @@ A distributed network of mobile devices acting as live sensors:
 *   **Maritime**: Ocean health, wave data, salinity.
 
 ### 2. Swarm Intelligence
-Nodes operate autonomously using mesh protocols (AODV/TORA) and Swarm Intelligence (ACO) to optimize routing and coverage without centralized control during critical failures.
+Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimize routing and coverage without centralized control during critical failures.
 
 ### 3. AI & Prediction
 *   **Real-time Analysis**: Edge AI for immediate anomaly detection.
