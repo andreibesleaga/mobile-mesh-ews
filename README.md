@@ -1,8 +1,10 @@
-# Mobile Mesh Climate Early Warning System (SwarmSystem)
+# Climate Early Warning System 
+## Mobile Mesh SwarmSystem
 
 ## 🌍 Overview
 
-**Live Mobile Swarm Mesh for Early Warnings and Climate Monitoring**
+- **Live Mobile Swarm Mesh for Early Warnings and Climate Monitoring**
+- **System Requirements and Specs, Architecture Proposals & Parts Implementations**
 
 > [ Innovative Swarm System Architecture with Live Mobile Edge Sensors for Climate Monitoring](https://medium.com/@andrei-besleaga/innovative-swarm-system-architecture-with-live-mobile-edge-sensors-for-climate-monitoring-and-eb0124e7b451)
 
@@ -16,11 +18,11 @@ Part of the concept proposed in [this article on multi-hazard EWS](https://mediu
 
 ## 📚 Core Documentation
 
-The system is fully specified and architected in the following documents:
+The system is specified and architected in the following documents:
 
 | Component | Document | Description |
 |-----------|----------|-------------|
-| **Product Specs** | [**PRD_Swarm_System_Requirements.md**](./PRD_Swarm_System_Requirements_Specification.md) | Full functional & non-functional requirements |
+| **Product Specs** | [**PRD_Swarm_System_Requirements.md**](./PRD_Swarm_System_Requirements_Specification.md) | Functional & non-functional requirements |
 | **Integrations** | [**PRD_Other_Integrations.md**](./PRD_Other_Integrations.md) | Specs for AI, CAP, VisualGrid, and external APIs |
 | **Architecture** | [**ARCHITECTURE_INDEX.md**](./ARCHITECTURE/ARCHITECTURE_INDEX.md) | **MAIN ENTRY POINT**: C4 diagrams, flows, security, protocols |
 
@@ -64,7 +66,7 @@ A distributed network of mobile devices acting as live sensors:
 *   **Maritime**: Ocean health, wave data, salinity.
 
 ### 2. Swarm Intelligence
-Nodes operate autonomously using mesh protocols (AODV/TORA) and Swarm Intelligence (ACO) to optimize routing and coverage without centralized control during critical failures.
+Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimize routing and coverage without centralized control during critical failures.
 
 ### 3. AI & Prediction
 *   **Real-time Analysis**: Edge AI for immediate anomaly detection.
