@@ -184,6 +184,17 @@ V1 Node receives V2 Message:
 └── Process successfully (degraded)
 ```
 
+## Safety Protocols
+
+### Fail-Safe Design (IEEE P7009)
+**Use Case:** Loss of positive control or catastrophic jamming
+**Mechanism:**
+1. **Heartbeat Loss:** If C2 heartbeat missing > 120s
+2. **Safe State Transition:** Nodes enter `SAFE_MODE`
+3. **Action:** Execute "Return-to-Base" or "Land Immediately"
+4. **No Autonomous Engagement:** All active tracking disabled
+**PRD Reference:** REQ-REL-004
+
 ## Operational Support Protocols (Integrated Extensions)
 
 ### Messaging & Notification Protocols

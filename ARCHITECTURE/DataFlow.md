@@ -215,6 +215,12 @@ sequenceDiagram
     participant HW as Hardware Driver
     participant B as Blockchain
 
+    D->>D: Risk Classification
+    alt Risk > 90% (High)
+        D->>C2: Request Human Auth
+        C2->>D: Auth Token
+    end
+    
     D->>C: Alert object (severity=Extreme, area=S2Cell)
     D->>B: Log decision (immutable)
     C->>C: Map to CAP enums

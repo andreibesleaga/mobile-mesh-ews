@@ -11,6 +11,7 @@ This is the architecture documentation index for the **Live Mobile Edge Sensors 
 | Document | Purpose | Key Contents |
 |----------|---------|--------------|
 | [System_Architecture_Overview.md](./System_Architecture_Overview.md) | **Global Architecture** | **High-level System of Systems Diagram** |
+| [System_Architectures.md](./System_Architectures.md) | **Detailed Use Case Arch** | **Mermaid Diagrams for Gov/NGO/Biz cases** |
 | [C4_Context.md](./C4_Context.md) | System boundary | External actors, integrated systems |
 | [C4_Container.md](./C4_Container.md) | Major subsystems | 9 containers, technology stack |
 | [C4_Component.md](./C4_Component.md) | Internal structure | Components per container |
@@ -18,6 +19,7 @@ This is the architecture documentation index for the **Live Mobile Edge Sensors 
 | [Deployment.md](./Deployment.md) | Physical topology | 4 tiers, DR strategy |
 | [Security.md](./Security.md) | Security layers | 5 layers, threat model |
 | [Scalability.md](./Scalability.md) | Scaling patterns | Performance targets |
+| [TechnicalStacks.md](./TechnicalStacks.md) | **Technology Choices** | **GCP vs AWS vs OSS comparison** |
 | [TechnicalProtocols.md](./TechnicalProtocols.md) | Protocol details | AODV, TORA, A2A, MCP, CAP |
 | [UserFlows.md](./UserFlows.md) | Scenarios | 7 disaster types, state diagrams |
 | [AuxiliarySystems.md](./AuxiliarySystems.md) | Support Services | IoT, Ledger, Notification diagrams |

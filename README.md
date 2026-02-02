@@ -12,6 +12,10 @@ This project implements a decentralized, autonomous **Swarm Intelligence** netwo
 
 Part of the concept proposed in [this article on multi-hazard EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9).
 
+### 💡 Scientific & Technical Innovation
+Unlike traditional centralized EWS (which rely on vulnerable single backbones), this project implements a **Bio-Inspired Decentralized Swarm Architecture**. It leverages **6G OTFS waveforms** for high-mobility communication (overcoming the Doppler shift limits of 5G) and **Federated Learning** to train AI at the edge, preserving privacy while reducing bandwidth by 90%. This "Digital Immune System" approach aligns with cutting-edge academic research on *Post-Disaster Mobile Ad-hoc Networks (PDANs)* but pushes the state-of-the-art by adding active, agentic mobility to repair connectivity gaps autonomously.
+> [Read the full Comparative Analysis vs SOTA](./INNOVATION.md)
+
 ![Swarm System Overview](SwarmSystem.png)
 
 ---
@@ -24,7 +28,12 @@ The system is specified and architected in the following documents:
 |-----------|----------|-------------|
 | **Product Specs** | [**PRD_Swarm_System_Requirements.md**](./PRD_Swarm_System_Requirements_Specification.md) | Functional & non-functional requirements |
 | **Integrations** | [**PRD_Other_Integrations.md**](./PRD_Other_Integrations.md) | Specs for AI, CAP, VisualGrid, and external APIs |
+| **Business Strategy** | [**Business_Strategy.md**](./Business_Strategy.md) | Strategic value, revenue models, and use cases |
+| **Compliance** | [**Compliance_and_Ethics.md**](./Compliance_and_Ethics.md) | EU AI Act (High-Risk), GDPR, and Ethics Gap Analysis |
 | **Architecture** | [**ARCHITECTURE_INDEX.md**](./ARCHITECTURE/ARCHITECTURE_INDEX.md) | **MAIN ENTRY POINT**: C4 diagrams, flows, security, protocols |
+| **System Diagrams** | [**System_Architectures.md**](./ARCHITECTURE/System_Architectures.md) | **Mermaid Diagrams**: Visual flows for all Business Strategies use cases |
+| **Risk Assessment** | [**RISKS.md**](./RISKS.md) | **Comprehensive Registry**: Technical, Business, and Ethical risks |
+| **Innovation** | [**INNOVATION.md**](./INNOVATION.md) | **State-of-the-Art Analysis**: Comparison vs Academic/Industrial systems |
 
 ---
 

@@ -212,6 +212,7 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 * **REQ-REL-001:** **Ruggedization:** Sensor nodes must be rated IP68 (waterproof/dustproof) and capable of operating in extreme temperatures (-20°C to \+80°C).2  
 * **REQ-REL-002:** **Energy Autonomy:** Nodes must employ energy harvesting (solar, thermal, vibration) and adaptive duty-cycling algorithms to achieve a minimum operational lifespan of **6 months** without maintenance (for static nodes) or **optimized flight times** (for UAVs).1  
 * **REQ-REL-003:** **Fault Tolerance:** The system must have **No Single Point of Failure**. The destruction of the central platform link must not stop the local swarm from functioning; it must revert to local-only mesh coordination.7
+* **REQ-REL-004:** **Fail-Safe Design (IEEE P7009):** The system must implement a "Safe State" default. In the event of catastrophic jamming or loss of positive control, nodes must automatically execute a "Return-to-Base" or "Safe Land" maneuver, precluding any erratic or dangerous autonomous behavior.
 
 ### **9.3 Security**
 
@@ -312,8 +313,9 @@ The system's intelligence is not static; it is a living cycle.
 ### **13.2 Regulatory and Ethical Constraints**
 
 * **Spectrum Compliance:** The system must adhere to local radio frequency regulations, automatically disabling transmission on restricted bands.43  
-* **Privacy:** The system must implement "Privacy by Design." Any data collected that inadvertently captures PII (e.g., faces in a rescue camera feed) must be anonymized or deleted at the edge unless explicitly flagged for a rescue operation.44  
-* **Autonomous Lethality:** (Explicit Exclusion) While the system uses military-grade swarm tech, it is strictly prohibited from carrying weaponized payloads. It is a sensing and warning system only.44
+* **Privacy (GDPR):** The system must implement **Edge Anonymization**. Any multimedia data (video/audio) must be processed locally to extract metadata (e.g., "Person Detected") and the raw stream discarded immediately, unless a "Search and Rescue" mode is explicitly authorized by a human commander.44  
+* **Autonomous Lethality:** (Explicit Exclusion) The system is strictly prohibited from integrating with weapon systems. It acts solely as a sensor and relay.  
+* **Human Oversight (EU AI Act):** All valid alerts classified as "CRITICAL" (Risk Score > 90) must be routed to a human operator for verification before being broadcast to the public, unless a "Fail-Safe Override" (e.g., dam burst detected) is pre-authorized.
 
 ## ---
 
