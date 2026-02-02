@@ -73,15 +73,6 @@ Node D → RREP unicast → Back to Node A
 
 **PRD Reference:** REQ-COM-006
 
-```
-Pheromone Update:
-τ_ij = (1-ρ)τ_ij + Δτ_ij
-
-where:
-- τ_ij = pheromone on link i→j
-- ρ = evaporation rate
-- Δτ_ij = deposit based on path quality
-```
 
 ## Physical Layer Protocols
 
@@ -229,7 +220,7 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 | **Hyperledger Fabric** | gRPC (Fabric SDK) | Private permissioned logging of AI decisions |
 | **Ethereum** | JSON-RPC (Web3) | Public anchor for transparency/verification |
 
-**Audit Log Schema:**
+**Audit Log Schema Example:**
 ```json
 {
   "decision_id": "uuid",
