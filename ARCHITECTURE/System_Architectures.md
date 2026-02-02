@@ -20,10 +20,10 @@ graph TD
     end
 
     subgraph Connectivity ["Tier 2: The Network (Hybrid Mesh)"]
-        Meshnet[Ad-Hoc Mesh Protocols<br/>(AODV/TORA)]
-        Backhaul_Sat[Satellite Backhaul<br/>(Starlink/Iridium)]
+        Meshnet["Ad-Hoc Mesh Protocols<br/>(AODV/TORA)"]
+        Backhaul_Sat["Satellite Backhaul<br/>(Starlink/Iridium)"]
         Backhaul_5G[5G/6G Terrestrial]
-        DTN[Disruption Tolerant<br/>Data Ferrying]
+        DTN["Disruption Tolerant<br/>Data Ferrying"]
         
         Edge_Swarm <--> Meshnet
         Meshnet <--> Backhaul_Sat
@@ -34,9 +34,9 @@ graph TD
     subgraph Core_Cloud ["Tier 3: The Core (Central Intelligence)"]
         Ingest[Big Data Ingestion]
         RealTimeDB[(Real-Time System DB)]
-        BigQuery[BigQuery AI Engine<br/>(Predictive Models)]
-        Ledger[Blockchain Ledger<br/>(Audit/Smart Contracts)]
-        Genie[GenieAI Chatbot<br/>(RAG Interface)]
+        BigQuery["BigQuery AI Engine<br/>(Predictive Models)"]
+        Ledger["Blockchain Ledger<br/>(Audit/Smart Contracts)"]
+        Genie["GenieAI Chatbot<br/>(RAG Interface)"]
         
         Backhaul_Sat <--> Ingest
         Backhaul_5G <--> Ingest
@@ -224,27 +224,27 @@ graph LR
 
 ```mermaid
 graph TD
-    RawData[Raw Mesh Data<br/>(Pings/Video/Mac Addr)]
+    RawData["Raw Mesh Data<br/>(Pings/Video/Mac Addr)"]
     
     subgraph Edge_Compute ["Edge Privacy Layer"]
-        Anonymizer[strip_PII()]
-        Aggregate[Cluster Counting]
+        Anonymizer["strip_PII()"]
+        Aggregate["Cluster Counting"]
     end
     
     RawData --> Anonymizer
     Anonymizer --> Aggregate
     
     subgraph Telco_API ["CAMARA / Telco Cloud"]
-        LocAPI[Location Retrieval API]
-        QoDAPI[Quality on Demand API]
+        LocAPI["Location Retrieval API"]
+        QoDAPI["Quality on Demand API"]
     end
     
     Aggregate --> LocAPI
     
     subgraph Biz_Value ["Commercial Services"]
-        Heatmap[Retail Heatmap]
-        EV_Opt[EV Charger Optimization]
-        Traffic[Logistics Routing]
+        Heatmap["Retail Heatmap"]
+        EV_Opt["EV Charger Optimization"]
+        Traffic["Logistics Routing"]
     end
     
     LocAPI --> Heatmap
