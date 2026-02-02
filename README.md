@@ -87,3 +87,6 @@ Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimi
 
 ---
 *Last Updated: February 2026*
+
+---
+<a href="https://github.com/andreibesleaga/mobile-mesh-ews">Mobile Mesh Swarm EWS Climate System</a> ©2024-2026 by <a href="https://github.com/andreibesleaga">Andrei Besleaga</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</a>
