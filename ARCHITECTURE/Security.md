@@ -59,6 +59,7 @@ flowchart TB
 | **Secure Boot** | Signed firmware, integrity verification | Firmware tampering |
 | **Local Encryption** | ECC (Elliptic Curve Cryptography) | Data exposure on lost device |
 | **Anomaly Detection** | ML-based sensor value validation | Injected false data |
+| **Provenance Metadata** | Device ID, Timestamp, Location, Signature | Data Spoofing/Replay |
 
 **PRD Reference:** REQ-SEC-001, REQ-SEC-003
 
@@ -142,6 +143,19 @@ flowchart LR
     HASHED --> STORE
     STORE --> TTL
 ```
+
+### Data Governance & Provenance
+
+**Provenance Metadata Requirements:**
+All data packets must include:
+- **Device ID**: Cryptographically verifiable identity.
+- **Timestamp**: High-precision timestamp synced via GPS/NTP.
+- **Location**: Geolocation coordinates (or S2 cell).
+- **Signature**: Digital signature using device's private key.
+
+**Audit Trails:**
+- Critical events (Alert Triggers, System Mode Changes) are logged to a permissioned blockchain ledger.
+- Privacy-preserving access controls ensure only authorized reviewers can decrypt sensitive audit logs.
 
 **Privacy Controls:**
 

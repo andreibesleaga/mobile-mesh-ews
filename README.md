@@ -34,6 +34,8 @@ The system is specified and architected in the following documents:
 | **System Diagrams** | [**System_Architectures.md**](./ARCHITECTURE/System_Architectures.md) | **Mermaid Diagrams**: Visual flows for all Business Strategies use cases |
 | **Risk Assessment** | [**RISKS.md**](./RISKS.md) | **Comprehensive Registry**: Technical, Business, and Ethical risks |
 | **Innovation** | [**INNOVATION.md**](./INNOVATION.md) | **State-of-the-Art Analysis**: Comparison vs Academic/Industrial systems |
+| **UN Reference** | [**UN_Early_Warnings_Reference.md**](./UN_Early_Warnings_Reference.md) | **EW4All Implementation**: Reference for UN initiative alignment |
+| **RTM** | [**Requirements_Traceability_Matrix.md**](./Requirements_Traceability_Matrix.md) | **Traceability**: Mapping requirements to implementation |
 
 ---
 
@@ -94,8 +96,11 @@ Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimi
 *   [Article: Emerging Tech in EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9)
 *   [Project BigData AI Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData_AI_Decision_System)
 
----
-*Last Updated: February 2026*
+[**References.md**](./References.md) | **Citations**: Standards, Research Papers, and Case Studies
 
 ---
+
 <a href="https://github.com/andreibesleaga/mobile-mesh-ews">Mobile Mesh Swarm EWS Climate System</a> ©2024-2026 by <a href="https://github.com/andreibesleaga">Andrei Besleaga</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</a>
+
+---
+*Last Updated: February 2026*

@@ -14,13 +14,22 @@ Based on current architecture and use cases, the Mobile Mesh EWS falls under **H
 - **Human Oversight**: "Human-in-the-loop" interfaces for critical decisions (e.g., evacuation orders).
 - **Accuracy, Robustness, Cybersecurity**: Resilience against adversarial attacks (jamming, spoofing).
 
+### Data Governance Standards
+- **Metadata Standards**: All environmental data complies with **ISO 19115** (Geographic Information - Metadata) and the **CF Convention** (Climate and Forecast Metadata) for netCDF files.
+- **Data Provenance**: A permanent, immutable audit trail of data origin is maintained via the **W3C PROV** ontology.
+- **Interoperability**: Adherence to **OGC SensorThings API** for standardized tasking and sensing.
+
 ## 2. Ethical Risk Assessment (IEEE 7000 / Ethics Guidelines)
 
 ### 2.1 Surveillance & Privacy (High Risk)
 - **Risk**: "Always-on" sensors on consumer vehicles/phones could inadvertently collect PII (Personal Identifiable Information) like faces, license plates, or conversations.
 - **Mitigation Requirement**:
     - **Privacy-by-Design**: Data must be anonymized *at the edge* before transmission.
-    - **GDPR Compliance**: Explicit consent mechanisms for "Citizen Nodes".
+    - **GDPR Compliance**:
+        - **Data Processing Agreement (DPA)**: All cloud processors must sign standard clauses.
+        - **Right to Erasure**: Automated API endpoints to purge user-contributed data (e.g., from Citizen Nodes).
+        - **Consent Management**: Granular opt-in model for location sharing.
+    - **CCPA/GDPA Alignment**: Annual privacy impact assessments (PIA).
     - **Data Minimization**: Collect only environmental data, not user tracking data.
 
 ### 2.2 Dual-Use & Militarization (Medium Risk)

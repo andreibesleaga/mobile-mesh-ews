@@ -43,9 +43,21 @@ This layer is critical for offline autonomy. Choices are validated against IEEE 
     *   *DuckDB*: Best for on-device analytics via SQL.
 
 ### 3.2 Swarm Communication Protocols
-*   **Message Transport:** **MQTT-SN** (Low bandwidth) over **AODV/TORA** Mesh.
-*   **SoTA Alternative:** **DDS (Data Distribution Service)** (ROS2 standard) for real-time high-frequency telemetry.
-*   **Serialization:** **Protobuf** (Google) or **FlatBuffers** (Zero-copy access).
+*   **Mesh Protocol Options:**
+    *   **BATMAN-ADV (Better Approach To Mobile Adhoc Networking)**: Layer 2 routing. **Recommended** for transparent bridging and roaming. Agnostic to Layer 3 protocols.
+    *   **802.11s**: Standardized mesh. Good integration but can be less flexible with dynamic high-mobility nodes compared to BATMAN.
+*   **Communication Stack:**
+    *   **Physical**: 5G / LTE-M / LoRa / WiFi.
+    *   **Transport**: TCP/UDP + TLS 1.3.
+    *   **Application**:
+        *   **MQTT**: Telemetry (Low overhead).
+        *   **CoAP**: Constrained devices.
+*   **Serialization**: **Protobuf** (Google) or **FlatBuffers** (Zero-copy access).
+
+### 3.3 Sensor Accuracy & Calibration
+*   **Calibration Matrix**: All sensors must be calibrated against reference instruments before deployment.
+*   **Routine**: Automatic baseline correction (ABC) for gas sensors; Periodic co-location calibration.
+*   **Filtering**: Kalman Filters and Median filters implemented at the Edge to reject noise and faulting sensor data.
 
 ### 3.3 Simulation & Digital Twins
 Before physical deployment, swarms are trained in high-fidelity physics simulators.
@@ -60,6 +72,11 @@ This subsystem allows the swarm to "communicate over mobile directly" and acquir
     *   **Quality on Demand (QoD):** Prioritize critical alert traffic during congestion.
     *   **Device Location:** Acquire verified coordinates from the cell tower (anti-spoofing).
     *   **SIM Swap:** Verify device identity integrity before allowing mesh join.
+
+### 3.5 Integration Framework
+*   **WMO (World Meteorological Organization)**: WIS 2.0 compliant data exchange.
+*   **USGS (United States Geological Survey)**: Earthquake Catalog API integration.
+*   **National Systems**: CAP v1.2 standardized alerts for interoperability with IPAWS, EU-Alert.
 
 ---
 

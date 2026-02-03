@@ -2,7 +2,30 @@
 
 ## 1. High-Level System Context
 
-The Mobile Mesh Early Warning System (EWS) operates on a three-tier architecture: **The Edge (Swarm)**, **The Network (Nervous System)**, and **The Core (Brain)**.
+The Mobile Mesh Early Warning System (EWS) operates on a **Four-Tier Architecture**:
+1.  **Tier 1: The Edge (Swarm)** - Autonomous sensing and local actions.
+2.  **Tier 2: The Network (Nervous System)** - Resilient mesh and backhaul connectivity.
+3.  **Tier 3: The Core (Brain)** - Centralized AI, Big Data, and Orchestration.
+4.  **Tier 4: Action & Dissemination (Effectors)** - Alerts, Government Dashboards, and Public Interfaces.
+
+### Latency Service Level Objectives (SLOs)
+| Hazard Type | Detection-to-Alert Latency | Requirement |
+|-------------|---------------------------|-------------|
+| **Earthquake** | < 5 seconds | Real-time immediate automated alert |
+| **Flood** | < 60 seconds | Rapid validation and predictive modeling |
+| **Air Quality** | < 10 minutes | Trend analysis and verified dispersal pattern |
+
+### AI/ML Model Architectures
+- **Edge AI**: TensorFlow Lite Micro running on local nodes for anomaly detection (One-Class SVM) and sensor validation.
+- **Core AI**:
+    - **Predictive Models**: BigQuery ML (ARIMA_PLUS, XGBoost) for time-series forecasting.
+    - **Generative AI**: GenieAI (Gemini Pro/Flash) for RAG-based query answering.
+    - **Vision AI**: CNNs (ResNet-50 optimized) on Border Drones for object classification.
+
+### Hybrid Coordination Strategy
+- **Decentralized**: Local swarms use consensus (Raft-over-Mesh) for immediate collision avoidance and local data aggregation.
+- **Centralized**: The Core Cloud provides strategic directives (e.g., "Scan Sector 7") and long-term model retraining.
+
 
 ```mermaid
 graph TD
@@ -247,7 +270,13 @@ graph TD
         Traffic["Logistics Routing"]
     end
     
-    LocAPI --> Heatmap
     LocAPI --> EV_Opt
     QoDAPI --> Traffic
 ```
+
+## 5. Architectural Weaknesses and Gaps
+*   **Data Flow Specifics**: The high-level architecture requires more detailed data pipeline diagrams specifying message formats (Protobuf/Avro) and error handling queues (Dead Letter Queues).
+*   **Security Boundaries**: Explicit trust zones and authentication flows between the Mesh and Cloud need stricter definition (Zero Trust implementation).
+*   **Failover Mechanisms**: While Swarm is resilient, the Cloud Core needs explicit Multi-Region Disaster Recovery (DR) and High Availability (HA) strategies documented.
+*   **Requirements Traceability**: Mapping system requirements to specific architectural components is currently high-level and needs a detailed RTM.
+

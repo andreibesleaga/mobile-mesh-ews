@@ -101,7 +101,8 @@ The network must be robust, self-healing, and capable of operating in complete i
 
 ### **4.4 Backhaul and Resilience**
 
-* **REQ-COM-010:** The system must integrate **Satellite Backhaul** capabilities (LEO constellations like Starlink/Iridium) to ensure connectivity in remote areas where terrestrial 5G/6G is unavailable.31  
+*   **REQ-COM-010:** The system must integrate **Satellite Backhaul** capabilities (LEO constellations like Starlink/Iridium) to ensure connectivity in remote areas where terrestrial 5G/6G is unavailable.31
+*   **REQ-COM-012:** **Network Resilience & Coverage:** The system assumes **intermittent 5G/6G coverage** in disaster zones. It shall aggressively prioritize "store-and-forward" mesh routing when backhaul is < 100kbps, queueing non-critical telemetry while pushing high-priority alerts immediately.  
 * **REQ-COM-011:** The system shall support **Disruption Tolerant Networking (DTN)**. If no backhaul is available, nodes must cache data locally and physically move to a location with connectivity ("ferrying" data) to upload it.18
 
 ## ---
@@ -203,9 +204,10 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 
 ### **9.1 Performance**
 
-* **REQ-PERF-001:** **Latency:** The system must achieve end-to-end latency (from sensor detection to platform alert) of less than **1 second** for critical life-safety events.1  
-* **REQ-PERF-002:** **Packet Delivery Ratio (PDR):** The mesh network must maintain a PDR of **\>95%** even under conditions of 20% node failure, ensuring reliable data delivery in destructive environments.1  
-* **REQ-PERF-003:** **Detection Accuracy:** The AI models must achieve a detection accuracy of **\>99%** for primary hazards (fire, flood) to prevent alarm fatigue.1
+*   **REQ-PERF-001:** **Latency:** The system must achieve end-to-end latency (from sensor detection to platform alert) of less than **1 second** for critical life-safety events.1  
+*   **REQ-PERF-002:** **Packet Delivery Ratio (PDR):** The mesh network must maintain a PDR of **\>95%** even under conditions of 20% node failure, ensuring reliable data delivery in destructive environments.1  
+*   **REQ-PERF-003:** **Detection Accuracy:** The AI models must achieve a detection accuracy of **\>99%** for primary hazards (fire, flood) to prevent alarm fatigue.1
+*   **REQ-PERF-004:** **System Uptime (SLO):** The Core Platform shall maintain **99.99% availability** (max 52 mins downtime/year). The Mesh Network shall maintain **99.999% availability** within the local theater via autonomous self-healing.
 
 ### **9.2 Reliability and Robustness**
 
@@ -322,50 +324,3 @@ The system's intelligence is not static; it is a living cycle.
 **14\. Conclusion**
 
 This Product Requirements Document outlines a sophisticated, next-generation environmental monitoring system that leverages the convergence of Swarm Intelligence, 6G Connectivity, and Edge AI. By adhering to these requirements, the "Live Mobile Edge Sensors Swarm System" will effectively function as a "digital immune system" for the planet—detecting threats early, responding autonomously, and providing the critical intelligence needed to save lives and ecosystems. The requirements emphasize resilience, autonomy, and integration, ensuring the system remains operational when it is needed most: in the chaos of a disaster.
-
-#### **Works cited**
-
-1. Optimized Wireless Sensor Network Architecture for AI-Based Wildfire Detection in Remote Areas \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2571-6255/8/7/245](https://www.mdpi.com/2571-6255/8/7/245)  
-2. Recent Advances in Internet of Things Solutions for Early Warning Systems: A Review, accessed January 30, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC8954208/](https://pmc.ncbi.nlm.nih.gov/articles/PMC8954208/)  
-3. Communication architecture of an early warning system \- NHESS, accessed January 30, 2026, [https://nhess.copernicus.org/articles/10/2215/2010/nhess-10-2215-2010.pdf](https://nhess.copernicus.org/articles/10/2215/2010/nhess-10-2215-2010.pdf)  
-4. Cohere Technologies fights to keep 6G doors open for something new \- Light Reading, accessed January 30, 2026, [https://www.lightreading.com/6g/cohere-technologies-fights-to-keep-6g-doors-open-for-something-new](https://www.lightreading.com/6g/cohere-technologies-fights-to-keep-6g-doors-open-for-something-new)  
-5. Google Earth Engine, accessed January 30, 2026, [https://earthengine.google.com/](https://earthengine.google.com/)  
-6. FIRMS | NASA Earthdata, accessed January 30, 2026, [https://www.earthdata.nasa.gov/data/tools/firms](https://www.earthdata.nasa.gov/data/tools/firms)  
-7. Why Swarm Intelligence Will Revolutionize 6G Networks \- 6G Academy, accessed January 30, 2026, [https://www.6gacademy.com/why-swarm-intelligence-will-revolutionize-6g-networks/](https://www.6gacademy.com/why-swarm-intelligence-will-revolutionize-6g-networks/)  
-8. Routing Methods for Mobile Ad-hoc Network: A Review and Comparison of Multi-criteria Approaches \- Journal of Communications, accessed January 30, 2026, [http://www.jocm.us/uploadfile/2021/0922/20210922025755593.pdf](http://www.jocm.us/uploadfile/2021/0922/20210922025755593.pdf)  
-9. The 6G Mobile Network as a Smart Sensor Platform \- IEEE Xplore, accessed January 30, 2026, [https://ieeexplore.ieee.org/iel8/10209/11016131/11016142.pdf](https://ieeexplore.ieee.org/iel8/10209/11016131/11016142.pdf)  
-10. A Federated Learning Latency Minimization Method for UAV Swarms Aided by Communication Compression and Energy Allocation \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/1424-8220/23/13/5787](https://www.mdpi.com/1424-8220/23/13/5787)  
-11. Mobile Alerting Practices Version 1.0 \- Index of /, accessed January 30, 2026, [https://docs.oasis-open.org/emergency/mapcn/v1.0/cn01/mapcn-v1.0-cn01.pdf](https://docs.oasis-open.org/emergency/mapcn/v1.0/cn01/mapcn-v1.0-cn01.pdf)  
-12. Exploring the Future of Agentic AI Swarms \- Codewave, accessed January 30, 2026, [https://codewave.com/insights/future-agentic-ai-swarms/](https://codewave.com/insights/future-agentic-ai-swarms/)  
-13. Wild Swarms: Autonomous Drones for Environmental Monitoring and Protection \- VTT's Research Information Portal, accessed January 30, 2026, [https://cris.vtt.fi/ws/portalfiles/portal/106558343/2023.Saffre.FinDrones\_Accepted\_Author\_Manuscript.pdf](https://cris.vtt.fi/ws/portalfiles/portal/106558343/2023.Saffre.FinDrones_Accepted_Author_Manuscript.pdf)  
-14. Swarm Intelligence Techniques for Mobile Wireless Charging \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2079-9292/11/3/371](https://www.mdpi.com/2079-9292/11/3/371)  
-15. An IoT-Based Sensor Mesh Network Architecture for Waste Management in Smart Cities \- Journal of Communications, accessed January 30, 2026, [https://www.jocm.us/2025/JCM-V20N2-153.pdf](https://www.jocm.us/2025/JCM-V20N2-153.pdf)  
-16. Routing Protocols for Mobile Sensor Networks: A Comparative Study \- arXiv, accessed January 30, 2026, [https://arxiv.org/pdf/1403.3162](https://arxiv.org/pdf/1403.3162)  
-17. The Why and How of Polymorphic Artificial Autonomous Swarms \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2504-446X/9/1/53](https://www.mdpi.com/2504-446X/9/1/53)  
-18. Real-Time Deployment of Mesh Networks | NIST, accessed January 30, 2026, [https://www.nist.gov/ctl/real-time-deployment-mesh-networks](https://www.nist.gov/ctl/real-time-deployment-mesh-networks)  
-19. Wireless ad hoc network \- Wikipedia, accessed January 30, 2026, [https://en.wikipedia.org/wiki/Wireless\_ad\_hoc\_network](https://en.wikipedia.org/wiki/Wireless_ad_hoc_network)  
-20. Intelligent Swarm Robotics for Disaster Response and Obstacle Avoidance \- IEEE Xplore, accessed January 30, 2026, [https://ieeexplore.ieee.org/iel8/11034707/11034773/11035980.pdf](https://ieeexplore.ieee.org/iel8/11034707/11034773/11035980.pdf)  
-21. SwarmC2 Swarm Command & Control System View product \- UDS, accessed January 30, 2026, [https://www.udefenses.com/products/swarm-c2](https://www.udefenses.com/products/swarm-c2)  
-22. Autonomous Swarming Takes Flight: The Next Era of UAV Operations \- Palladyne AI, accessed January 30, 2026, [https://www.palladyneai.com/blog/autonomous-swarming-takes-flight-the-next-era-of-uav-operations/](https://www.palladyneai.com/blog/autonomous-swarming-takes-flight-the-next-era-of-uav-operations/)  
-23. Drone-swarm based surveillance system for autonomous machine safety functionality in, accessed January 30, 2026, [https://brill.com/edcollchap-oa/book/9789004725232/BP000077.xml](https://brill.com/edcollchap-oa/book/9789004725232/BP000077.xml)  
-24. Mesh networks and real-time data collection are the new foundations of industry, accessed January 30, 2026, [https://www.macnica.co.jp/en/business/maas/columns/146721/](https://www.macnica.co.jp/en/business/maas/columns/146721/)  
-25. DFDM: Decentralized fault detection mechanism to improving fault management in Wireless Sensor Networks | IEEE Conference Publication | IEEE Xplore, accessed January 30, 2026, [https://ieeexplore.ieee.org/document/5979417/](https://ieeexplore.ieee.org/document/5979417/)  
-26. Mobile ad hoc network (MANET) routing protocols comparison for wireless sensor network, accessed January 30, 2026, [https://ieeexplore.ieee.org/document/5993439/](https://ieeexplore.ieee.org/document/5993439/)  
-27. Survey on swarm intelligence based routing protocols for wireless sensor networks: An extensive study \- IEEE Xplore, accessed January 30, 2026, [https://ieeexplore.ieee.org/document/7475064/](https://ieeexplore.ieee.org/document/7475064/)  
-28. Swarm-Intelligence-Centric Routing Algorithm for Wireless Sensor Networks \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/1424-8220/20/18/5164](https://www.mdpi.com/1424-8220/20/18/5164)  
-29. Evolving Towards Artificial-Intelligence-Driven Sixth-Generation Mobile Networks: An End-to-End Framework, Key Technologies, and Opportunities \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2076-3417/15/6/2920](https://www.mdpi.com/2076-3417/15/6/2920)  
-30. 6G Networks and the AI Revolution—Exploring Technologies, Applications, and Emerging Challenges \- PMC \- PubMed Central, accessed January 30, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC10975185/](https://pmc.ncbi.nlm.nih.gov/articles/PMC10975185/)  
-31. (PDF) Communication architecture of an early warning system \- ResearchGate, accessed January 30, 2026, [https://www.researchgate.net/publication/224992833\_Communication\_architecture\_of\_an\_early\_warning\_system](https://www.researchgate.net/publication/224992833_Communication_architecture_of_an_early_warning_system)  
-32. Federated Learning — Enabling Swarm Intelligence | Bosch Global, accessed January 30, 2026, [https://www.bosch.com/research/news/federated-learning/](https://www.bosch.com/research/news/federated-learning/)  
-33. Federated Reinforcement Learning‐Based UAV Swarm System for Aerial Remote Sensing \- DSpace@HANSUNG, accessed January 30, 2026, [https://dspace.hansung.ac.kr/bitstream/2024.oak/1800/2/AR\_E1A1A3\_Federated%20Reinforcement%20Learning-Based%20UAV%20Swarm%20System%20for%20Aerial%20Remote%20Sensing.pdf](https://dspace.hansung.ac.kr/bitstream/2024.oak/1800/2/AR_E1A1A3_Federated%20Reinforcement%20Learning-Based%20UAV%20Swarm%20System%20for%20Aerial%20Remote%20Sensing.pdf)  
-34. Post-Disaster Recovery Monitoring with Google Earth Engine \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2076-3417/10/13/4574](https://www.mdpi.com/2076-3417/10/13/4574)  
-35. Google Earth Engine for Disaster Management: Mitigating Impacts of Flood \- YouTube, accessed January 30, 2026, [https://www.youtube.com/watch?v=AbYB6DkQFq8](https://www.youtube.com/watch?v=AbYB6DkQFq8)  
-36. NASA | LANCE | FIRMS, accessed January 30, 2026, [https://firms.modaps.eosdis.nasa.gov/api/](https://firms.modaps.eosdis.nasa.gov/api/)  
-37. Designing a User-Centered Interaction Interface for Human–Swarm Teaming \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2504-446X/5/4/131](https://www.mdpi.com/2504-446X/5/4/131)  
-38. Part I: Usability of Human-swarm Interaction Interface \- TAS Hub, accessed January 30, 2026, [https://tas.ac.uk/usability-of-human-swarm-interaction-interface/](https://tas.ac.uk/usability-of-human-swarm-interaction-interface/)  
-39. Command and Control of a Large Scale Swarm Using Natural Human Interfaces \- IEEE Xplore, accessed January 30, 2026, [https://ieeexplore.ieee.org/iel8/10854677/10875987/10876045.pdf](https://ieeexplore.ieee.org/iel8/10854677/10875987/10876045.pdf)  
-40. Characterization of Indicators for Adaptive Human-Swarm Teaming \- PMC \- PubMed Central, accessed January 30, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC8891141/](https://pmc.ncbi.nlm.nih.gov/articles/PMC8891141/)  
-41. Environmental Monitoring with Distributed Mesh Networks: An Overview and Practical Implementation Perspective for Urban Scenario \- PubMed Central, accessed January 30, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC6960639/](https://pmc.ncbi.nlm.nih.gov/articles/PMC6960639/)  
-42. The Modeling and Detection of Attacks in Role-Based Self-Organized Decentralized Wireless Sensor Networks \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2673-4001/5/1/8](https://www.mdpi.com/2673-4001/5/1/8)  
-43. UAV swarm communication and control architectures: a review, accessed January 30, 2026, [https://cdnsciencepub.com/doi/10.1139/juvs-2018-0009](https://cdnsciencepub.com/doi/10.1139/juvs-2018-0009)  
-44. AI-Automated Swarm Drone System with Advanced Targeting, Added Countermeasures, and Improved Stealth Technology \- Preprints.org, accessed January 30, 2026, [https://www.preprints.org/manuscript/202511.0792/v1](https://www.preprints.org/manuscript/202511.0792/v1)
