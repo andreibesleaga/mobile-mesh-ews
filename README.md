@@ -12,7 +12,7 @@ This project implements a decentralized, autonomous **Swarm Intelligence** netwo
 
 Part of the concept proposed in [this article on multi-hazard EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9).
 
-### 💡 Scientific & Technical Innovation
+### 💡 Innovations
 Unlike traditional centralized EWS (which rely on vulnerable single backbones), this project implements a **Bio-Inspired Decentralized Swarm Architecture**. It leverages **6G OTFS waveforms** for high-mobility communication (overcoming the Doppler shift limits of 5G) and **Federated Learning** to train AI at the edge, preserving privacy while reducing bandwidth by 90%. This "Digital Immune System" approach aligns with cutting-edge academic research on *Post-Disaster Mobile Ad-hoc Networks (PDANs)* but pushes the state-of-the-art by adding active, agentic mobility to repair connectivity gaps autonomously.
 > [Read the full Comparative Analysis vs SOTA](./INNOVATION.md)
 
