@@ -7,7 +7,7 @@ This document compares the **Live Mobile Edge Sensors Swarm System** against sta
 
 ## 1. Paradigm Shift: From Centralized to Decentralized Swarm Intelligence
 ### State of the Art (Traditional EWS)
-Current national EWS (e.g., USGS ShakeAlert, Copernicus EMS) rely on **Centralized Server Architectures**. Sensors transmit raw data to a central cloud for processing.
+Current EWS (e.g., USGS ShakeAlert, Copernicus EMS) rely on **Centralized Server Architectures**. Sensors transmit raw data to a central cloud for processing.
 *   **Limitation:** Single point of failure. If the central link (fiber/satellite) is severed by the disaster itself (e.g., Tonga eruption cable cut), the system fails.
 *   **Latency:** Data round-trip time (RTT) to cloud increases reaction time.
 
