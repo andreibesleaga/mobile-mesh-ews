@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or documentations, please cite it as below."
+authors:
+  - family-names: "Besleaga"
+    given-names: "Andrei Nicolae"
+title: "Mobile Mesh Swarm EWS Climate System"
+version: 1.0.0
+date-released: 2026-02-04
+url: "https://github.com/andreibesleaga/mobile-mesh-ews"
+repository-code: "https://github.com/andreibesleaga/mobile-mesh-ews"
+license: "CC-BY-NC-ND-4.0"
+abstract: "This project defines a resilient, decentralized, autonomous Swarm Intelligence network using mobile edge sensors (EVs, Drone Swarms, IoT) to provide hyper-local climate monitoring and real-time disaster response. It integrates with global satellite data to form a comprehensive layout for Next-Gen Early Warning Systems (EWS). It implements 5G/6G, OTFS, Federated Learning Edge AI, and centralized AI Decision Making with Human-in-the-loop, aligned with UN Early Warnings for All (EW4All) initiative."
+keywords:
+  - "Swarm Intelligence"
+  - "Early Warning Systems"
+  - "Mobile Mesh"
+  - "Climate Monitoring"
+  - "Edge AI"
+  - "Big Data AI Brain"
+  - "Disaster Response"
+  - "Federated Learning"
+  - "AI Decision Making with Human-in-the-loop"
