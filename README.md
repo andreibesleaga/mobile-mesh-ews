@@ -10,7 +10,7 @@
 
 This project implements a decentralized, autonomous **Swarm Intelligence** network using mobile edge sensors (EVs, Drone Swarms, IoT) to provide hyper-local climate monitoring and real-time disaster response. It integrates with global satellite data to form a comprehensive layout for Next-Gen Early Warning Systems (EWS).
 
-Part of the concept proposed in [this article on multi-hazard EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9).
+Part of the concept proposed in [this article on multi-hazard EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9) and an explained walkthrough of the experimental AI decision system part can be found in the article: [Climate Early Warning System: BigQuery AI Data Decision Engine](https://andreibesleaga.substack.com/p/climate-early-warning-system-bigquery), although it can be replaced with different technology for smaller implementations (Timeseries type DB with statistic queries and forecasting).
 
 ### 💡 Innovations
 Unlike traditional centralized EWS (which rely on vulnerable single backbones), this project implements a **Bio-Inspired Decentralized Swarm Architecture**. It leverages **6G OTFS waveforms** for high-mobility communication (overcoming the Doppler shift limits of 5G) and **Federated Learning** to train AI at the edge, preserving privacy while reducing bandwidth by 90%. This "Digital Immune System" approach aligns with cutting-edge academic research on *Post-Disaster Mobile Ad-hoc Networks (PDANs)* but pushes the state-of-the-art by adding active, agentic mobility to repair connectivity gaps autonomously.
@@ -95,6 +95,7 @@ Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimi
 *   [Article: Swarm System Architecture](https://medium.com/@andrei-besleaga/innovative-swarm-system-architecture-with-live-mobile-edge-sensors-for-climate-monitoring-and-eb0124e7b451)
 *   [Article: Emerging Tech in EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9)
 *   [Project BigData AI Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData_AI_Decision_System)
+*   [Article: Climate Early Warning System: BigQuery AI Data Decision Engine](https://andreibesleaga.substack.com/p/climate-early-warning-system-bigquery)
 
 [**References.md**](./References.md) | **Citations**: Standards, Research Papers, and Case Studies
 
