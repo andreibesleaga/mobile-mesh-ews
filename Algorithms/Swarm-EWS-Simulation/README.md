@@ -46,7 +46,7 @@ cd Swarm-EWS-Simulation
 
 # Install dependencies
 pip install numpy matplotlib
-
+```
 
 ## Visualization
 When running the simulation, a window will appear displaying the swarm in real-time:
