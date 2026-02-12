@@ -41,7 +41,7 @@ $$\vec{V}_{new} = \vec{V}_{current} + \alpha \vec{F}_{attract} + \beta \vec{F}_{
 ### Setup
 ```bash
 # Clone the repository
-git clone [https://github.com/your-username/Swarm-EWS-Simulation.git](https://github.com/your-username/Swarm-EWS-Simulation.git)
+git clone [https://github.com/andreibesleaga/Swarm-EWS-Simulation.git](https://github.com/andreibesleaga/Swarm-EWS-Simulation.git)
 cd Swarm-EWS-Simulation
 
 # Create a virtual environment
