@@ -50,10 +50,10 @@ source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-
+```
 
 ## Visualization
-Since this environment is headless, the simulation will save an animation as `simulation.gif`.
+Since this environment is headless, the simulation will save an animation as [simulation.gif](simulation.gif).
 
 To view the results, download or open `simulation.gif`. It displays the swarm in real-time:
 
