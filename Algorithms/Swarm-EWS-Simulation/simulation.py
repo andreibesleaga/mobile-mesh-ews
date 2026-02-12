@@ -4,13 +4,13 @@ from matplotlib.animation import FuncAnimation
 import random
 
 # --- CONFIGURATION ---
-NUM_AGENTS = 30
+NUM_AGENTS = 10
 AREA_SIZE = 100
 ANOMALY_POS = np.array([75, 75])  # Location of the fire/hazard
 ANOMALY_RADIUS = 20
-COMM_RANGE = 15          # Radius for local communication (mesh)
+COMM_RANGE = 25          # Radius for local communication (mesh)
 SENSOR_NOISE = 0.05      # Simulated sensor noise
-ALERT_THRESHOLD = 0.8    # Confidence required to vote
+ALERT_THRESHOLD = 0.5    # Confidence required to vote
 CONSENSUS_REQ = 0.5      # % of neighbors needed to trigger global alert
 
 class Agent:
@@ -139,4 +139,6 @@ def update(frame):
     return scatter,
 
 ani = FuncAnimation(fig, update, frames=200, init_func=init, blit=False)
-plt.show() # In a Jupyter notebook, use specific inline renderers
+print("Saving simulation to 'simulation.gif' (this may take a moment)...")
+ani.save('simulation.gif', writer='pillow', fps=15)
+print("Simulation saved successfully!")

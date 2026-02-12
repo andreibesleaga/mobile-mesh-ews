@@ -44,12 +44,18 @@ $$\vec{V}_{new} = \vec{V}_{current} + \alpha \vec{F}_{attract} + \beta \vec{F}_{
 git clone [https://github.com/your-username/Swarm-EWS-Simulation.git](https://github.com/your-username/Swarm-EWS-Simulation.git)
 cd Swarm-EWS-Simulation
 
+# Create a virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
 # Install dependencies
-pip install numpy matplotlib
+pip install -r requirements.txt
 
 
 ## Visualization
-When running the simulation, a window will appear displaying the swarm in real-time:
+Since this environment is headless, the simulation will save an animation as `simulation.gif`.
+
+To view the results, download or open `simulation.gif`. It displays the swarm in real-time:
 
 Red Circle: The "Hazard Zone" (e.g., fire perimeter, chemical spill).
 Blue Dots: Agents in SEARCH mode.
