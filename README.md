@@ -96,6 +96,7 @@ Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimi
 *   [Article: Emerging Tech in EWS](https://medium.com/@andrei-besleaga/innovative-usage-of-emerging-it-technologies-in-multi-hazard-early-warning-systems-7bcfe3d170b9)
 *   [Project BigData AI Decision System](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData_AI_Decision_System)
 *   [Article: Climate Early Warning System: BigQuery AI Data Decision Engine](https://andreibesleaga.substack.com/p/climate-early-warning-system-bigquery)
+*   [Live Mobile Edge Sensors Swarm System: Decentralized AI-Driven Early Warning Architecture for Disaster Response and Climate Monitoring](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177130668.85128931/v1)
 
 [**References.md**](./References.md) | **Citations**: Standards, Research Papers, and Case Studies
 
