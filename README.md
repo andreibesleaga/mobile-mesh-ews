@@ -107,4 +107,5 @@ Nodes operate autonomously using mesh protocols and Swarm Intelligence to optimi
 If you reference or use this software or documentations, please cite it as in [CITATION.cff](./CITATION.cff)
 
 ---
+
 *Last Updated: February 2026*
