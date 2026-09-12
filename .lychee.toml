@@ -19,4 +19,3 @@ exclude = [
 
 # Assets that are large binaries or rate-limited image hosts.
 exclude_all_private = false
-include_fragments = true
