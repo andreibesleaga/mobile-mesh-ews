@@ -8,7 +8,7 @@
 > precedence order.
 
 [![Preprint](https://img.shields.io/badge/Preprint-TechRxiv-blue.svg)](https://www.techrxiv.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 ## Overview
@@ -16,7 +16,9 @@
 This repository contains the supplementary simulation code for the paper:  
 **"Live Mobile Edge Sensors Swarm System: Decentralized AI-Driven Early Warning Architecture for Disaster Response and Climate Monitoring"** _Author: BESLEAGA Andrei Nicolae_
 
-This simulation validates **Innovation 1 (Section 4.1)** of the proposed architecture: the ability of a decentralized swarm to operate as a "Digital Immune System." It demonstrates how independent agents using simple local rules can achieve complex global behaviors—specifically **autonomous hazard detection**, **self-healing mesh formation**, and **consensus-based alert generation**—without reliance on a central cloud controller.
+This simulation **illustrates** one idea from the proposed architecture: that simple local rules can produce coordinated behaviour in a decentralised swarm. It shows local hazard detection and a simple consensus vote over a fixed communication range.
+
+**It does not validate the architecture.** Specifically, it does **not** model node failure, link loss, re-routing, energy limits, or adversarial input, so it provides no evidence for the "self-healing mesh" or "resilient routing" claims made elsewhere in this repository. It is an illustration, not a test.
 
 ## Simulation Logic
 
@@ -52,8 +54,8 @@ $$\vec{V}_{new} = \vec{V}_{current} + \alpha \vec{F}_{attract} + \beta \vec{F}_{
 
 ```bash
 # Clone the repository
-git clone [https://github.com/andreibesleaga/Swarm-EWS-Simulation.git](https://github.com/andreibesleaga/Swarm-EWS-Simulation.git)
-cd Swarm-EWS-Simulation
+git clone https://github.com/andreibesleaga/mobile-mesh-ews.git
+cd mobile-mesh-ews/Algorithms/Swarm-EWS-Simulation
 
 # Create a virtual environment
 python3 -m venv venv

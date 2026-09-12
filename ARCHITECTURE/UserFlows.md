@@ -161,9 +161,9 @@ stateDiagram-v2
     Likely --> Observed : Both CI exceed threshold
     Imminent --> Observed : Direct observation
 
-    Observed --> Broadcasting : CAP generated
+    Observed --> Broadcasting : CAP message drafted for authority review
     
-    Broadcasting --> Disseminated : IPAWS/WEA sent
+    Broadcasting --> Disseminated : Dissemination decided by the authority
     Disseminated --> Tracking : Ongoing monitoring
 
     Tracking --> Escalated : Conditions worsen

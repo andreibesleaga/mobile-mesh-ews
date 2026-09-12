@@ -101,7 +101,7 @@ graph TD
 ### 2.1 National Disaster Management (Data Flow)
 
 **Problem**: Rapid alerting and situational awareness during infrastructure failure.
-**Flow**: Sensors detect hazard -> AI validates -> CAP Alert broadcast.
+**Flow**: Sensors detect hazard -> analysis produces an evidence package -> a human operator reviews it -> the responsible authority decides on dissemination.
 
 ```mermaid
 sequenceDiagram
@@ -120,52 +120,20 @@ sequenceDiagram
     alt Confidence > 90% (CRITICAL)
         Cloud->>Human: Request Verification (Human-in-Loop)
         Human->>Cloud: Confirm Alert
-        Cloud->>CAP: Generate CAP v1.2 Message
-        CAP->>Public: Broadcast Wireless Emergency Alert
+        Cloud->>CAP: Draft proposed CAP 1.2 message
+        CAP->>Public: Dissemination is decided and performed by the alerting authority
     else Confidence < 90%
         Cloud->>Sensor: Request Swarm Re-tasking (Verify)
     end
 ```
 
-### 2.2 Defense & Border Surveillance (Safe State)
+### 2.2 Defence and surveillance: excluded
 
-**Problem**: Passive surveillance with strict non-lethal, human-controlled intervention.
-
-```mermaid
-stateDiagram-v2
-    [*] --> PatrolMode
-    
-    state PatrolMode {
-        [*] --> Navigating
-        Navigating --> Scanning: Waypoint Reached
-        Scanning --> Navigating: Sector Clear
-    }
-    
-    PatrolMode --> Detection: Feature Identified (Visual/Thermal)
-    
-    state Detection {
-        [*] --> Tracking
-        Tracking --> Classification: AI Analysis
-    }
-    
-    Classification --> AlertHuman: Valid Target?
-    
-    state AlertHuman {
-        [*] --> Transmission
-        Transmission --> WaitAuth: Data Sent to HQ
-    }
-
-    WaitAuth --> SafeState: Loss of Comms > 120s
-    WaitAuth --> PatrolMode: False Alarm Flagged
-    
-    state SafeState {
-        [*] --> ReturnToBase
-        ReturnToBase --> Land
-        Land --> [*]
-    }
-```
-
----
+Targeting, weapons coordination, individual tracking, covert surveillance, border security, and defence operations are **excluded** from this design and from contributions. They are named as exclusions in
+[Assumptions and Boundaries](ASSUMPTIONS_AND_BOUNDARIES.md) and
+[Compliance and Ethics](../Compliance_and_Ethics.md). An earlier revision of this
+document sketched a surveillance state machine here; it has been removed rather
+than softened.
 
 ## 3. NGO Sector Architecture
 

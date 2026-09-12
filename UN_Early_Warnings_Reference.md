@@ -49,8 +49,8 @@ The EW4All initiative is built on four pillars. The Mobile Mesh EWS addresses ea
 
 ## Compliance & Governance
 
-* **Data Standard**: ISO 19115.
-* **Privacy**: GDPR-compliant "Privacy by Design".
+* **Data standard (target)**: ISO 19115 metadata conventions.
+* **Privacy**: privacy-by-design requirements are stated in [Compliance and Ethics](Compliance_and_Ethics.md). The project makes no GDPR-compliance finding; that is a deployment-specific legal determination.
 
 ---
 _Reference Architecture for UN Global Compact SDG 11 (Sustainable Cities) and 13 (Climate Action)._

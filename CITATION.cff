@@ -6,7 +6,6 @@ authors:
 title: "Mobile Mesh EWS: Architecture and Research Baseline"
 version: 0.3.0
 date-released: 2026-09-12
-type: software
 url: "https://github.com/andreibesleaga/mobile-mesh-ews"
 repository-code: "https://github.com/andreibesleaga/mobile-mesh-ews"
 license: "CC-BY-NC-ND-4.0"

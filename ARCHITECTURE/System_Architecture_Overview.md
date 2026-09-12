@@ -85,7 +85,7 @@ graph LR
         
         subgraph Output ["Response & Audit"]
             ThirdParty["3rd Party Incident Response Systems<br>(Ambulance/Fire)"]
-            Blockchain[("Azure Blockchain Service<br>(Stored Tracked Decisions)")]
+            Blockchain[("Ledger option (unselected)<br>(stored tracked decisions)")]
             API_Access["Internal/External API Access"]
         end
     end
@@ -156,5 +156,5 @@ The core logic is divided into three pillars:
 
 * **Google Earth AI**: Used for macro-level Flood and Wildfire prediction.
 * **NASA / ESA**: Provides open science data (Sentinel-2, MERRA-2) for baseline calibration.
-* **Blockchain**: Specifically **Azure Blockchain Service** for immutable auditing of all autonomous decisions.
+* **Ledger option**: an append-only ledger is an **option, not a selection**, for tamper-evident audit records. Azure Blockchain Service has been retired by Microsoft and is not a candidate. Any ledger choice requires a decision record, a privacy and cost assessment, and a lifecycle owner.
 * **3rd Party Response**: Direct integration with Emergency Services (Ambulance/Fire) via subscribed APIs.

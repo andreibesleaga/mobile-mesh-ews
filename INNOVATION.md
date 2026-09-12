@@ -27,7 +27,7 @@ Current EWS (e.g., USGS ShakeAlert, Copernicus EMS) rely on **Centralized Server
 This project utilizes **Decentralized Swarm Intelligence (SI)**, moving the "brain" to the edge.
 
 * **Bio-Inspired Logic:** Like an ant colony, agents (drones/rovers) use simple local rules (e.g., "follow heat gradient") to achieve complex global behavior (perimeter tracking) without central command.
-* **Resilience:** The mesh is self-healing. Losing 20% of nodes does not stop the system; the remaining swarm re-routes and continues the mission.
+* **Resilience (hypothesis):** the design target is that losing 20% of nodes degrades rather than stops the mission. This is an **untested hypothesis**. The illustrative simulation has 10 agents and models no node failure, so it provides no evidence for this claim.
 * **Reference:** Aligns with research on _Post-Disaster Ad-hoc Networks (PDANs)_ but adds active autonomous mobility to _repair_ connectivity holes.
 
 ---

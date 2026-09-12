@@ -10,7 +10,7 @@ service. Version numbers describe the documentation and research artefacts;
 they say nothing about operational readiness. See
 [PROJECT_STATUS.md](PROJECT_STATUS.md) for the maturity boundary.
 
-## [Unreleased]
+## [0.3.0] - 2026-09-12
 
 ### Added
 
@@ -53,8 +53,21 @@ they say nothing about operational readiness. See
 
 ### Removed
 
-- Unsupported performance, latency, and compliance claims from public summaries.
+- Unsupported performance, latency, and compliance claims from the principal summary documents.
 - Duplicated narrative that restated the same architecture in several documents.
+- The requirement to broadcast Wireless Emergency Alerts to the public, and the
+  requirement to actuate fire-alarm panels and third-party signage. Both were
+  incompatible with ADR-001; see the audit follow-up in `PROJECT_STATUS.md`.
+- The defence, border-surveillance, and tactical-response material in
+  `Business_Strategy.md`, `ARCHITECTURE/System_Architectures.md`, and
+  `ARCHITECTURE/TechnicalStacks.md`.
+
+### Known remaining work
+
+A claim-consistency pass is required in the PRD, `PRD_Other_Integrations.md`,
+`Business_Strategy.md`, and `BigData_AI_Decision_System/` for quantitative
+figures that are still stated without a target label. This is recorded as open,
+not closed.
 
 ## [0.2.0] - 2026-02-21
 
@@ -77,6 +90,6 @@ they say nothing about operational readiness. See
   register, innovation comparison, references, and business strategy.
 - `CITATION.cff` and the Creative Commons licence.
 
-[Unreleased]: https://github.com/andreibesleaga/mobile-mesh-ews/compare/v0.2.0...HEAD
+[0.3.0]: https://github.com/andreibesleaga/mobile-mesh-ews/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/andreibesleaga/mobile-mesh-ews/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/andreibesleaga/mobile-mesh-ews/releases/tag/v0.1.0

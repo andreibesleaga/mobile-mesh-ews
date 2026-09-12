@@ -168,7 +168,7 @@ To contextualize local data, the swarm must sync with global datasets.
 ### **7.2 Alerting and Public Warning**
 
 * **REQ-EXT-005:** The system must act as an **Early Warning System (EWS) Source**. It shall generate warning messages compliant with **CAP (Common Alerting Protocol)** standards.11  
-* **REQ-EXT-006:** The system shall interface with **Wireless Emergency Alert (WEA)** gateways (ATIS 07 000 10). This enables the system to push "Life Safety" alerts directly to cellular networks for broadcast to civilian mobile devices in the affected area.11  
+* **REQ-EXT-006:** The system shall interface with **Wireless Emergency Alert (WEA)** gateways (ATIS 07 000 10). Dissemination over WEA is performed only by the responsible alerting authority through its own approved systems. This design does not broadcast to civilian devices and holds no credential or pathway that would permit it.11  
 * **REQ-EXT-007:** The alerting logic must support **Polygon-Based Targeting**. Alerts should be routed only to devices located within the specific geofenced danger zone determined by the swarm's sensors, minimizing panic in safe areas.11
 
 **8\. Human-Swarm Interaction (HSI) Requirements**
@@ -189,6 +189,8 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 **9\. Non-Functional Requirements**
 
 ### **9.1 Performance**
+
+> **Every figure in this section is an unvalidated acceptance target, not a measured result.** No system and no benchmark harness exists. Each target requires a stated operational design domain, method, and reproducible evidence before it can be reported as achieved.
 
 * **REQ-PERF-001:** **Latency:** The system must achieve end-to-end latency (from sensor detection to platform alert) of less than **1 second** for critical life-safety events.1  
 * **REQ-PERF-002:** **Packet Delivery Ratio (PDR):** The mesh network must maintain a PDR of **\>95%** even under conditions of 20% node failure, ensuring reliable data delivery in destructive environments.1  
@@ -217,7 +219,7 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 3. **Verify:** Swarm "Routed" UAVs are dispatched to the location.  
 4. **Confirm:** UAV thermal/visual sensors confirm fire.  
 5. **Predict:** AI model uses wind/terrain data to forecast spread.  
-6. **Alert:** System sends CAP alert to authorities and WEA alert to local civilians.  
+6. **Propose:** The system assembles an evidence package and a proposed CAP message for the responsible authority, which decides whether, when, and how to warn the public. This system issues no alert.  
 7. **Adapt:** Swarm reconfigures into a perimeter tracking formation to monitor the fire line in real-time.
 
 ### **10.2 Use Case 2: Post-Disaster Search and Rescue**
@@ -295,8 +297,8 @@ The system's intelligence is not static; it is a living cycle.
 * **Spectrum Compliance:** The system must adhere to local radio frequency regulations, automatically disabling transmission on restricted bands.43  
 * **Privacy (GDPR):** The system must implement **Edge Anonymization**. Any multimedia data (video/audio) must be processed locally to extract metadata (e.g., "Person Detected") and the raw stream discarded immediately, unless a "Search and Rescue" mode is explicitly authorized by a human commander.44  
 * **Autonomous Lethality:** (Explicit Exclusion) The system is strictly prohibited from integrating with weapon systems. It acts solely as a sensor and relay.  
-* **Human Oversight (EU AI Act):** All valid alerts classified as "CRITICAL" (Risk Score > 90) must be routed to a human operator for verification before being broadcast to the public, unless a "Fail-Safe Override" (e.g., dam burst detected) is pre-authorized.
+* **Human Oversight (EU AI Act):** All valid alerts classified as "CRITICAL" (Risk Score > 90) must be routed to a human operator for verification before anything is passed to the responsible warning authority. A standing "Fail-Safe Override" that would authorise automatic public warning is prohibited by this design; see [ADR-001](ARCHITECTURE/DECISIONS.md).
 
 **14\. Conclusion**
 
-This Product Requirements Document outlines a sophisticated, next-generation environmental monitoring system that leverages the convergence of Swarm Intelligence, 6G Connectivity, and Edge AI. By adhering to these requirements, the "Live Mobile Edge Sensors Swarm System" will effectively function as a "digital immune system" for the planet—detecting threats early, responding autonomously, and providing the critical intelligence needed to save lives and ecosystems. The requirements emphasize resilience, autonomy, and integration, ensuring the system remains operational when it is needed most: in the chaos of a disaster.
+This document states requirements for a proposed environmental monitoring and decision-support system. Every requirement in it is a hypothesis: none has been implemented, tested, or validated. If implemented, the system would be expected to produce evidence and recommendations for a responsible warning authority. It would not issue warnings, respond autonomously, or act on the physical world without explicit human authorisation. See [PROJECT_STATUS.md](PROJECT_STATUS.md) for the maturity boundary.

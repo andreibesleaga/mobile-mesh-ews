@@ -95,7 +95,7 @@ The Common Alerting Protocol (CAP) is an XML-based international standard (ITU-T
 
 **Requirement Specification:**
 
-The Gateway must function as a certified CAP Alert Originator. It accepts internal alert objects from the BigQuery engine and serializes them into valid CAP v1.2 XML.
+The Gateway is proposed to serialise an internal alert object into CAP XML **for review by the responsible authority**. It is not a CAP Alert Originator, holds no certification, and cannot originate a public warning; no certification of this kind exists for this project. Originating a public warning is an authority function.
 
 * **Field Mapping:** The system must rigorously map internal severity scores to CAP enumerations.
   * **Urgency:** Mapped based on the AI.FORECAST time horizon (e.g., < 1 hour = "Immediate", < 6 hours = "Expected").
@@ -121,8 +121,8 @@ The research snippets 2 explicitly reference integration with "Notifier" fire al
 
 **Requirement Specification:**
 
-* **Fire Systems:** The Gateway must implement a driver interface for standard Fire Alarm protocols. When a "Fire" or "Biohazard" alert is generated for a specific building, the system must send a command to activate physical strobes and voice evacuation systems. It must also monitor sensor health.2
-* **Public Signage:** The Gateway must support a "LEDSIGN Gateway" interface 13 to interrupt commercial messaging on connected billboards and display CAP headline text (e.g., "EVACUATE NOW").
+* **Fire systems (out of scope):** actuating fire alarm panels, strobes, or voice evacuation systems is **out of scope** for this design. Life-safety actuation belongs to certified building systems and their responsible operator, not to a research prototype. An earlier revision required this; the requirement has been withdrawn.
+* **Public signage (out of scope):** interrupting third-party commercial signage is **out of scope**. It would require the signage owner's authority, a contract, and a safety assessment, and it is not a capability this design proposes.
 
 ### **4.4. Security and Authentication**
 
@@ -241,7 +241,9 @@ The power to trigger city-wide alarms carries immense responsibility. Security a
 
 To facilitate the development phase, the following metrics define the system performance goals.
 
-### **9.1. Key System Metrics and SLAs**
+### **9.1. Key System Metrics and Targets**
+
+> **All figures in this section are unvalidated targets, not commitments or measurements.** No service level is offered and no system exists. See [PROJECT_STATUS.md](PROJECT_STATUS.md).
 
 | Metric | Target Value | Justification |
 | :---- | :---- | :---- |

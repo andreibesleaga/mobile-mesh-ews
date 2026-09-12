@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The **Mobile Mesh Early Warning System (EWS)** acts as a "digital immune system" for the planet, bridging the critical gap between macro-level satellite infrastructure and micro-level ground truth. By leveraging a decentralized swarm of mobile edge sensors (EVs, drones, IoT nodes), the system provides hyper-local, real-time climate monitoring and disaster response capabilities in infrastructure-denied environments.
+The **Mobile Mesh Early Warning System (EWS)** acts as a "digital immune system" concept, bridging the gap between macro-level satellite observation and micro-level ground truth. The proposal is to use a decentralized swarm of mobile edge sensors (EVs, drones, IoT nodes) to support hyper-local environmental monitoring in infrastructure-denied environments. Nothing here is implemented; every benefit described in this document is a hypothesis that a future pilot would have to test.
 
 This project solves the problem of "blind spots" in climate monitoring by:
 
@@ -58,7 +58,7 @@ Governments are the primary guarantors of public safety and infrastructure integ
 
 **Problem**: Traditional cellular networks often fail during catastrophic events (e.g., hurricanes, earthquakes), leaving first responders blind.
 **Solution**: A self-healing mobile mesh that provides off-grid communication and situational awareness.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **HARP (Humanitarian Aid and Rescue Project)**: Deployed mobile mesh networking in the Bahamas post-Hurricane Dorian to coordinate body recovery and triage when all other comms were down.
 * **FEMA / Public Safety**: Agencies increasingly seek "infrastructure-independent" communications for continuity of government (COG) operations.
@@ -70,7 +70,7 @@ Governments are the primary guarantors of public safety and infrastructure integ
 
 **Problem**: Urban environments suffer from "data deserts" regarding hyper-local air quality, heat islands, and noise pollution.
 **Solution**: Piggybacking sensor nodes on municipal fleets (buses, waste trucks) and static infrastructure (smart lights) to create a high-density environmental map.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Airly**: Demonstrates the model of dense, distributed air quality sensor networks aiding municipal policy.
 * **Smart Streetlights**: Cities are adopting "lamp post" integrated sensors for ISAC (Integrated Sensing and Communications) to monitor traffic and environmental hazards.
@@ -78,23 +78,15 @@ Governments are the primary guarantors of public safety and infrastructure integ
 * **Dynamic Zoning**: Real-time data allows for dynamic congestion pricing or low-emission zones based on live pollution levels.
 * **Preventative Maintenance**: Vibration sensors on municipal vehicles can detect road anomalies (potholes) before they become hazards.
 
-### Use Case 1.3: Defense & Border Security
+### Use Case 1.3: Excluded use cases
 
-**Problem**: Monitoring vast, remote border areas often requires expensive manned patrols or static towers that are vulnerable to sabotage.
-**Solution**: Autonomous drone swarms and unattended ground sensors (UGS) that form a covert, self-regulating surveillance mesh.
-**Real-World Verification**:
-
-* **Off-Grid Surveillance**: Applications already utilize MANET (Mobile Ad-hoc Networks) for tactical edge communications (e.g., goTenna Pro).
-**Value Proposition**:
-* **Force Multiplier**: A single operator can manage a swarm covering hundreds of square kilometers.
-* **Anti-Jamming**: Distributed mesh routing (AODV/TORA) makes the network highly resistant to electronic warfare.
-* **Human-Centric Passive Surveillance**: The system is strictly limited to _detection and tracking_ only. Any escalation or intervention requires explicit **Human-in-the-Loop** verification, ensuring no autonomous engagement decisions.
+Defence, border security, covert surveillance, targeting, and weapons coordination are **excluded** from this design. An earlier revision sketched an "autonomous drone swarms and unattended ground sensors (UGS)" surveillance mesh here; it has been removed. See [Assumptions and Boundaries](ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md).
 
 ### Use Case 1.4: BigData AI Decision Engine (BigQuery AI)
 
 **Problem**: Raw sensor data is overwhelming; decision-makers need "human-readable" actionable intelligence instantly.
 **Solution**: A serverless **BigData AI Decision Engine** that processes petabytes of data to generate executive briefings and predictive models.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **BigQuery AI Hackathon**: System utilizes `AI.FORECAST` for 6-hour lead times on flood/fire events and `ML.GENERATE_TEXT_LLM` to create multi-persona executive summaries (e.g., "Meteorologist" vs. "Emergency Coordinator").
 **Value Proposition**:
@@ -105,7 +97,7 @@ Governments are the primary guarantors of public safety and infrastructure integ
 
 **Problem**: Emergency broadcasts often lack precise targeting, causing panic in safe zones.
 **Solution**: Leveraging **CAMARA Telco APIs** (e.g., `Location Retrieval`, `Quality on Demand`) to target alerts and prioritize responder traffic.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **CAMARA Emergency Demo**: Verified use cases include "Smart City Traffic Management" (rerouting around hazards) and "Crowd Safety" (monitoring density at evacuation points).
 **Value Proposition**:
@@ -122,7 +114,7 @@ NGOs operate in the most challenging environments on Earth, often with limited b
 
 **Problem**: Delivering aid in conflict zones or disaster areas is logistically complex due to lack of reliable data on safe routes and population needs.
 **Solution**: Deployable "pop-up" mesh networks that reconnect severed communities and track aid distribution.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Red Cross / UN OCHA**: Utilizing technologies like "needs mapping" and coordinating volunteers in areas with destroyed infrastructure.
 * **Serval Project**: Proved the concept of mesh telephony for disaster relief in Haiti.
@@ -134,7 +126,7 @@ NGOs operate in the most challenging environments on Earth, often with limited b
 
 **Problem**: Poaching and deforestation act faster than traditional satellite monitoring can detect.
 **Solution**: "Bio-logging" tags on animals and acoustic sensors in forests that act as mesh nodes, detecting chainsaws or gunshots in real-time.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Conservation Swarms**: Drones are currently used to track rhino populations and deter poachers in real-time.
 * **Rainforest Connection**: Uses upcycled mobile devices to detect illegal logging acoustics.
@@ -146,7 +138,7 @@ NGOs operate in the most challenging environments on Earth, often with limited b
 
 **Problem**: Rural and remote communities lack affordable internet and access to early warning information.
 **Solution**: Community-owned mesh ISP models that double as environmental sensor networks.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Red Hook Mesh**: A community-led wireless network in Brooklyn that maintained connectivity during Hurricane Sandy.
 * **Guifi.net**: The world's largest community mesh network.
@@ -158,7 +150,7 @@ NGOs operate in the most challenging environments on Earth, often with limited b
 
 **Problem**: Communities feel disconnected from high-level data; they want answers to specific, personal safety questions.
 **Solution**: A **citizen-facing RAG Chatbot** (integrated with GenieAI/Haystack) that allows natural language querying of the sensor mesh.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Framework Architecture**: Active integration with LLM frameworks (OPEA/GovStack) destructured complex EWS data into simple answers.
 **Value Proposition**:
@@ -175,7 +167,7 @@ The private sector is waking up to the financial reality of climate risk. The Mo
 
 **Problem**: Traditional insurance claims take months to process due to the need for manual on-site verification.
 **Solution**: "Smart Contracts" linked to the mesh's trusted oracle data. If the sensor grid confirms >X wind speed or >Y flood level, payout is instant.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Arbol / Swiss Re**: Pioneering parametric insurance products where payouts are triggered by independent weather data sets.
 * **African Risk Capacity**: Uses satellite indexes for drought insurance; mesh data provides the missing "ground truth" to reduce basis risk.
@@ -187,7 +179,7 @@ The private sector is waking up to the financial reality of climate risk. The Mo
 
 **Problem**: Monocultures are vulnerable to micro-climate variations and pests that spread unseen.
 **Solution**: Swarms of small agricultural drones and ground moisture sensors that monitor crop health per-plant rather than per-acre.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Precision Ag**: Companies like John Deere and various AgTech startups use IoT for sub-field level management.
 **Value Proposition**:
@@ -198,7 +190,7 @@ The private sector is waking up to the financial reality of climate risk. The Mo
 
 **Problem**: Large outdoor events (festivals, sports) are vulnerable to sudden weather changes and crowd surges.
 **Solution**: A temporary, localized mesh network for crowd density monitoring and hazardous weather alerts.
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Event Safety**: Weather insurance for events is a growing market; real-time onsite monitoring is standard for liability.
 **Value Proposition**:
@@ -209,7 +201,7 @@ The private sector is waking up to the financial reality of climate risk. The Mo
 
 **Problem**: Businesses lack real-time data on foot traffic and customer movement patterns.
 **Solution**: Monetizing the "exhaust data" from the mesh and Telco APIs for commercial insights (anonymized).
-**Real-World Verification**:
+**Comparable prior art** (context only - not a verification of this design, and not an endorsement or partnership):
 
 * **Retail Intelligence**: "Shopping Center Heatmaps" verified in CAMARA business cases show customer journey tracking.
 * **EV Charging**: Optimizing charging station placement based on real-time vehicle density.
@@ -241,9 +233,9 @@ The private sector is waking up to the financial reality of climate risk. The Mo
 
 ### 5.1 Regulatory Adherence (EU AI Act)
 
-The Mobile Mesh EWS is designed to comply with **High-Risk AI System** requirements under the EU AI Act:
+Classification under the EU AI Act is a deployment-specific legal determination that this project cannot make. **No compliance or classification is claimed.** The areas a future provider would have to assess are:
 
-* **Human-in-the-Loop**: Critical decisions (e.g., evacuation orders, defense surveillance) require explicit human confirmation before execution.
+* **Human oversight**: decisions with public or physical effect require explicit confirmation by an accountable person, not merely a system check.
 * **Transparency**: All AI-generated alerts (SMS, Chatbot) are clearly labeled as "Automated Intelligence".
 * **Risk Management**: Continuous logging and forensic audit trails (Blockchain) ensure full traceability of AI decision-making.
 
@@ -254,5 +246,5 @@ The Mobile Mesh EWS is designed to comply with **High-Risk AI System** requireme
 
 ### 5.3 Defense & Dual-Use Policy
 
-* **Non-Lethal Mandate**: The system is strictly prohibited from autonomous weaponization. Defense applications are limited to _passive surveillance_ and _situational awareness_.
-* **Fail-Safe Protocols**: Integrated "Kill Switches" allow immediate de-activation of swarm autonomy in case of malfunction (IEEE P7009 compliant).
+* **Exclusions**: targeting, weapons coordination, individual tracking, covert surveillance, border security, and defence operations are excluded from this design and from contributions. See [Assumptions and Boundaries](ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md).
+* **Stopping mechanism**: any future fielded system must provide a means to stop automated activity that does not depend on the components it stops. IEEE P7009 is cited as design guidance, not as a claim of compliance.

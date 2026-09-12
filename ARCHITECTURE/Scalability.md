@@ -157,7 +157,7 @@ flowchart LR
 
 ### Throughput Capacity
 
-| Metric | Current Design | Growth Path |
+| Metric | Unvalidated target (not a measurement) | Growth path |
 |--------|----------------|-------------|
 | **Sensor events/sec** | 100,000 | +10x with Pub/Sub partitioning |
 | **Concurrent alerts** | 1,000 | +10x with CAP gateway scaling |

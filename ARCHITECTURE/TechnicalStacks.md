@@ -90,7 +90,7 @@ This subsystem allows the swarm to "communicate over mobile directly" and acquir
 
 ### 3.5 Integration Framework
 
-* **WMO (World Meteorological Organization)**: WIS 2.0 compliant data exchange.
+* **WMO (World Meteorological Organization)**: WIS 2.0 is a target convention for data exchange. No conformance testing has been performed and no affiliation exists.
 * **USGS (United States Geological Survey)**: Earthquake Catalog API integration.
 * **National Systems**: CAP v1.2 standardized alerts for interoperability with IPAWS, EU-Alert.
 
@@ -124,11 +124,9 @@ This subsystem allows the swarm to "communicate over mobile directly" and acquir
 * **Why:** Unbeatable geospatial scale (Petabytes of satellite data).
 * **Focus:** Macro-level analytics, prediction, political dashboards.
 
-### Scenario B: "Tactical Response" (Defense/First Responders)
+### Scenario B: withdrawn
 
-* **Stack:** **Azure (GovCloud) + AirSim**.
-* **Why:** Strong integration with MilSpec hardware and Hololens (AR) for operators.
-* **Focus:** Real-time situational awareness, offline capability, rapid mesh deployment.
+A defence and first-responder tactical scenario was previously described here. It has been **withdrawn**: defence, surveillance, and tactical use are excluded by this design. See [Assumptions and Boundaries](ASSUMPTIONS_AND_BOUNDARIES.md).
 
 ### Scenario C: "Sovereign Citizen" (Community Mesh)
 

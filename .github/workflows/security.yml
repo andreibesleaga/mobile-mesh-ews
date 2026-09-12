@@ -5,130 +5,130 @@ name: Security
 # Findings are uploaded to the GitHub Security tab as SARIF where supported.
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-  schedule:
-    - cron: "17 5 * * 1"
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+    schedule:
+        - cron: "17 5 * * 1"
+    workflow_dispatch:
 
 permissions:
-  contents: read
+    contents: read
 
 concurrency:
-  group: security-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: security-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  secrets:
-    name: Secret scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Scan for committed secrets
-        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    secrets:
+        name: Secret scan
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+              with:
+                  fetch-depth: 0
+                  persist-credentials: false
+            - name: Scan for committed secrets
+              uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  dependencies:
-    name: Dependency vulnerabilities
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          persist-credentials: false
-      - name: Run OSV-Scanner
-        uses: google/osv-scanner-action/osv-scanner-action@6e4298ebc4db23e847df9b2e2de2939d6f066c67 # v2.5.1
-        continue-on-error: false
-        with:
-          scan-args: |-
-            --recursive
-            --format sarif
-            --output results.sarif
-            ./
-      - name: Upload SARIF
-        if: always() && hashFiles('results.sarif') != ''
-        uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
-        with:
-          sarif_file: results.sarif
+    dependencies:
+        name: Dependency vulnerabilities
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            security-events: write
+            actions: read
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+              with:
+                  persist-credentials: false
+            - name: Run OSV-Scanner
+              uses: google/osv-scanner-action/osv-scanner-action@6e4298ebc4db23e847df9b2e2de2939d6f066c67 # v2.5.1
+              continue-on-error: false
+              with:
+                  scan-args: |-
+                      --recursive
+                      --format sarif
+                      --output results.sarif
+                      ./
+            - name: Upload SARIF
+              if: always() && hashFiles('results.sarif') != ''
+              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              with:
+                  sarif_file: results.sarif
 
-  misconfiguration:
-    name: Filesystem and config scan
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          persist-credentials: false
-      - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          format: sarif
-          output: trivy.sarif
-          severity: HIGH,CRITICAL
-          exit-code: "0"
-      - name: Upload SARIF
-        if: always() && hashFiles('trivy.sarif') != ''
-        uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
-        with:
-          sarif_file: trivy.sarif
+    misconfiguration:
+        name: Filesystem and config scan
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            security-events: write
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+              with:
+                  persist-credentials: false
+            - name: Run Trivy filesystem scan
+              uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+              with:
+                  scan-type: fs
+                  scan-ref: .
+                  format: sarif
+                  output: trivy.sarif
+                  severity: HIGH,CRITICAL
+                  exit-code: "0"
+            - name: Upload SARIF
+              if: always() && hashFiles('trivy.sarif') != ''
+              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              with:
+                  sarif_file: trivy.sarif
 
-  dependency-review:
-    name: Dependency review
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          persist-credentials: false
-      - name: Review dependency changes
-        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4
-        with:
-          fail-on-severity: high
+    dependency-review:
+        name: Dependency review
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+              with:
+                  persist-credentials: false
+            - name: Review dependency changes
+              uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4
+              with:
+                  fail-on-severity: high
 
-  scorecard:
-    name: OpenSSF Scorecard
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      id-token: write
-      actions: read
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          persist-credentials: false
-      - name: Run Scorecard
-        uses: ossf/scorecard-action@62b2cac7ed8198b15735ed49ab1e5cf35480ba46 # v2.4.0
-        with:
-          results_file: scorecard.sarif
-          results_format: sarif
-          publish_results: true
-      - name: Upload SARIF
-        if: always() && hashFiles('scorecard.sarif') != ''
-        uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
-        with:
-          sarif_file: scorecard.sarif
-      - name: Upload Scorecard results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: scorecard-results
-          path: scorecard.sarif
-          retention-days: 14
+    scorecard:
+        name: OpenSSF Scorecard
+        if: github.event_name != 'pull_request'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            security-events: write
+            id-token: write
+            actions: read
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+              with:
+                  persist-credentials: false
+            - name: Run Scorecard
+              uses: ossf/scorecard-action@62b2cac7ed8198b15735ed49ab1e5cf35480ba46 # v2.4.0
+              with:
+                  results_file: scorecard.sarif
+                  results_format: sarif
+                  publish_results: true
+            - name: Upload SARIF
+              if: always() && hashFiles('scorecard.sarif') != ''
+              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              with:
+                  sarif_file: scorecard.sarif
+            - name: Upload Scorecard results
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+              with:
+                  name: scorecard-results
+                  path: scorecard.sarif
+                  retention-days: 14

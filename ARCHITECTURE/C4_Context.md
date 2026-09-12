@@ -80,9 +80,9 @@ C4Context
 
 2. **Universal Data Ingestion**: AI framework (Framework_AI) ingests and learns from ANY relevant external data source via MCP/A2A protocols or standard APIs.
 
-3. **Multi-Modal Alerting**: Alerts are disseminated through digital (apps, WEA) AND physical (sirens, LED signs) channels simultaneously.
+3. **No direct dissemination**: this design proposes no direct dissemination to apps, WEA, sirens, or signage. Notification is raised through the responsible authority's own systems and under its control.
 
-4. **Standards Compliance**: CAP v1.2 ensures interoperability with national/international alert systems.
+4. **CAP as a target format**: CAP 1.2 is a proposed interchange format for the authority's workflow. No schema or profile conformance has been demonstrated, so "CAP-compatible" is not claimed. See [Compliance and Ethics](../Compliance_and_Ethics.md).
 
 ## Requirements Traceability
 

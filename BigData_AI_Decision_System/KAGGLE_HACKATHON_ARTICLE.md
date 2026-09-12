@@ -407,7 +407,7 @@ bq query < emergency_team_routing.sql
 ### 5.5 Scale and Performance
 
 - **Petabyte-Scale Processing**: BigQuery handles massive data volumes
-- **Sub-Second Queries**: Real-time risk assessment despite data complexity
+- **Query Latency (target)**: sub-second risk assessment is a performance _target_ for this prototype, not a measured result
 - **Serverless Architecture**: No infrastructure management overhead
 
 ---

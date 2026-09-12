@@ -30,7 +30,7 @@ You can view the project [on Kaggle](https://www.kaggle.com/competitions/bigquer
 
 ### Core SQL Scripts
 
-[demo production ready - beta testing in Kaggle/GCP]
+[exploratory prototype - experimentation only, not a service]
 
 - **`create.sql`**: Database schema creation for sensor data, satellite imagery, and AI models
 - **`data_population.sql`**: Sample data insertion for testing and demonstration

@@ -69,9 +69,9 @@ This document serves as the authoritative source of truth for all external refer
 
 ---
 
-## 3. Industrial Case Studies & Verifications
+## 3. Comparable prior art
 
-These real-world projects validatethe architectural choices made in the **Mobile Mesh EWS**.
+The projects below are cited as **context** - they are examples of related deployments. They do not validate this design, and no relationship, endorsement, or partnership exists with them.
 
 ### RainForest Connection (RFCx)
 
@@ -117,7 +117,7 @@ These real-world projects validatethe architectural choices made in the **Mobile
 
 ### EU AI Act
 
-* **Classification**: "High-Risk AI Systems" (Annex III) - Critical Infrastructure & Emergency Services.
+* **Classification**: not determined by this project. Emergency-management uses can fall within Annex III, but classification depends on intended purpose and product context and is a deployment-specific legal determination. See [Compliance and Ethics](Compliance_and_Ethics.md).
 * **Text**: [The Artificial Intelligence Act](https://artificialintelligenceact.eu/)
 * **Key Requirement**: Human oversight for critical decisions (Article 14).
 

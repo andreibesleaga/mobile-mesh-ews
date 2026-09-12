@@ -125,7 +125,15 @@ components:
           type: string
         sourceType:
           type: string
-          enum: [fieldSensor, managedNode, satellite, weatherService, telecomContext, analyst]
+          enum:
+            [
+              fieldSensor,
+              managedNode,
+              satellite,
+              weatherService,
+              telecomContext,
+              analyst,
+            ]
         observedAt:
           type: string
           format: date-time

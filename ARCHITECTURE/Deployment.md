@@ -90,7 +90,7 @@ C4Deployment
 
 ### Tier 3: Cloud Platform (GCP)
 
-| Service | Purpose | Region Strategy | SLA |
+| Service | Purpose | Region Strategy | Vendor-published availability (not system availability) |
 |---------|---------|-----------------|-----|
 | **Pub/Sub** | Message ingestion | Multi-region | 99.95% |
 | **Dataflow** | Stream processing | Regional | 99.9% |

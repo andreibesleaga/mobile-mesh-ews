@@ -71,7 +71,16 @@ components:
             properties:
               quarantineReason:
                 type: string
-                enum: [identityFailed, stale, integrityFailed, outOfBounds, duplicate, suspectCalibration, rateLimited]
+                enum:
+                  [
+                    identityFailed,
+                    stale,
+                    integrityFailed,
+                    outOfBounds,
+                    duplicate,
+                    suspectCalibration,
+                    rateLimited,
+                  ]
   schemas:
     ObservationPayload:
       type: object
@@ -88,7 +97,18 @@ components:
           format: date-time
         kind:
           type: string
-          enum: [temperature, humidity, pressure, rainfall, waterLevel, seismic, windSpeed, airQuality, imageryFeature]
+          enum:
+            [
+              temperature,
+              humidity,
+              pressure,
+              rainfall,
+              waterLevel,
+              seismic,
+              windSpeed,
+              airQuality,
+              imageryFeature,
+            ]
         value:
           type: number
         unit:

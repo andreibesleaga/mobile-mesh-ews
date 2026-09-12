@@ -13,6 +13,33 @@ This repository is at **architecture and research-prototype maturity**. Its Mark
 | AI and privacy | Design intent only | Controls are requirements, not implemented safeguards |
 | Availability, scale, latency, and accuracy | No reproducible benchmark evidence | No performance claim |
 
+## Document precedence
+
+Where two documents disagree, the earlier tier wins:
+
+1. **This document** — maturity, claim policy, and release gates.
+2. **Boundary and assurance:**
+   [ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md](ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md),
+   [ARCHITECTURE/Security.md](ARCHITECTURE/Security.md),
+   [Compliance_and_Ethics.md](Compliance_and_Ethics.md),
+   [RISKS.md](RISKS.md), [OBSERVABILITY.md](OBSERVABILITY.md).
+3. **Decisions and traceability:**
+   [ARCHITECTURE/DECISIONS.md](ARCHITECTURE/DECISIONS.md) and
+   [Requirements_Traceability_Matrix.md](Requirements_Traceability_Matrix.md).
+4. **Requirements hypothesis:**
+   [PRD_Swarm_System_Requirements_Specification.md](PRD_Swarm_System_Requirements_Specification.md).
+   It states proposed requirements and is subordinate to tiers 1-3.
+5. **Architecture views:** C4, data flow, deployment, scalability, protocols,
+   user flows.
+6. **Background and exploratory material:** `Business_Strategy.md`,
+   `INNOVATION.md`, `References.md`, `UN_Early_Warnings_Reference.md`,
+   `PRD_Other_Integrations.md`, the subsystem directories, `Algorithms/`, and
+   `BigData_AI_Decision_System/`.
+
+A lower tier never overrides a higher one. **No tier authorises a public alert, a
+physical action, a third-party service integration, or the processing of personal
+data.**
+
 ## Claim policy
 
 Use **proposed**, **illustrative**, **target**, or **requires validation** for design statements. Do not use **live**, **production-ready**, **real-time**, **compliant**, **secure**, **resilient**, **self-healing**, **autonomous**, or quantified performance language unless the claim links to reproducible evidence, test conditions, date, version, and limitation. “CAP-compatible” may be claimed only after schema and profile conformance tests; authority onboarding is a separate claim.
