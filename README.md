@@ -2,6 +2,8 @@
 
 Mobile Mesh EWS is a public architecture and research repository for a possible multi-hazard early-warning system that combines field sensors, resilient communications, analytical services, and authorized warning operations, in new types of architectures and innovative ways, as swarm mesh networks based on live mobile devices and sensors.
 
+![System Overview](SwarmSystem.png)
+
 ## Status and safety boundary
 
 **This repository is not an operational early-warning system.** It contains requirements, architecture proposals, SQL and simulation artefacts intended for research and design review. It does not operate sensors, validate hazards, issue public warnings, connect to emergency-alerting authorities, or control vehicles or aircraft. Nothing in this repository may be used to make life-safety, evacuation, dispatch, navigation, or regulatory decisions.
@@ -34,7 +36,6 @@ The proposal is aligned conceptually with the four pillars of the World Meteorol
 | [Requirements traceability matrix](Requirements_Traceability_Matrix.md) | Requirement status and verification strategy |
 | [Decision log](ARCHITECTURE/DECISIONS.md) | Design decisions and unresolved choices |
 
-![System Overview](SwarmSystem.png)
 
 ## Repository guide
 
