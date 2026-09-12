@@ -1,6 +1,6 @@
 # Mobile Mesh EWS
 
-Mobile Mesh EWS is a public architecture and research repository for a possible multi-hazard early-warning system that combines field sensors, resilient communications, analytical services, and authorised warning operations.
+Mobile Mesh EWS is a public architecture and research repository for a possible multi-hazard early-warning system that combines field sensors, resilient communications, analytical services, and authorized warning operations, in new types of architectures and innovative ways, as swarm mesh networks based on live mobile devices and sensors.
 
 ## Status and safety boundary
 
@@ -44,6 +44,8 @@ The proposal is aligned conceptually with the four pillars of the World Meteorol
 - [OBSERVABILITY.md](OBSERVABILITY.md) fixes the observability contract any future runtime must satisfy.
 - [`contracts/`](contracts/README.md) holds non-normative OpenAPI and AsyncAPI sketches of proposed interfaces; nothing there is implemented or binding.
 - The remaining top-level and subsystem Markdown files are design inputs and background material. Where they conflict with the documents listed above, the status, boundary, safety, security, compliance, risk, and traceability documents take precedence.
+
+Part of this system has been presented as a [final project for University of Helsinki's - Build AI - course](https://github.com/andreibesleaga/climate-ai).
 
 ## Public-repository practices
 
