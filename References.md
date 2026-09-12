@@ -34,7 +34,7 @@ This document serves as the authoritative source of truth for all external refer
 
 * **CAMARA Project**: The Telco Global API Alliance.
   * [CAMARA Project Home](https://camaraproject.org/)
-  * [Location Retrieval API](https://github.com/camaraproject/LocationRetrieval) - For verifying device location.
+  * [Location Retrieval API](https://github.com/camaraproject/DeviceLocation) - For verifying device location.
   * [Quality on Demand (QoD) API](https://github.com/camaraproject/QualityOnDemand) - For prioritizing emergency traffic.
 * **IEEE 802.11s**: Wireless Mesh Networking standard (comparison vs BATMAN-ADV).
   * [IEEE Standard](https://standards.ieee.org/standard/802_11s-2011.html)
