@@ -34,6 +34,8 @@ The proposal is aligned conceptually with the four pillars of the World Meteorol
 | [Requirements traceability matrix](Requirements_Traceability_Matrix.md) | Requirement status and verification strategy |
 | [Decision log](ARCHITECTURE/DECISIONS.md) | Design decisions and unresolved choices |
 
+![System Overview](SwarmSystem.png)
+
 ## Repository guide
 
 - `ARCHITECTURE/` contains proposed C4 views, data flows, protocols, and operational concepts.
