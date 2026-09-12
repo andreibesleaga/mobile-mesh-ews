@@ -1,5 +1,12 @@
 # Scalability Architecture - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Scalability Overview
 
 The SwarmSystem is designed to scale from local deployments of dozens of sensors to global networks of thousands of nodes. This document describes the horizontal and vertical scaling patterns, performance targets, and capacity planning.
@@ -71,6 +78,7 @@ flowchart TB
 | **Cloud Gateway** | 1000+ | Variable | Infrastructure-based |
 
 **Key Scaling Properties:**
+
 - Linear performance up to thousands of nodes (REQ-GEN-004)
 - No central coordinator required at edge level
 - Dynamic entry/exit without reconfiguration (REQ-GEN-006)
@@ -194,11 +202,13 @@ flowchart TB
 ## Load Balancing
 
 ### Mesh Level
+
 - **Algorithm**: Swarm Intelligence (Ant Colony Optimization)
 - **Optimization**: Battery life, link quality, hop count
 - **PRD Reference**: REQ-COM-006
 
 ### Cloud Level
+
 - **Global**: GCP Global Load Balancer (anycast)
 - **Regional**: Cloud Run request distribution
 - **Database**: Read replicas with connection pooling
@@ -227,17 +237,20 @@ flowchart TB
 ## Scaling Patterns
 
 ### Pattern 1: Event-Driven Autoscaling
-```
+
+```text
 Pub/Sub message backlog → Scale Dataflow workers → Drain backlog → Scale down
 ```
 
 ### Pattern 2: Predictive Scaling
-```
+
+```text
 Historical patterns → Forecast event spikes → Pre-scale before disaster season
 ```
 
 ### Pattern 3: Geographic Expansion
-```
+
+```text
 New region deployed → Mesh nodes connect → Local aggregation → Federated to global
 ```
 
@@ -253,4 +266,4 @@ New region deployed → Mesh nodes connect → Local aggregation → Federated t
 
 ---
 
-*This document describes the scalability architecture of the SwarmSystem.*
+_This document describes the scalability architecture of the SwarmSystem._

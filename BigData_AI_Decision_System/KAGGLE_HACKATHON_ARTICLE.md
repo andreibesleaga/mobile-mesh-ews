@@ -1,5 +1,12 @@
 # Climate Early Warning System: A Big Data AI Engine for Disaster Prevention
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 **BigQuery AI Decison Engine**
 **Project:** [Climate Early Warning System - Big Data AI Engine](https://www.kaggle.com/competitions/bigquery-ai-hackathon/writeups/climate-early-warning-system-big-data-ai-engine)
 **Author:** Andrei Besleaga  
@@ -25,7 +32,6 @@ This project delivers a decision engine for the Climate Early Warning System (EW
 
 ### How to run (quick path)
 
- 
 1) Run `BigData_AI_Decision_System/create.sql` and `views.sql` to create schema and materialized views.
 2) Populate data with `mock_data_generator.sql` (or integrate Earth Engine via `earthAI.md`).
 3) Deploy the decision view with `optimized_pipeline.sql` and persist alerts with `alerts_sink.sql`.
@@ -85,13 +91,13 @@ As detailed in the project [README](README.md), the foundation is a distributed 
 
 This mobile mesh creates a **dynamic, adaptive monitoring grid** that repositions based on real-time risk assessment—a key innovation over static sensor networks.
 
-![System Architecture](SwarmSystem.png)
+![System Architecture](../SwarmSystem.png)
 
 ### 2.2 BigQuery AI Decision Engine: The Intelligence Layer
 
-The `BigData_AI_Decision_System` is the brain of the operation—a fully serverless, scalable analytics pipeline built natively in BigQuery. As documented in its [README](BigData_AI_Decision_System/README.md), it processes multi-source data streams to generate actionable intelligence.
+The `BigData_AI_Decision_System` is the brain of the operation—a fully serverless, scalable analytics pipeline built natively in BigQuery. As documented in its [README](README.md), it processes multi-source data streams to generate actionable intelligence.
 
-![Data Flow Architecture](BigData_AI_Decision_System/DataflowDiagram.png)
+![Data Flow Architecture](DataflowDiagram.png)
 
 ---
 
@@ -230,21 +236,21 @@ The system follows a structured deployment sequence documented in `00_execution_
 ### **Phase 1: Database Initialization**
 
 #### Step 1: Create Schema (`create.sql`)
- 
+
 ```bash
 # In BigQuery Console
 bq query --use_legacy_sql=false < create.sql
 ```
 
 Creates core tables:
- 
+
 - `sensor_data`: Partitioned by timestamp, clustered by location
 - `earth_images`: Satellite imagery metadata
 - `imagery_metadata`: Fire and flood indices from satellite data
 - `alert_logs`: Historical alert records
 
 #### Step 2: Populate Test Data (`mock_data_generator.sql`)
- 
+
 ```sql
 -- Generates 5000+ sensor readings across multiple locations
 -- Simulates realistic temperature, precipitation, pressure patterns
@@ -256,7 +262,7 @@ Creates core tables:
 ### **Phase 2: AI Model Setup**
 
 #### Step 3: Create ML Models (`create_ml_models.sql`)
- 
+
 ```sql
 -- Temperature forecast model (Linear Regression)
 CREATE OR REPLACE MODEL `climate_ai.temperature_forecast_model`
@@ -274,7 +280,7 @@ FROM `climate_ai.sensor_data`;
 ### **Phase 3: Data Pipeline Deployment**
 
 #### Step 4: Create Aggregation Views (`views.sql`)
- 
+
 ```sql
 -- Hourly sensor aggregations
 CREATE OR REPLACE VIEW `climate_ai.vw_sensor_hourly` AS
@@ -285,7 +291,7 @@ GROUP BY location_id, hour_bucket;
 ```
 
 #### Step 5: Deploy Decision Engine (`optimized_pipeline.sql`)
- 
+
 This is the **core intelligence layer**:
 
 ```sql
@@ -301,14 +307,14 @@ FROM risk_classification;
 ```
 
 **Output**: Real-time view generating:
- 
+
 - `wildfire_risk_score` (0-100)
 - `flood_risk_score` (0-100)
 - `alert_level` (NORMAL | WARNING | CRITICAL)
 - `recommended_action` (Monitor | Deploy Teams | Evacuate)
 
 #### Step 6: Activate Alerting (`alerts_sink.sql`)
- 
+
 ```sql
 -- Persist alerts for historical tracking
 CREATE OR REPLACE TABLE `climate_ai.alert_logs` AS
@@ -320,7 +326,7 @@ WHERE alert_level IN ('WARNING', 'CRITICAL');
 ### **Phase 4: Satellite Integration (Optional)**
 
 #### Step 7: Earth Engine Setup (`earthAi.js`)
- 
+
 Run in [Google Earth Engine Code Editor](https://code.earthengine.google.com/):
 
 ```javascript
@@ -338,7 +344,7 @@ Export.image.toCloudStorage({
 ```
 
 #### Step 8: Load Satellite Data (`earthAI.sql`)
- 
+
 ```sql
 -- Load exported imagery metadata
 CREATE EXTERNAL TABLE `climate_ai.gee_export_metadata`
@@ -352,7 +358,7 @@ SELECT uri, lat, lon, tstamp FROM gee_export_metadata;
 ### **Phase 5: Operational Systems**
 
 #### Step 9: Deploy Routing Systems
- 
+
 ```bash
 # Mobile sensor optimization
 bq query < mobile_sensor_routing.sql
@@ -362,7 +368,7 @@ bq query < emergency_team_routing.sql
 ```
 
 #### Step 10: Quality Assurance (`optimized_pipeline_checks.sql`)
- 
+
 ```sql
 -- Validate data quality
 -- Check for out-of-range values
@@ -486,7 +492,7 @@ bq query < emergency_team_routing.sql
 1. **CAMARA Telecom APIs**: Direct integration with Telco Network APIs for location and emergency services
 2. **Distributed Ledger**: Immutable event logging for audit trails
 3. **AI Framework**:  AI agent orchestration and framework
-5. **Other**: Integration of other services and APIs
+4. **Other**: Integration of other services and APIs
 
 ---
 

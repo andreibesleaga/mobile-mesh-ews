@@ -1,0 +1,170 @@
+# Illustrative OpenAPI sketch of an internal alert-proposal API.
+#
+# STATUS: NON-NORMATIVE, NOT IMPLEMENTED. This document exists so that future
+# implementers converge on the same vocabulary. It is not a published API and
+# must not be used to build against. The API proposes an alert; it never
+# publishes one. Public dissemination belongs exclusively to an authorised
+# warning authority (see ARCHITECTURE/DECISIONS.md, ADR-001).
+openapi: 3.1.0
+info:
+  title: Mobile Mesh EWS — Alert Proposal API (illustrative)
+  version: 0.0.1-draft
+  description: >-
+    Non-normative sketch. A decision-support service submits an evidence-backed
+    alert proposal; an authorised reviewer accepts, amends, or rejects it.
+    Nothing in this document authorises outward dissemination.
+  license:
+    name: CC BY-NC-ND 4.0
+    identifier: CC-BY-NC-ND-4.0
+servers:
+  - url: https://localhost.invalid/api/v0
+    description: Placeholder only. No server is operated by this repository.
+tags:
+  - name: Proposals
+    description: Submission and review of alert proposals.
+paths:
+  /alert-proposals:
+    post:
+      operationId: createAlertProposal
+      summary: Submit an alert proposal for human review
+      tags: [Proposals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlertProposal"
+      responses:
+        "202":
+          description: Proposal accepted for review. This is not a decision.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlertProposal"
+        "400":
+          description: Malformed proposal or missing provenance.
+        "422":
+          description: Proposal failed schema, freshness, or confidence validation.
+    get:
+      operationId: listAlertProposals
+      summary: List proposals and their review state
+      tags: [Proposals]
+      responses:
+        "200":
+          description: A page of proposals.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlertProposal"
+  /alert-proposals/{proposalId}/decisions:
+    post:
+      operationId: recordReviewDecision
+      summary: Record an authorised reviewer's decision on a proposal
+      tags: [Proposals]
+      parameters:
+        - name: proposalId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^ap_[0-9a-f]{16}$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewDecision"
+      responses:
+        "200":
+          description: Decision recorded. Outward dissemination is a separate, authority-owned act.
+        "403":
+          description: Actor is not an authorised reviewer.
+components:
+  schemas:
+    AlertProposal:
+      type: object
+      required: [proposalId, hazard, severity, confidence, evidence, createdAt]
+      properties:
+        proposalId:
+          type: string
+          pattern: "^ap_[0-9a-f]{16}$"
+          description: Stable identifier, propagated through every revision.
+        hazard:
+          type: string
+          enum: [flood, wildfire, earthquake, tsunami, landslide, storm, other]
+        severity:
+          type: string
+          enum: [minor, moderate, severe, extreme]
+          description: Proposed severity. Never a published CAP severity.
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Model confidence with a documented method; not a probability of harm.
+        evidence:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/EvidenceReference"
+        suggestedArea:
+          $ref: "#/components/schemas/GeoArea"
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+          description: After this instant the proposal is stale and must be re-derived.
+    EvidenceReference:
+      type: object
+      required: [sourceId, sourceType, observedAt]
+      properties:
+        sourceId:
+          type: string
+        sourceType:
+          type: string
+          enum: [fieldSensor, managedNode, satellite, weatherService, telecomContext, analyst]
+        observedAt:
+          type: string
+          format: date-time
+        quality:
+          type: string
+          enum: [verified, provisional, suspect]
+          description: Suspect evidence must never be the sole basis of a proposal.
+        provenance:
+          type: string
+          description: Versioned reference to the source system and payload digest.
+    GeoArea:
+      type: object
+      description: Coarse area only. Precise personal location is out of scope by design.
+      required: [cellScheme, cells]
+      properties:
+        cellScheme:
+          type: string
+          example: s2-level-14
+        cells:
+          type: array
+          items:
+            type: string
+    ReviewDecision:
+      type: object
+      required: [proposalId, actorId, decidedAt, outcome]
+      properties:
+        proposalId:
+          type: string
+        actorId:
+          type: string
+          description: Pseudonymous reference to an authenticated, authorised reviewer.
+        decidedAt:
+          type: string
+          format: date-time
+        outcome:
+          type: string
+          enum: [accepted, amended, rejected, deferred]
+        rationale:
+          type: string
+        amendedSeverity:
+          type: string
+          enum: [minor, moderate, severe, extreme]

@@ -1,118 +1,51 @@
-# SwarmSystem Architecture Documentation
+# Mobile Mesh EWS Architecture
 
-## Overview
+## Authority and lifecycle
 
-This is the architecture documentation index for the **Live Mobile Edge Sensors Swarm System (SwarmSystem)** - a decentralized, autonomous climate monitoring and early warning platform.
+This directory describes a **candidate architecture**, not a deployed system. Diagrams and technology names express design options unless a document explicitly labels a statement as verified evidence. The project has no field deployment, public-warning integration, safety case, or production service.
 
-![System Overview](./C4_Context_Diagram.png)
+When documents disagree, use this order of authority:
 
-## Quick Reference
+1. [Project status and verification](../PROJECT_STATUS.md)
+2. [Assumptions and boundaries](ASSUMPTIONS_AND_BOUNDARIES.md), [Security](Security.md), [Compliance](../Compliance_and_Ethics.md), [Risks](../RISKS.md), and [Observability](../OBSERVABILITY.md)
+3. [Decision log](DECISIONS.md) and [Requirements traceability matrix](../Requirements_Traceability_Matrix.md)
+4. C4, data-flow, deployment, protocol, scale, and scenario views
+5. Background, business, integration, simulation, and prototype material
 
-| Document | Purpose | Key Contents |
-|----------|---------|--------------|
-| [System_Architecture_Overview.md](./System_Architecture_Overview.md) | **Global Architecture** | **High-level System of Systems Diagram** |
-| [System_Architectures.md](./System_Architectures.md) | **Detailed Use Case Arch** | **Mermaid Diagrams for Gov/NGO/Biz cases** |
-| [C4_Context.md](./C4_Context.md) | System boundary | External actors, integrated systems |
-| [C4_Container.md](./C4_Container.md) | Major subsystems | 9 containers, technology stack |
-| [C4_Component.md](./C4_Component.md) | Internal structure | Components per container |
-| [DataFlow.md](./DataFlow.md) | Data movement | 6 flow paths, schemas |
-| [Deployment.md](./Deployment.md) | Physical topology | 4 tiers, DR strategy |
-| [Security.md](./Security.md) | Security layers | 5 layers, threat model |
-| [Scalability.md](./Scalability.md) | Scaling patterns | Performance targets |
-| [TechnicalStacks.md](./TechnicalStacks.md) | **Technology Choices** | **GCP vs AWS vs OSS comparison** |
-| [TechnicalProtocols.md](./TechnicalProtocols.md) | Protocol details | AODV, TORA, A2A, MCP, CAP |
-| [UserFlows.md](./UserFlows.md) | Scenarios | 7 disaster types, state diagrams |
-| [AuxiliarySystems.md](./AuxiliarySystems.md) | Support Services | IoT, Ledger, Notification diagrams |
+No diagram authorises a public alert, autonomous vehicle action, access to third-party services, or processing of personal data.
 
-## Architecture at a Glance
+## Reading path
 
-```mermaid
-flowchart TB
-    subgraph EDGE["Layer 1: Environment (Edge/IoT)"]
-        SENSORS["Mobile Sensors<br/>Drones, Vehicles, IoT"]
-    end
+| Step | Document | Question answered |
+|---|---|---|
+| 1 | [Assumptions and boundaries](ASSUMPTIONS_AND_BOUNDARIES.md) | What is and is not being designed? |
+| 2 | [C4 context](C4_Context.md) and [containers](C4_Container.md) | Which actors and logical services are proposed? |
+| 3 | [Data flow](DataFlow.md) | How should data be minimised, verified, and reviewed? |
+| 4 | [Security](Security.md) | What controls and evidence are required before implementation? |
+| 5 | [Deployment](Deployment.md) and [scalability](Scalability.md) | What must be proven under operational conditions? |
+| 6 | [Technical protocols](TechnicalProtocols.md) | Which standards and options need a decision record? |
+| 7 | [User flows](UserFlows.md) | How should human-authorised workflows behave? |
 
-    subgraph COMM["Layer 2: Communication"]
-        NETWORK["5G/6G + Satellite<br/>+ Mesh Protocols"]
-    end
+## Architectural invariants
 
-    subgraph PLATFORM["Layer 3: Central Platform"]
-        CLOUD["Cloud Services<br/>BigQuery AI, Decision Engine"]
-    end
+- An observation is not a verified hazard; a model output is not an alert.
+- Only an authorised human role may approve dissemination outside the system boundary.
+- Field and third-party data are untrusted until identity, integrity, freshness, quality, and provenance checks pass.
+- Critical operation must degrade safely: suppress unverified outputs, preserve evidence, and hand control to authorised people.
+- Privacy, accessibility, jurisdiction, aviation, spectrum, and emergency-management requirements are deployment prerequisites, not post-release work.
+- Performance figures in legacy views are hypotheses and acceptance targets, never achieved results.
 
-    subgraph OUTPUT["Layer 4: Outputs"]
-        ALERTS["CAP Alerts<br/>WEA, Mobile Apps, Sirens"]
-    end
+## Existing views
 
-    SENSORS --> NETWORK
-    NETWORK --> CLOUD
-    CLOUD --> ALERTS
-    
-    NASA["NASA/GEE"] --> CLOUD
-    EXTERNAL["External Data<br/>(MCP/A2A)"] --> CLOUD
-```
+| View | Purpose | Important limitation |
+|---|---|---|
+| [System overview](System_Architecture_Overview.md) | Broad system-of-systems concept | Candidate components only |
+| [Detailed scenarios](System_Architectures.md) | Sector-specific concepts | Not an authorisation for defence, surveillance, or alerting use |
+| [Components](C4_Component.md) | Logical component decomposition | Interfaces and trust contracts remain to be specified |
+| [Auxiliary systems](AuxiliarySystems.md) | Optional services | Ledger, AI, and notification providers are not committed dependencies |
+| [Interface contracts](../contracts/README.md) | Non-normative OpenAPI and AsyncAPI sketches | Not a normative specification; nothing is implemented or binding |
+| [Technology stacks](TechnicalStacks.md) | Options comparison | Selection requires ADR, threat model, cost model, and legal review |
 
-## System Diagrams
+## Verification rule
 
-### C4 Diagrams
-- ![Context](./C4_Context_Diagram.png) - System context and boundaries
-- ![Container](./C4_Container_Diagram.png) - Major containers and interactions
-- ![Component](./C4_Component_Diagram.png) - Component structure
-
-### Flow Diagrams
-- ![Data Flow](./DataFlow_Diagram.png) - End-to-end data movement
-- ![Deployment](./Deployment_Diagram.png) - Physical topology
-
-### Additional Diagrams
-- ![Security](./Security_Diagram.png) - Security layers
-- ![Scalability](./Scalability_Diagram.png) - Scaling architecture
-- ![User Flows](./UserFlows_Diagram.png) - Scenario sequences
-- ![Auxiliary Systems](./AuxiliarySystems_Diagram.png) - Support services architecture
-
-## Key Integrations
-
-| Integration | Purpose | Protocol |
-|-------------|---------|----------|
-| **NASA/GEE** | Satellite data, foundation models | REST API |
-| **IPAWS/WEA** | Public alert dissemination | CAP v1.2 |
-| **CAMARA** | Mobile network APIs (urban) | CAMARA API |
-| **Framework AI** | Chatbot, document learning | MCP/A2A |
-| **Distributed Ledger** | Audit trail | Blockchain API |
-
-## Disaster Scenarios Covered
-
-1. **Wildfire** - Detection, prediction, perimeter tracking
-2. **Flood** - Water level monitoring, breach alerts
-3. **Earthquake** - P-wave warning, SAR coordination
-4. **Tsunami** - Offshore detection, coastal evacuation
-5. **Tornado** - Supercell tracking, path prediction
-6. **Urban Mob** - Crowd density, emergency guidance
-7. **Search & Rescue** - Survivor location, AR navigation
-
-## PRD Traceability
-
-All architecture documents include requirement traceability back to:
-- `PRD_Swarm_System_Requirements_Specification.md`
-- `PRD_Other_Integrations.md`
-
-Key requirements addressed:
-- **REQ-GEN-001 to 006**: Autonomy, decentralization, scalability
-- **REQ-EDGE-001 to 009**: Sensor nodes, fusion, navigation
-- **REQ-COM-001 to 011**: Mesh networking, routing, backhaul
-- **REQ-PLAT-001 to 008**: Central platform, decisions
-- **REQ-AI-001 to 006**: Hybrid AI, federated learning
-- **REQ-EXT-001 to 007**: External integrations
-- **REQ-HSI-001 to 005**: Human-swarm interaction
-- **REQ-PERF-001 to 003**: Performance targets
-- **REQ-REL-001 to 003**: Reliability, ruggedization
-- **REQ-SEC-001 to 003**: Security controls
-
-## Reference Images
-
-- [SwarmSystem.png](../SwarmSystem.png) - Original system overview
-- [BigData_AI_Decision_System/](../BigData_AI_Decision_System/) - AI engine implementation
-
----
-
-*Architecture documentation generated for the Mobile-Mesh-EWS project.*
-*Last updated: January 2026*
+Every proposed requirement must have a measurable acceptance criterion, test method, accountable owner, and recorded result before it can be called implemented. See the [verification plan](../PROJECT_STATUS.md#release-gates) and [traceability matrix](../Requirements_Traceability_Matrix.md).

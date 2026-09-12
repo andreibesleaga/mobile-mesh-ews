@@ -1,0 +1,22 @@
+# Lychee link-checker configuration.
+# Internal (relative) links must resolve. External links are checked leniently
+# because third-party services, standards bodies, and data providers change
+# their URLs without notice; a dead external link is reported, not fatal.
+max_concurrency = 8
+timeout = 30
+max_retries = 2
+retry_wait_time = 3
+accept = [200, 206, 301, 302, 403, 429]
+exclude_path = [".git", "node_modules", "venv", ".venv"]
+
+# Placeholder or intentionally non-resolvable hosts used in examples.
+exclude = [
+  "https?://example\\.(com|org|net)",
+  "https?://localhost",
+  "https?://127\\.0\\.0\\.1",
+  "https?://[^/]*\\.invalid",
+]
+
+# Assets that are large binaries or rate-limited image hosts.
+exclude_all_private = false
+include_fragments = true

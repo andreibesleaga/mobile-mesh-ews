@@ -1,5 +1,12 @@
 # Auxiliary Systems Diagram (Optional)
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Overview
 
 This diagram visualizes the optional subsystem containers identified during verification (`IoT Manager`, `Ledger Service`, `Notification Service`) which handle specific operational duties distinct from the main data path.

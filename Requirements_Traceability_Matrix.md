@@ -1,59 +1,28 @@
-# Requirements Traceability Matrix (RTM)
+# Requirements Traceability Matrix
 
-## Overview
-This matrix maps high-level product requirements to architectural components, implementation files, and verification methods.
+## Status convention
 
-| Req ID | Requirement Description | Priority | Source Document | Implemented In | Verification Method | Status |
-|:---|:---|:---|:---|:---|:---|:---|
-| **REQ-GEN-001** | Decentralized Agentic AI Capability | Critical | PRD (2.1) | `SwarmSystem.drawio`, `ARCHITECTURE/System_Architectures.md` | Simulation (Gazebo) | In Progress |
-| **REQ-GEN-002** | Emergent Behavior (Local Interactions) | Critical | PRD (2.1) | `SwarmSystem.drawio` | Simulation (NetLogo) | In Progress |
-| **REQ-GEN-003** | Swarm Leader Election (Resilience) | Critical | PRD (2.1) | `ARCHITECTURE/Security.md` (Edge/Mesh Layer) | Kill-Switch Test | In Progress |
-| **REQ-GEN-004** | Scalability (>1000 nodes) | High | PRD (2.2) | `ARCHITECTURE/System_Architectures.md` | Scalability Simulation | In Progress |
-| **REQ-GEN-005** | Form Factor Agnostic (UAV/UGV/IoT) | High | PRD (2.2) | `ARCHITECTURE/TechnicalStacks.md` | Hardware Integration Test | In Progress |
-| **REQ-GEN-006** | Dynamic Entry/Exit of Nodes | High | PRD (2.2) | `ARCHITECTURE/System_Architectures.md` | Network Join/Leave Test | In Progress |
-| **REQ-EDGE-001** | Routed Swarm Intelligent Sensors | Critical | PRD (3.1) | `ARCHITECTURE/TechnicalStacks.md` | Unit Tests | In Progress |
-| **REQ-EDGE-002** | Non-Routed Flora/Fauna Sensors | High | PRD (3.1) | `ARCHITECTURE/TechnicalStacks.md` | Connection Test | In Progress |
-| **REQ-EDGE-003** | Edge Pre-processing (Feature Extraction) | High | PRD (3.1) | `BigData_AI_Decision_System` | Data Bandwidth Test | In Progress |
-| **REQ-EDGE-004** | Modular Sensor Payloads (Thermal/Gas/etc) | High | PRD (3.2) | `ARCHITECTURE/TechnicalStacks.md` | Hardware Validation | In Progress |
-| **REQ-EDGE-005** | Integrated Sensing and Communication (ISAC) | High | PRD (3.2) | `ARCHITECTURE/System_Architectures.md` | RF Sensing Test | In Progress |
-| **REQ-EDGE-006** | Multi-Modal Sensor Fusion | High | PRD (3.2) | `TechnicalStacks.md` (Edge AI) | Field Trial (Sensor Co-location) | In Progress |
-| **REQ-EDGE-007** | Real-time Geospatial Awareness | Critical | PRD (3.3) | `ARCHITECTURE/System_Architectures.md` | GPS/RSSI Test | In Progress |
-| **REQ-EDGE-008** | Autonomous Navigation | High | PRD (3.3) | `SwarmSystem.drawio` | Obstacle Avoidance Test | In Progress |
-| **REQ-EDGE-009** | Formation Control | Medium | PRD (3.3) | `SwarmSystem.drawio` | Formation Simulation | In Progress |
-| **REQ-COM-001** | Hybrid Circular/Star Mesh Topology | High | PRD (4.1) | `SYSTEM_ARHITECTURE_OVERVIEW.md` | Network Simulation (NS-3) | In Progress |
-| **REQ-COM-002** | Self-Healing Logic | Critical | PRD (4.1) | `ARCHITECTURE/System_Architectures.md` | Failure Recovery Test | In Progress |
-| **REQ-COM-003** | Dynamic Tier Jumps (Direct-to-Sat) | High | PRD (4.1) | `ARCHITECTURE/System_Architectures.md` | Connectivity Test | In Progress |
-| **REQ-COM-004** | AODV Routing Protocol | High | PRD (4.2) | `ARCHITECTURE/TechnicalProtocols.md` | Routing Efficiency Test | In Progress |
-| **REQ-COM-005** | TORA Routing Protocol | High | PRD (4.2) | `ARCHITECTURE/TechnicalProtocols.md` | Mobility Routing Test | In Progress |
-| **REQ-COM-006** | Swarm Intelligence Routing (ACO) | High | PRD (4.2) | `ARCHITECTURE/System_Architectures.md` | Path Optimization Test | In Progress |
-| **REQ-COM-007** | 6G Standards Compliance | High | PRD (4.3) | `ARCHITECTURE/TechnicalStacks.md` | Protocol Compliance Check | In Progress |
-| **REQ-COM-008** | OTFS Modulation (Doppler Mitigation) | Critical | PRD (4.3) | `ARCHITECTURE/TechnicalStacks.md` | High-Speed Signal Test | In Progress |
-| **REQ-COM-10** | Satellite Backhaul Integration | Medium | PRD (4.4) | `ARCHITECTURE/System_Architectures.md` (Tier 2) | Link Budget Analysis | In Progress |
-| **REQ-COM-011** | Disruption Tolerant Networking (DTN) | High | PRD (4.4) | `ARCHITECTURE/TechnicalProtocols.md` | Store-and-Forward Test | In Progress |
-| **REQ-PLAT-001** | Big Data Acquisition Layer | Critical | PRD (5.1) | `BigData_AI_Decision_System` | Ingestion Load Test | In Progress |
-| **REQ-PLAT-002** | Real-Time System Status DB | High | PRD (5.1) | `BigData_AI_Decision_System` | DB Latency Test | In Progress |
-| **REQ-PLAT-004** | Swarm Decision Making Logic | High | PRD (5.2) | `BigData_AI_Decision_System` | Logic Validation | In Progress |
-| **REQ-PLAT-005** | Incident Response Decision Making | Critical | PRD (5.2) | `BigData_AI_Decision_System` | Workflow Test | In Progress |
-| **REQ-PLAT-006** | Blockchain Audit Trail | Critical | PRD (5.2) | `ARCHITECTURE/Security.md` (Audit Logging) | Ledger Audit | In Progress |
-| **REQ-PLAT-007** | Synced Big Data Analytics | High | PRD (5.3) | `BigData_AI_Decision_System` | Analytics Accuracy Test | In Progress |
-| **REQ-AI-001** | Hybrid AI Training Loop | High | PRD (6.1) | `BigData_AI_Decision_System` | Model Convergence Test | In Progress |
-| **REQ-AI-002** | Federated Learning (FL) | High | PRD (6.1) | `Framework_AI_Integration` | Privacy/Gradient Test | In Progress |
-| **REQ-AI-003** | LSTM Temporal Forecasting | High | PRD (6.1) | `BigData_AI_Decision_System` | Forecast Accuracy Test | In Progress |
-| **REQ-AI-004** | Continuous Reinforcement Learning | Medium | PRD (6.2) | `Framework_AI_Integration` | Reward Function Check | In Progress |
-| **REQ-AI-006** | Unsupervised Anomaly Detection | High | PRD (6.2) | `BigData_AI_Decision_System` | Anomaly Detection Rate | In Progress |
-| **REQ-EXT-001** | Google Earth Engine Integration | High | PRD (7.1) | `BigData_AI_Decision_System` | API Integration Test | In Progress |
-| **REQ-EXT-004** | NASA FIRMS Integration | High | PRD (7.1) | `BigData_AI_Decision_System` | API Response Test | In Progress |
-| **REQ-EXT-005** | CAP v1.2 Alert Generation | High | PRD (7.2) | `TechnicalStacks.md` | Schema Validation | In Progress |
-| **REQ-EXT-006** | WEA Gateway Interface | High | PRD (7.2) | `Communications_APIs` | Gateway Connectivity | In Progress |
-| **REQ-HSI-001** | Swarm Visualizations (Heatmaps) | Medium | PRD (8.1) | `VisualGridDev` | UI Usability Test | In Progress |
-| **REQ-HSI-004** | Explainable AI (XAI) outputs | High | PRD (8.2) | `BigData_AI_Decision_System` | Explanation Quality Check | In Progress |
-| **REQ-PERF-001** | Latency < 1s (Detection-to-Alert) | Critical | PRD (9.1) | `ARCHITECTURE/System_Architectures.md` (SLOs) | E2E Latency Test | In Progress |
-| **REQ-PERF-004** | System Uptime SLOs (99.99%) | Critical | PRD (9.1) | `ARCHITECTURE/System_Architectures.md` | Availability Monitor | In Progress |
-| **REQ-REL-004** | Fail-Safe Design (IEEE P7009) | Critical | PRD (9.2) | `ARCHITECTURE/Security.md` | Safety Drill | In Progress |
-| **REQ-SEC-002** | Edge Encryption (ECC + mTLS) | Critical | PRD (9.3) | `ARCHITECTURE/Security.md` | Pen Test / Code Review | In Progress |
-| **REQ-SEC-004** | Provenance Metadata (Device ID, Sig) | Critical | Security Audit | `ARCHITECTURE/Security.md` (Provenance Section) | Packet Inspection | In Progress |
-| **REQ-PRIV-001** | GDPR Privacy-by-Design (Anonymization) | Critical | Compliance | `Compliance_and_Ethics.md` | Privacy Impact Assessment | In Progress |
+**Specified** means a requirement exists in the PRD. **Demonstrated only** means a local illustrative artefact exists; it is not production, field, safety, or compliance evidence. **Unverified** means no acceptance result is present. No row is “implemented” or “compliant” at this repository's current maturity.
 
-## Gap Analysis
-*   **User Stories**: Missing link to specific UI Components (`REQ-HSI-001`).
-*   **Calibration**: `REQ-EDGE-003` (Calibration routines) needs specific unit tests in the codebase.
+## Traceability baseline
+
+| Requirement group | IDs | Design location | Current status | Required verification before any operational claim |
+|---|---|---|---|---|
+| System purpose and mesh | REQ-GEN-001–006 | PRD; C4 context; assumptions | Specified | Scale, mobility, join/leave, partition, and energy tests under defined operating conditions |
+| Edge sensing and control | REQ-EDGE-001–009 | PRD; data flow; security | Specified | Sensor calibration, environmental, cybersecurity, and safety evidence; no autonomous action without approval |
+| Communications | REQ-COM-001–012 | PRD; technical protocols; ADR-002 | Specified | RF/legal assessment, loss/jamming tests, throughput/latency measurement, and fallback validation |
+| Platform and analytics | REQ-PLAT-001–008 | PRD; data flow; ADR-003 | Demonstrated only for selected SQL | Reproducible data pipeline, performance/cost tests, backup/recovery, security and privacy assessment |
+| AI and learning | REQ-AI-001–006; REQ-LOOP-001–003 | PRD; compliance; risks | Specified | Intended-purpose definition, dataset governance, evaluation, uncertainty, monitoring, human-oversight and change-control evidence |
+| External integrations | REQ-EXT-001–007 | PRD; boundaries | Specified | Permission/licence, versioned contract, sandbox interoperability, and authority acceptance evidence |
+| Human-system interaction | REQ-HSI-001–005 | PRD; user flows | Specified | Accessibility, usability, training, human-factors, and authority workflow evaluation |
+| Performance and reliability | REQ-PERF-001–004; REQ-REL-001–004 | PRD; scalability; deployment | Unverified | Defined SLOs, operational design domain, test plan, reproducible measurements, confidence bounds, and recovery evidence |
+| Security | REQ-SEC-001–003 | Security; risks | Specified | Threat-model review, key/device lifecycle tests, adversarial tests, pen test, incident-response exercise |
+| Algorithmic flow | REQ-ALG-001–005 | PRD; data flow | Demonstrated only for simulation concepts | Scenario, failure, and adversarial tests with traceable expected outcomes |
+
+## Requirement quality rules
+
+Before implementation, each requirement must define: intended user and hazard; priority; measurable acceptance criterion; operating conditions; safety and privacy impacts; owner; dependencies; verification method; and evidence location. Replace absolute or unsupported claims such as “zero downtime,” “linear scaling,” or fixed accuracy/latency numbers with a measurable, context-bounded acceptance target.
+
+## Explicit gaps
+
+The PRD contains ambitious technology and performance statements that remain hypotheses. It needs a future requirements-baselining pass to establish priority, feasibility, jurisdiction, operational design domain, and acceptance metrics. The repository intentionally does not claim closure of those gaps.

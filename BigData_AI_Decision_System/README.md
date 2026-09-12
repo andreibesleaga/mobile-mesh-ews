@@ -1,8 +1,15 @@
 # BigData AI E2E Decision System
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Overview
 
-This is an end-to-end AI-powered Early Warning System (EWS) Big Data Decision System and Routing Layer, built on Google BigQuery that processes real-time sensor data and satellite imagery to generate intelligent climate risk alerts. The system combines sensor telemetry, satellite image analysis, and AI models to provide automated decision-making for wildfire and flood risk assessment.
+This is an exploratory BigQuery-oriented prototype for an early-warning decision-support and routing layer. It illustrates how sensor telemetry and satellite imagery could be combined with SQL-native analytics and models to produce climate risk scores. It is not a real-time alerting service, it issues no alerts, and neither its figures nor its behaviour are validated results.
 
 This project uses new features from BigQuery AI like: Generative AI in SQL, Vector Search in SQL, Multimodal Features in SQL, and it can be run as a separate domain system, outside of main EWS system imlementation, or embbeded in the general system architecture, when completed, and has been tested with generated data on a Google Cloud Personal Account, with SQL, and via Kaggle Python scripts.
 
@@ -22,6 +29,7 @@ You can view the project [on Kaggle](https://www.kaggle.com/competitions/bigquer
 ## System Components
 
 ### Core SQL Scripts
+
 [demo production ready - beta testing in Kaggle/GCP]
 
 - **`create.sql`**: Database schema creation for sensor data, satellite imagery, and AI models
@@ -41,6 +49,7 @@ You can view the project [on Kaggle](https://www.kaggle.com/competitions/bigquer
 - **`earthAI.md`**: Complete documentation and tutorial for Earth Engine integration with step-by-step instructions
 
 ### Documentation
+
 [Final Drafts]
 
 - **`EWS BigQuery AI System Prototype.pdf`**: Technical architecture and implementation details
@@ -109,4 +118,4 @@ The system includes comprehensive development tools:
 
 ---
 
-*This system is a demo and not tested in the wild (only on limited GCP account with live BigQuery AI and mock datasets) and is designed for scalable, real-time environmental monitoring and can be adapted for various climate and weather-related early warning applications.*
+_This system is a demo and not tested in the wild (only on limited GCP account with live BigQuery AI and mock datasets) and is designed for scalable, real-time environmental monitoring and can be adapted for various climate and weather-related early warning applications._

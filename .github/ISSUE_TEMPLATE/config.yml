@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security issue
+    url: https://github.com/andreibesleaga/mobile-mesh-ews/security/advisories/new
+    about: Report repository vulnerabilities privately. Do not open a public issue.
+  - name: Read the contribution standard
+    url: https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/CONTRIBUTING.md
+    about: Scope, evidence expectations, and the review process for this repository.
+  - name: Check the project boundary first
+    url: https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/PROJECT_STATUS.md
+    about: This repository is a design baseline and does not operate a warning service.

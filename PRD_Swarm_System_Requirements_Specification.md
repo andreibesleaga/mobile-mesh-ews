@@ -1,4 +1,6 @@
-# **Product Requirements Document: Live Mobile Edge Sensors Swarm System for Early Warnings and Climate Systems**
+# Product Requirements Document: Mobile Mesh EWS
+
+> **Lifecycle interpretation:** This PRD is a requirements hypothesis for architecture work. “Must,” “shall,” and quantitative statements express proposed acceptance criteria, not present capabilities, field results, compliance findings, or authorisation to operate. Any future baselining pass must add priority, owner, operational design domain, legal/safety/privacy impact, measurable acceptance criterion, and verification evidence for each requirement. The project currently has no operational implementation; [PROJECT_STATUS.md](PROJECT_STATUS.md), [RISKS.md](RISKS.md), and [ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md](ARCHITECTURE/ASSUMPTIONS_AND_BOUNDARIES.md) take precedence where a statement could imply otherwise.
 
 ## **1\. Introduction**
 
@@ -8,7 +10,7 @@ This Product Requirements Document (PRD) defines the comprehensive functional an
 
 The primary objective of the system is to bridge the critical gap between macro-level satellite observation and micro-level ground truth. By deploying a self-healing mesh of sensors into high-risk environments (e.g., wildfire zones, flood plains, seismic fault lines), the system provides granular, real-time data that enables rapid decision-making for incident response teams and long-term climate modeling.
 
-This document serves as the authoritative source of requirements for the development of the system's architecture, distinct from detailed technical implementation plans or specific technology stack selections. It focuses on *what* the system must achieve, the *behaviors* it must exhibit, and the *constraints* under which it must operate.
+This document serves as the authoritative source of requirements for the development of the system's architecture, distinct from detailed technical implementation plans or specific technology stack selections. It focuses on _what_ the system must achieve, the _behaviors_ it must exhibit, and the _constraints_ under which it must operate.
 
 ### **1.2 System Overview**
 
@@ -26,8 +28,6 @@ The system architecture consists of three primary domains:
 * **Federated Learning (FL):** A machine learning technique that trains an algorithm across multiple decentralized edge devices holding local data samples, without exchanging them.10  
 * **CAP:** Common Alerting Protocol, a standard format for exchanging public warnings.11
 
-## ---
-
 **2\. General System Requirements**
 
 ### **2.1 Autonomy and Decentralization**
@@ -43,8 +43,6 @@ The defining characteristic of the Swarm System is its ability to operate withou
 * **REQ-GEN-004:** The system shall support the simultaneous operation of thousands of distinct sensor nodes within a single mesh network, scaling linearly in performance rather than degrading exponentially.15  
 * **REQ-GEN-005:** The system must be **agnostic to the physical form factor** of the mobile entity. It shall define a universal abstraction layer for "Mobile Sensor Nodes," allowing seamless integration of UAVs (drones), UGVs (rovers), USVs (boats), and wearable sensors on personnel or animals.2  
 * **REQ-GEN-006:** The system must allow for **dynamic entry and exit** of nodes. New sensors deployed into an active theater must automatically discover the mesh network, authenticate, and begin contributing data without manual configuration.18
-
-## ---
 
 **3\. Data Collection and Monitoring Requirements (The Edge)**
 
@@ -75,8 +73,6 @@ The system is a multi-sensor fusion engine.
 * **REQ-EDGE-008:** The system shall support **Autonomous Navigation**. Swarm nodes must be capable of pathfinding through complex, unstructured environments (e.g., forests, rubble) using onboard obstacle avoidance logic.22  
 * **REQ-EDGE-009:** The system must implement **Formation Control**. When scanning large areas, the swarm shall autonomously arrange itself into optimal geometric formations (e.g., search lines, circular perimeters) based on the sensor footprint and terrain topology.13
 
-## ---
-
 **4\. Communication Architecture Requirements (The Nervous System)**
 
 ### **4.1 Mesh Networking and Topology**
@@ -101,11 +97,9 @@ The network must be robust, self-healing, and capable of operating in complete i
 
 ### **4.4 Backhaul and Resilience**
 
-*   **REQ-COM-010:** The system must integrate **Satellite Backhaul** capabilities (LEO constellations like Starlink/Iridium) to ensure connectivity in remote areas where terrestrial 5G/6G is unavailable.31
-*   **REQ-COM-012:** **Network Resilience & Coverage:** The system assumes **intermittent 5G/6G coverage** in disaster zones. It shall aggressively prioritize "store-and-forward" mesh routing when backhaul is < 100kbps, queueing non-critical telemetry while pushing high-priority alerts immediately.  
+* **REQ-COM-010:** The system must integrate **Satellite Backhaul** capabilities (LEO constellations like Starlink/Iridium) to ensure connectivity in remote areas where terrestrial 5G/6G is unavailable.31
+* **REQ-COM-012:** **Network Resilience & Coverage:** The system assumes **intermittent 5G/6G coverage** in disaster zones. It shall aggressively prioritize "store-and-forward" mesh routing when backhaul is < 100kbps, queueing non-critical telemetry while pushing high-priority alerts immediately.  
 * **REQ-COM-011:** The system shall support **Disruption Tolerant Networking (DTN)**. If no backhaul is available, nodes must cache data locally and physically move to a location with connectivity ("ferrying" data) to upload it.18
-
-## ---
 
 **5\. Central Platform Requirements (The Brain)**
 
@@ -142,8 +136,6 @@ The platform distinguishes between two types of decision-making: "Swarm Decision
 * **REQ-PLAT-007:** The system must provide a **Synced Big Data Analytics** engine. This engine correlates real-time swarm data with historical baselines to identify anomalies that may precede a disaster (predictive maintenance for the environment).  
 * **REQ-PLAT-008:** The integration layer must support **API/Messaging Services** to expose system data to authorized third parties (governments, NGOs, researchers) via standard RESTful or GraphQL interfaces.
 
-## ---
-
 **6\. AI and Machine Learning Requirements**
 
 ### **6.1 Hybrid Training Architecture**
@@ -162,8 +154,6 @@ The system relies on continuous learning to adapt to changing environmental cond
 * **REQ-AI-005:** The system shall support **Model Distribution**. Updated, re-trained models must be pushed from the central platform to the edge nodes via the "Direct Incident Response Decision Router," ensuring field agents always run the latest logic.  
 * **REQ-AI-006:** The AI must be capable of **Unsupervised Anomaly Detection**. It should identify "unknown unknowns"—patterns that deviate significantly from the norm but do not match known disaster signatures—and flag them for human review.2
 
-## ---
-
 **7\. External System Integration Requirements**
 
 ### **7.1 Global Earth Observation Systems**
@@ -181,8 +171,6 @@ To contextualize local data, the swarm must sync with global datasets.
 * **REQ-EXT-006:** The system shall interface with **Wireless Emergency Alert (WEA)** gateways (ATIS 07 000 10). This enables the system to push "Life Safety" alerts directly to cellular networks for broadcast to civilian mobile devices in the affected area.11  
 * **REQ-EXT-007:** The alerting logic must support **Polygon-Based Targeting**. Alerts should be routed only to devices located within the specific geofenced danger zone determined by the swarm's sensors, minimizing panic in safe areas.11
 
-## ---
-
 **8\. Human-Swarm Interaction (HSI) Requirements**
 
 ### **8.1 Operator Interface and C2**
@@ -198,16 +186,14 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 * **REQ-HSI-004:** The system must provide **Explainable AI (XAI)** outputs. When the system recommends an evacuation, it must provide the rationale (e.g., "Wind shift detected \+ Fuel moisture \< 5% \+ Fire front velocity \> 10km/h") to build operator trust.40  
 * **REQ-HSI-005:** The system shall display **Confidence Metrics**. Every sensor reading and prediction must be accompanied by a probability score (e.g., "Fire Detected: 98% Confidence"), helping operators filter out noise.38
 
-## ---
-
 **9\. Non-Functional Requirements**
 
 ### **9.1 Performance**
 
-*   **REQ-PERF-001:** **Latency:** The system must achieve end-to-end latency (from sensor detection to platform alert) of less than **1 second** for critical life-safety events.1  
-*   **REQ-PERF-002:** **Packet Delivery Ratio (PDR):** The mesh network must maintain a PDR of **\>95%** even under conditions of 20% node failure, ensuring reliable data delivery in destructive environments.1  
-*   **REQ-PERF-003:** **Detection Accuracy:** The AI models must achieve a detection accuracy of **\>99%** for primary hazards (fire, flood) to prevent alarm fatigue.1
-*   **REQ-PERF-004:** **System Uptime (SLO):** The Core Platform shall maintain **99.99% availability** (max 52 mins downtime/year). The Mesh Network shall maintain **99.999% availability** within the local theater via autonomous self-healing.
+* **REQ-PERF-001:** **Latency:** The system must achieve end-to-end latency (from sensor detection to platform alert) of less than **1 second** for critical life-safety events.1  
+* **REQ-PERF-002:** **Packet Delivery Ratio (PDR):** The mesh network must maintain a PDR of **\>95%** even under conditions of 20% node failure, ensuring reliable data delivery in destructive environments.1  
+* **REQ-PERF-003:** **Detection Accuracy:** The AI models must achieve a detection accuracy of **\>99%** for primary hazards (fire, flood) to prevent alarm fatigue.1
+* **REQ-PERF-004:** **System Uptime (SLO):** The Core Platform shall maintain **99.99% availability** (max 52 mins downtime/year). The Mesh Network shall maintain **99.999% availability** within the local theater via autonomous self-healing.
 
 ### **9.2 Reliability and Robustness**
 
@@ -221,8 +207,6 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 * **REQ-SEC-001:** **Authentication:** The mesh network must utilize decentralized authentication mechanisms to prevent unauthorized nodes (Sybil attacks) from joining the swarm.41  
 * **REQ-SEC-002:** **Encryption:** All data in transit and at rest must be encrypted using lightweight cryptographic standards suitable for edge devices (e.g., Elliptic Curve Cryptography).41  
 * **REQ-SEC-003:** **Anomaly Detection:** The system must monitor for "Bad Actor" nodes injecting false data and autonomously quarantine them from the consensus network.42
-
-## ---
 
 **10\. Operational Use Case Summaries**
 
@@ -244,8 +228,6 @@ Controlling a swarm requires a shift from "direct control" to "intent management
 4. **Locate:** "Human" signature detected.  
 5. **Relay:** Location data is hopped through the mesh to the Incident Commander.  
 6. **Guide:** Rescuers use AR tablets connected to the swarm to navigate safely to the survivor.
-
-## ---
 
 **11\. Comparative Analysis of Architectures (Data Tables)**
 
@@ -270,8 +252,6 @@ The system utilizes a hybrid routing approach based on the specific operational 
 | **TORA** | Link Reversal, High Redundancy. | Highly dynamic networks, rapid mobility. | **Active Response Phase:** Used by fast-moving UAV swarms during deployment.26 |
 | **Swarm Intelligence (ACO)** | Bio-inspired, Probabilistic, Multi-path. | Complex, unpredictable environments. | **Resource Optimization:** Used to balance battery load across the network.27 |
 
-## ---
-
 **12\. Detailed Functional Requirements (Expanded)**
 
 ### **12.1 The "Generic Algorithms" Module**
@@ -282,9 +262,9 @@ The architecture diagram highlights a specific module for "Generic Algorithms" t
 * **REQ-ALG-002:** **Get AI Model Forecasted Critical Conditions:** The system must periodically poll the predictive models. If a model forecasts a critical condition (e.g., "Wind shift in 10 mins"), this triggers a preemptive state change in the swarm (e.g., "Reposition to upwind sector").  
 * **REQ-ALG-003:** **Environment Need Assessment:** The system must calculate "Information Gain." It asks: "Where are my blind spots?" and "Where is the uncertainty highest?" It then generates navigation waypoints to fill these data gaps.  
 * **REQ-ALG-004:** **Threshold Trigger Evaluation:** The system must constantly evaluate incoming sensor streams against dynamic thresholds stored in the Settings DB.  
-  * *Input:* Sensor Value (e.g., Water Level \= 4.5m).  
-  * *Logic:* If Value \> Threshold (4.0m) AND Trend \= Rising.  
-  * *Output:* Trigger Alert Event.  
+  * _Input:_ Sensor Value (e.g., Water Level \= 4.5m).  
+  * _Logic:_ If Value \> Threshold (4.0m) AND Trend \= Rising.  
+  * _Output:_ Trigger Alert Event.  
 * **REQ-ALG-005:** **Swarm Response Generation:** Upon a confirmed trigger, the system must generate a "Swarm Response" package. This includes:  
   * Target Location.  
   * Required Sensor Mix (e.g., "Need Thermal").  
@@ -302,8 +282,6 @@ The system's intelligence is not static; it is a living cycle.
 * **REQ-LOOP-002:** **AI Training Evaluation:** Before deploying a new model, the system must run a "Shadow Mode" evaluation. The new model predicts outcomes on live data without acting. Its performance is compared to the active model. Only if the new model's accuracy is statistically superior (\>5% improvement) is it promoted to production.  
 * **REQ-LOOP-003:** **Fine-Tuning:** The system shall support "Few-Shot Learning." A general model (e.g., "Forest Fire") must be fine-tuned into a specific model (e.g., "Pine Forest Fire in High Wind") using only a small amount of local data gathered during the initial hours of an incident.
 
-## ---
-
 **13\. System Constraints and Assumptions**
 
 ### **13.1 Technical Constraints**
@@ -318,8 +296,6 @@ The system's intelligence is not static; it is a living cycle.
 * **Privacy (GDPR):** The system must implement **Edge Anonymization**. Any multimedia data (video/audio) must be processed locally to extract metadata (e.g., "Person Detected") and the raw stream discarded immediately, unless a "Search and Rescue" mode is explicitly authorized by a human commander.44  
 * **Autonomous Lethality:** (Explicit Exclusion) The system is strictly prohibited from integrating with weapon systems. It acts solely as a sensor and relay.  
 * **Human Oversight (EU AI Act):** All valid alerts classified as "CRITICAL" (Risk Score > 90) must be routed to a human operator for verification before being broadcast to the public, unless a "Fail-Safe Override" (e.g., dam burst detected) is pre-authorized.
-
-## ---
 
 **14\. Conclusion**
 

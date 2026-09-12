@@ -1,0 +1,107 @@
+# Illustrative AsyncAPI sketch of the observation event stream.
+#
+# STATUS: NON-NORMATIVE, NOT IMPLEMENTED. Field and third-party observations are
+# untrusted input. Any implementation must apply enrolment, identity, integrity,
+# freshness, rate, calibration, and quality checks before an observation may
+# influence a proposal (see ARCHITECTURE/Security.md).
+asyncapi: 3.0.0
+info:
+  title: Mobile Mesh EWS — Observation Stream (illustrative)
+  version: 0.0.1-draft
+  description: >-
+    Non-normative sketch of the event path from field observation to
+    decision-support ingestion. It is deliberately decoupled from the
+    historical analytics path (see ARCHITECTURE/DECISIONS.md, ADR-003).
+  license:
+    name: CC BY-NC-ND 4.0
+    identifier: CC-BY-NC-ND-4.0
+defaultContentType: application/json
+servers:
+  localBroker:
+    host: localhost.invalid:1883
+    protocol: mqtt
+    description: Placeholder only. No broker is operated by this repository.
+channels:
+  observationRaw:
+    address: observations/raw
+    title: Raw observation (untrusted)
+    messages:
+      observation:
+        $ref: "#/components/messages/Observation"
+  observationAccepted:
+    address: observations/accepted
+    title: Accepted observation (post-validation)
+    description: Emitted only after identity, integrity, freshness, and quality checks pass.
+    messages:
+      observation:
+        $ref: "#/components/messages/Observation"
+  observationQuarantined:
+    address: observations/quarantined
+    title: Quarantined observation
+    description: Retained for analysis. Must never influence a proposal.
+    messages:
+      quarantined:
+        $ref: "#/components/messages/QuarantinedObservation"
+operations:
+  publishObservation:
+    action: send
+    channel:
+      $ref: "#/channels/observationRaw"
+    summary: A field or managed node emits an observation.
+  receiveAccepted:
+    action: receive
+    channel:
+      $ref: "#/channels/observationAccepted"
+    summary: Decision support consumes validated observations.
+components:
+  messages:
+    Observation:
+      name: Observation
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/ObservationPayload"
+    QuarantinedObservation:
+      name: QuarantinedObservation
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/ObservationPayload"
+          - type: object
+            required: [quarantineReason]
+            properties:
+              quarantineReason:
+                type: string
+                enum: [identityFailed, stale, integrityFailed, outOfBounds, duplicate, suspectCalibration, rateLimited]
+  schemas:
+    ObservationPayload:
+      type: object
+      required: [observationId, sourceId, observedAt, kind, value]
+      properties:
+        observationId:
+          type: string
+          description: Stable across retries; used for deduplication.
+        sourceId:
+          type: string
+          description: Opaque, non-personal device reference. Never a subscriber identifier.
+        observedAt:
+          type: string
+          format: date-time
+        kind:
+          type: string
+          enum: [temperature, humidity, pressure, rainfall, waterLevel, seismic, windSpeed, airQuality, imageryFeature]
+        value:
+          type: number
+        unit:
+          type: string
+          example: celsius
+        cellScheme:
+          type: string
+          example: s2-level-14
+        cell:
+          type: string
+        calibrationState:
+          type: string
+          enum: [valid, dueSoon, overdue, unknown]
+        signature:
+          type: string
+          description: Message authentication over the canonical payload.

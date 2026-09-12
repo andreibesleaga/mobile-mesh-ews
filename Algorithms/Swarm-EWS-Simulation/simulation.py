@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Andrei Nicolae Besleaga
+# SPDX-License-Identifier: CC-BY-NC-ND-4.0
+#
+# Illustrative simulation only. Not a digital twin, a field trial, or
+# evidence of system behaviour. See PROJECT_STATUS.md.
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation

@@ -1,5 +1,12 @@
 # System Architecture Overview
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 This document provides a comprehensive architecture overview of the **Live Mobile Edge Sensors Swarm System**, aligned with the visual architecture.
 
 The system is designed as a feedback loop between the physical environment (The Swarm) and the cloud-based Central Platform (The Brain), enabled by real-time communication.
@@ -126,23 +133,28 @@ graph LR
 ## Component Breakdown
 
 ### 1. Data Collection (Environment)
+
 Detailed in the diagram as the physical layer:
-*   **Non-Routed Sensors**: Static IoT nodes (flora/fauna monitoring) used primarily for training data acquisition.
-*   **Routed Sensors**: Active "Swarm Intelligent" clients (Drones, Vehicles) capable of routing traffic and executing physical relocation commands.
+
+* **Non-Routed Sensors**: Static IoT nodes (flora/fauna monitoring) used primarily for training data acquisition.
+* **Routed Sensors**: Active "Swarm Intelligent" clients (Drones, Vehicles) capable of routing traffic and executing physical relocation commands.
 
 ### 2. Central Platform Breakdown
+
 The core logic is divided into three pillars:
-*   **Databases**:
-    *   **System Status DB**: Is the "Live View" (Current locations, mesh health, live conditions).
-    *   **System Settings DB**: Is the "Configuration View" (Thresholds, logic trees, historical stats).
-*   **AI & Analytics**:
-    *   **Synced Big Data Analytics**: The ingestion funnel.
-    *   **AI Loop**: A continuous cycle of Training (Online/Offline) -> Evaluation (Shadow Mode) -> Production. Features **NASA/ESA** and **Google Earth AI** as foundational data sources.
-*   **Generic Algorithms**:
-    *   The operational loop that continuously queries: *Where are the sensors?* + *What does the AI predict is coming?* -> *Move Swarm to cover the gap.*
+
+* **Databases**:
+  * **System Status DB**: Is the "Live View" (Current locations, mesh health, live conditions).
+  * **System Settings DB**: Is the "Configuration View" (Thresholds, logic trees, historical stats).
+* **AI & Analytics**:
+  * **Synced Big Data Analytics**: The ingestion funnel.
+  * **AI Loop**: A continuous cycle of Training (Online/Offline) -> Evaluation (Shadow Mode) -> Production. Features **NASA/ESA** and **Google Earth AI** as foundational data sources.
+* **Generic Algorithms**:
+  * The operational loop that continuously queries: _Where are the sensors?_ + _What does the AI predict is coming?_ -> _Move Swarm to cover the gap._
 
 ### 3. External Integrations
-*   **Google Earth AI**: Used for macro-level Flood and Wildfire prediction.
-*   **NASA / ESA**: Provides open science data (Sentinel-2, MERRA-2) for baseline calibration.
-*   **Blockchain**: Specifically **Azure Blockchain Service** for immutable auditing of all autonomous decisions.
-*   **3rd Party Response**: Direct integration with Emergency Services (Ambulance/Fire) via subscribed APIs.
+
+* **Google Earth AI**: Used for macro-level Flood and Wildfire prediction.
+* **NASA / ESA**: Provides open science data (Sentinel-2, MERRA-2) for baseline calibration.
+* **Blockchain**: Specifically **Azure Blockchain Service** for immutable auditing of all autonomous decisions.
+* **3rd Party Response**: Direct integration with Emergency Services (Ambulance/Fire) via subscribed APIs.

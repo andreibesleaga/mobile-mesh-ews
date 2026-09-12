@@ -1,3 +1,12 @@
+# Earth Engine Export Script
+
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## **1. Google Earth Engine Export Script (JavaScript)**
 
 Paste this into the [GEE Code Editor](https://code.earthengine.google.com/) and run it.
@@ -87,8 +96,8 @@ Notes
 • Change bands arrays if your downstream model needs different spectral inputs.
 • The metadata CSV will include uri, lat, lon, tstamp, and source.
 
-
 **What it does:**
+
 - Filters Sentinel‑2 for a given ROI/date/cloud cover.
 - Exports a handful of RGB images as GeoTIFFs to your GCS bucket.
 - Creates a metadata CSV with URI, centroid lat/lon, and timestamp.
@@ -96,7 +105,9 @@ Notes
 ---
 
 ## **2. Permissions & Setup**
+
 Before running:
+
 - Enable the **Google Earth Engine API** and **Cloud Storage API** in your Google Cloud project.
 - Create the GCS bucket (`my-earth-ai-bucket` above) and give your GEE account write permission.
 - In the GEE Code Editor, you’ll need to **Authorize** the export when prompted.
@@ -104,6 +115,7 @@ Before running:
 ---
 
 ## **3. BigQuery Side: Load Into Tables**
+
 Once the export finishes, point BigQuery at the bucket:
 
 ```sql
@@ -145,10 +157,10 @@ SELECT
 FROM `climate_ai.gee_export_metadata`;
 ```
 
-
 ---
 
 ## **4. Optional Enhancements**
+
 - You can swap Sentinel‑2 for other GEE collections, like `LANDSAT/LC09/C02/T1_L2` or MODIS products.
 - Add spectral indices (NDVI, NBR) into the metadata CSV for richer features.
 - Use `.limit(N)` or `filter(ee.Filter.eq(...))` to control volume.

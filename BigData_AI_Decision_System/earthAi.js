@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2026 Andrei Nicolae Besleaga
+// SPDX-License-Identifier: CC-BY-NC-ND-4.0
+//
+// Exploratory Earth Engine material only. Not part of an operational
+// alerting path. See PROJECT_STATUS.md.
+
 // ===== CONFIG =====
 var roi = ee.Geometry.Polygon([
   [[23.0, 44.0], [27.0, 44.0], [27.0, 47.0], [23.0, 47.0], [23.0, 44.0]]

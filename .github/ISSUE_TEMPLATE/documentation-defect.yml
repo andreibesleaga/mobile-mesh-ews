@@ -1,0 +1,53 @@
+name: Documentation or evidence defect
+description: Report a documentation error, broken link, inconsistent claim, or missing evidence requirement.
+title: "[docs] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for defects in the documentation itself. Do **not** use
+        it for anything that would require operating the system: this repository
+        is a design baseline, not a service.
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: File path (and heading, if useful) where the defect appears.
+      placeholder: ARCHITECTURE/Scalability.md — "Latency budgets"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Describe the defect precisely. Quote the disputed text where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+      description: The evidence or wording that would resolve it. Link primary sources.
+    validations:
+      required: false
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Broken link or anchor
+        - Inconsistent statement between documents
+        - Unsupported or over-stated claim
+        - Missing evidence requirement or verification method
+        - Diagram does not render or is out of date
+        - Editorial or formatting
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: This report contains no personal data, credentials, or operational detail.
+          required: true

@@ -1,6 +1,14 @@
 # Technical Stack Options - Mobile Mesh EWS
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Overview
+
 This document outlines example comparative technology stacks for the SwarmSystem. It provides a comprehensive matrix of options across Top-Tier Cloud Providers (GCP, AWS, Azure), Open Source Sovereign options, and specific Swarm/Edge technologies.
 
 ---
@@ -10,7 +18,7 @@ This document outlines example comparative technology stacks for the SwarmSystem
 | Component | **Reference (Google-Centric)** | **AWS Equivalent** | **Azure Equivalent** | **OSS / Sovereign (GovStack)** |
 | :--- | :--- | :--- | :--- | :--- |
 | **Compute** | Cloud Run (Serverless) | AWS Fargate | Azure Container Apps | Knative / Kubernetes |
-| **IoT Core** | *Google Cloud IoT (Dep)* | AWS IoT Core | Azure IoT Hub | Eclipse Kapua / Mainflux |
+| **IoT Core** | _Google Cloud IoT (Dep)_ | AWS IoT Core | Azure IoT Hub | Eclipse Kapua / Mainflux |
 | **Event Bus** | Pub/Sub | Kinesis / SQS | Event Hubs | Apache Kafka / NATS |
 | **API Gateway** | Apigee | AWS API Gateway | Azure API Management | Kong / X-Road (Security Server) |
 | **Serverless Functions** | Cloud Functions | AWS Lambda | Azure Functions | OpenFaaS |
@@ -37,91 +45,106 @@ This document outlines example comparative technology stacks for the SwarmSystem
 This layer is critical for offline autonomy. Choices are validated against IEEE robotics standards.
 
 ### 3.1 Edge Database (Local Persistence)
-*   **Recommendation:** **ObjectBox** (Fastest, ACID, Edge-sync) or **SQLite** (Universal).
-*   **Alternatives:**
-    *   *Couchbase Lite*: Strong offline-sync but heavier.
-    *   *DuckDB*: Best for on-device analytics via SQL.
+
+* **Recommendation:** **ObjectBox** (Fastest, ACID, Edge-sync) or **SQLite** (Universal).
+* **Alternatives:**
+  * _Couchbase Lite_: Strong offline-sync but heavier.
+  * _DuckDB_: Best for on-device analytics via SQL.
 
 ### 3.2 Swarm Communication Protocols
-*   **Mesh Protocol Options:**
-    *   **BATMAN-ADV (Better Approach To Mobile Adhoc Networking)**: Layer 2 routing. **Recommended** for transparent bridging and roaming. Agnostic to Layer 3 protocols.
-    *   **802.11s**: Standardized mesh. Good integration but can be less flexible with dynamic high-mobility nodes compared to BATMAN.
-*   **Communication Stack:**
-    *   **Physical**: 5G / LTE-M / LoRa / WiFi.
-    *   **Transport**: TCP/UDP + TLS 1.3.
-    *   **Application**:
-        *   **MQTT**: Telemetry (Low overhead).
-        *   **CoAP**: Constrained devices.
-*   **Serialization**: **Protobuf** (Google) or **FlatBuffers** (Zero-copy access).
+
+* **Mesh Protocol Options:**
+  * **BATMAN-ADV (Better Approach To Mobile Adhoc Networking)**: Layer 2 routing. **Recommended** for transparent bridging and roaming. Agnostic to Layer 3 protocols.
+  * **802.11s**: Standardized mesh. Good integration but can be less flexible with dynamic high-mobility nodes compared to BATMAN.
+* **Communication Stack:**
+  * **Physical**: 5G / LTE-M / LoRa / WiFi.
+  * **Transport**: TCP/UDP + TLS 1.3.
+  * **Application**:
+    * **MQTT**: Telemetry (Low overhead).
+    * **CoAP**: Constrained devices.
+* **Serialization**: **Protobuf** (Google) or **FlatBuffers** (Zero-copy access).
 
 ### 3.3 Sensor Accuracy & Calibration
-*   **Calibration Matrix**: All sensors must be calibrated against reference instruments before deployment.
-*   **Routine**: Automatic baseline correction (ABC) for gas sensors; Periodic co-location calibration.
-*   **Filtering**: Kalman Filters and Median filters implemented at the Edge to reject noise and faulting sensor data.
+
+* **Calibration Matrix**: All sensors must be calibrated against reference instruments before deployment.
+* **Routine**: Automatic baseline correction (ABC) for gas sensors; Periodic co-location calibration.
+* **Filtering**: Kalman Filters and Median filters implemented at the Edge to reject noise and faulting sensor data.
 
 ### 3.3 Simulation & Digital Twins
+
 Before physical deployment, swarms are trained in high-fidelity physics simulators.
-*   **Primary:** **Gazebo** (Standard for ROS).
-*   **Alternative:** **Microsoft AirSim** (Unreal Engine based, best for visual AI training).
-*   **Web-Based:** **Webots.cloud**.
+
+* **Primary:** **Gazebo** (Standard for ROS).
+* **Alternative:** **Microsoft AirSim** (Unreal Engine based, best for visual AI training).
+* **Web-Based:** **Webots.cloud**.
 
 ### 3.4 Mobile Network & Telecom APIs (CAMARA / GSMA)
+
 This subsystem allows the swarm to "communicate over mobile directly" and acquire network-level data.
-*   **Standard:** **CAMARA APIs** (Open Gateway).
-*   **Core Capabilities:**
-    *   **Quality on Demand (QoD):** Prioritize critical alert traffic during congestion.
-    *   **Device Location:** Acquire verified coordinates from the cell tower (anti-spoofing).
-    *   **SIM Swap:** Verify device identity integrity before allowing mesh join.
+
+* **Standard:** **CAMARA APIs** (Open Gateway).
+* **Core Capabilities:**
+  * **Quality on Demand (QoD):** Prioritize critical alert traffic during congestion.
+  * **Device Location:** Acquire verified coordinates from the cell tower (anti-spoofing).
+  * **SIM Swap:** Verify device identity integrity before allowing mesh join.
 
 ### 3.5 Integration Framework
-*   **WMO (World Meteorological Organization)**: WIS 2.0 compliant data exchange.
-*   **USGS (United States Geological Survey)**: Earthquake Catalog API integration.
-*   **National Systems**: CAP v1.2 standardized alerts for interoperability with IPAWS, EU-Alert.
+
+* **WMO (World Meteorological Organization)**: WIS 2.0 compliant data exchange.
+* **USGS (United States Geological Survey)**: Earthquake Catalog API integration.
+* **National Systems**: CAP v1.2 standardized alerts for interoperability with IPAWS, EU-Alert.
 
 ---
 
 ## 4. Hardware Reference (BOM Categories)
 
 ### 4.1 Flight/Motion Controllers
-*   **Standard:** **Pixhawk 6X** (FMUv6 standard) running **PX4 Autopilot** or **ArduPilot**.
-*   **Low Cost:** ESP32-S3 (Custom firmware for micro-drones).
+
+* **Standard:** **Pixhawk 6X** (FMUv6 standard) running **PX4 Autopilot** or **ArduPilot**.
+* **Low Cost:** ESP32-S3 (Custom firmware for micro-drones).
 
 ### 4.2 Edge AI Compute Modules
-*   **High Performance:** NVIDIA Jetson Orin Nano (40 TOPS).
-*   **Power Efficient:** Google Coral TPU (4 TOPS, USB stick).
-*   **Sovereign:** RISC-V with NPU (e.g., StarFive).
+
+* **High Performance:** NVIDIA Jetson Orin Nano (40 TOPS).
+* **Power Efficient:** Google Coral TPU (4 TOPS, USB stick).
+* **Sovereign:** RISC-V with NPU (e.g., StarFive).
 
 ### 4.3 Communication Radios
-*   **Mesh/Telemetry:** LoRa SX1262 (915/868 MHz).
-*   **Broadband:** WiFi HaloW (802.11ah) or Custom 6G OTFS SDR (Software Defined Radio).
+
+* **Mesh/Telemetry:** LoRa SX1262 (915/868 MHz).
+* **Broadband:** WiFi HaloW (802.11ah) or Custom 6G OTFS SDR (Software Defined Radio).
 
 ---
 
 ## 5. Implementation Strategy by Scenarios
 
 ### Scenario A: "Global Watchtower" (NASA/UN Style)
-*   **Stack:** **GCP + Google Earth Engine**.
-*   **Why:** Unbeatable geospatial scale (Petabytes of satellite data).
-*   **Focus:** Macro-level analytics, prediction, political dashboards.
+
+* **Stack:** **GCP + Google Earth Engine**.
+* **Why:** Unbeatable geospatial scale (Petabytes of satellite data).
+* **Focus:** Macro-level analytics, prediction, political dashboards.
 
 ### Scenario B: "Tactical Response" (Defense/First Responders)
-*   **Stack:** **Azure (GovCloud) + AirSim**.
-*   **Why:** Strong integration with MilSpec hardware and Hololens (AR) for operators.
-*   **Focus:** Real-time situational awareness, offline capability, rapid mesh deployment.
+
+* **Stack:** **Azure (GovCloud) + AirSim**.
+* **Why:** Strong integration with MilSpec hardware and Hololens (AR) for operators.
+* **Focus:** Real-time situational awareness, offline capability, rapid mesh deployment.
 
 ### Scenario C: "Sovereign Citizen" (Community Mesh)
-*   **Stack:** **OSS (Kubernetes + HomeAssistant + Meshtastic)**.
-*   **Why:** Privacy-first, zero cloud dependency, runs on Raspberry Pis.
-*   **Focus:** Hyper-local warnings, neighbor-to-neighbor aid, privacy.
+
+* **Stack:** **OSS (Kubernetes + HomeAssistant + Meshtastic)**.
+* **Why:** Privacy-first, zero cloud dependency, runs on Raspberry Pis.
+* **Focus:** Hyper-local warnings, neighbor-to-neighbor aid, privacy.
 
 ### Scenario D: Fully Air-Gapped / Tactical Local Deployment
-*   **Constraint:** **Zero Connection** to commercial cloud or internet.
-*   **Infrastructure:**
-    *   **Compute:** 3-node **K3s Cluster** (Ruggedized NUCs or Laptops).
-    *   **Storage:** **MinIO** (S3-compatible local object storage).
-    *   **Maps:** **OpenStreetMap (OSM)** Vector Tiles hosted locally (TileServer GL).
-    *   **Updates:** Physical USB / Secure Sneakernet.
-*   **Target:** Nuclear Power Plants, Submarines, High-Security Bunkers.
+
+* **Constraint:** **Zero Connection** to commercial cloud or internet.
+* **Infrastructure:**
+  * **Compute:** 3-node **K3s Cluster** (Ruggedized NUCs or Laptops).
+  * **Storage:** **MinIO** (S3-compatible local object storage).
+  * **Maps:** **OpenStreetMap (OSM)** Vector Tiles hosted locally (TileServer GL).
+  * **Updates:** Physical USB / Secure Sneakernet.
+* **Target:** Nuclear Power Plants, Submarines, High-Security Bunkers.
 
 ---
 
@@ -183,31 +206,35 @@ This project supports a **Polyglot** architecture. Teams can choose the stack be
 This layer mandates **Defense-in-Depth** protocols required for "Scenario D" (Air-Gapped) and "Scenario A" (Global Watchtower).
 
 ### 7.1 Post-Quantum Cryptography (PQC) & Encryption
-*   **Key Exchange:** **CRYSTALS-Kyber** (NIST Standard) replacing ECDH.
-*   **Signatures:** **CRYSTALS-Dilithium** / **SPHINCS+** for firmware signing.
-*   **Symmetric:** **AES-256-GCM** (minimum) or **ChaCha20-Poly1305** (High perf on mobile/IoT).
+
+* **Key Exchange:** **CRYSTALS-Kyber** (NIST Standard) replacing ECDH.
+* **Signatures:** **CRYSTALS-Dilithium** / **SPHINCS+** for firmware signing.
+* **Symmetric:** **AES-256-GCM** (minimum) or **ChaCha20-Poly1305** (High perf on mobile/IoT).
 
 ### 7.2 Zero Trust Network Transport
-*   **Mesh VPN:** **WireGuard** (Kernel level, formal verification) or **Tailscale** (Coordination).
-*   **Service-to-Service:** **mTLS 1.3** (Mutual TLS) enforced via Linkerd/Istio.
-*   **IoT Handshake:** **Noise Protocol Framework** (used in WhatsApp/WireGuard) for lightweight authenticated encryption.
+
+* **Mesh VPN:** **WireGuard** (Kernel level, formal verification) or **Tailscale** (Coordination).
+* **Service-to-Service:** **mTLS 1.3** (Mutual TLS) enforced via Linkerd/Istio.
+* **IoT Handshake:** **Noise Protocol Framework** (used in WhatsApp/WireGuard) for lightweight authenticated encryption.
 
 ### 7.3 Hardware Root of Trust
-*   **Server:** **TPM 2.0** for Measured Boot and Remote Attestation.
-*   **Cloud:** **AWS/GCP HSM** (CloudHSM) or **Confidential Computing** (Intel SGX / AMD SEV).
-*   **Mobile/Edge:** **Secure Enclave** (Apple), **Titan M2** (Pixel), or **ATECC608B** (IoT crypto chip).
+
+* **Server:** **TPM 2.0** for Measured Boot and Remote Attestation.
+* **Cloud:** **AWS/GCP HSM** (CloudHSM) or **Confidential Computing** (Intel SGX / AMD SEV).
+* **Mobile/Edge:** **Secure Enclave** (Apple), **Titan M2** (Pixel), or **ATECC608B** (IoT crypto chip).
 
 ### 7.4 Software Supply Chain Security
-*   **Standard:** **SLSA Level 4** (Supply-chain Levels for Software Artifacts).
-*   **Signing:** **Sigstore** / **Cosign** for container image verification.
-*   **SBOM:** **CycloneDX** or **SPDX** generated at every build commit.
+
+* **Standard:** **SLSA Level 4** (Supply-chain Levels for Software Artifacts).
+* **Signing:** **Sigstore** / **Cosign** for container image verification.
+* **SBOM:** **CycloneDX** or **SPDX** generated at every build commit.
 
 ---
 
 ## 8. Authoritative Validation
 
-*   **IoT Databases**: *ObjectBox* outperformed SQLite/Realm in performant edge synchronization benchmarks (source: *Benchmarking Edge Databases, IEEE 2024*).
-*   **Communication**: *DDS* is mandated by **ROS2** (Robot Operating System) for real-time robotic control.
-*   **Fail-Safe**: **PX4 Autopilot** is the gold standard for verified flight safety compliance (compliance with drone regulations).
+* **IoT Databases**: _ObjectBox_ outperformed SQLite/Realm in performant edge synchronization benchmarks (source: _Benchmarking Edge Databases, IEEE 2024_).
+* **Communication**: _DDS_ is mandated by **ROS2** (Robot Operating System) for real-time robotic control.
+* **Fail-Safe**: **PX4 Autopilot** is the gold standard for verified flight safety compliance (compliance with drone regulations).
 
-*Last Updated: February 2026*
+_Last Updated: February 2026_

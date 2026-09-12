@@ -1,5 +1,12 @@
 # References & Citations
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 This document serves as the authoritative source of truth for all external references, standards, research papers, and industrial case studies cited throughout the **Mobile Mesh EWS** project.
 
 ---
@@ -7,52 +14,58 @@ This document serves as the authoritative source of truth for all external refer
 ## 1. Official Standards & Protocols
 
 ### Emergency & Alerting
-*   **CAP (Common Alerting Protocol) v1.2**: OASIS Standard for exchanging public warnings.
-    *   [Specification](https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html)
-    *   [DHS Implementation Guide](https://www.dhs.gov/sites/default/files/publications/Alert-Protocol-TG_0215-508.pdf)
-*   **Wireless Emergency Alerts (WEA)**: FCC/ATIS standards for cellular broadcasting.
-    *   [FEMA WEA Resources](https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system/public/wireless-emergency-alerts)
+
+* **CAP (Common Alerting Protocol) v1.2**: OASIS Standard for exchanging public warnings.
+  * [Specification](https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html)
+  * [DHS Implementation Guide](https://www.dhs.gov/sites/default/files/publications/Alert-Protocol-TG_0215-508.pdf)
+* **Wireless Emergency Alerts (WEA)**: FCC/ATIS standards for cellular broadcasting.
+  * [FEMA WEA Resources](https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system/public/wireless-emergency-alerts)
 
 ### Data Governance & Metadata
-*   **ISO 19115-1:2014**: Geographic information — Metadata.
-    *   [ISO Standard](https://www.iso.org/standard/53798.html)
-*   **OGC SensorThings API**: Standard for internet of things sensing.
-    *   [OGC Standard](https://www.ogc.org/standards/sensorthings)
-*   **W3C PROV-O**: The PROV Ontology for data provenance and audit trails.
-    *   [W3C Recommendation](https://www.w3.org/TR/prov-o/)
+
+* **ISO 19115-1:2014**: Geographic information — Metadata.
+  * [ISO Standard](https://www.iso.org/standard/53798.html)
+* **OGC SensorThings API**: Standard for internet of things sensing.
+  * [OGC Standard](https://www.ogc.org/standards/sensorthings)
+* **W3C PROV-O**: The PROV Ontology for data provenance and audit trails.
+  * [W3C Recommendation](https://www.w3.org/TR/prov-o/)
 
 ### Telecommunications & 6G (CAMARA/GSMA)
-*   **CAMARA Project**: The Telco Global API Alliance.
-    *   [CAMARA Project Home](https://camaraproject.org/)
-    *   [Location Retrieval API](https://github.com/camaraproject/LocationRetrieval) - For verifying device location.
-    *   [Quality on Demand (QoD) API](https://github.com/camaraproject/QualityOnDemand) - For prioritizing emergency traffic.
-*   **IEEE 802.11s**: Wireless Mesh Networking standard (comparison vs BATMAN-ADV).
-    *   [IEEE Standard](https://standards.ieee.org/standard/802_11s-2011.html)
+
+* **CAMARA Project**: The Telco Global API Alliance.
+  * [CAMARA Project Home](https://camaraproject.org/)
+  * [Location Retrieval API](https://github.com/camaraproject/LocationRetrieval) - For verifying device location.
+  * [Quality on Demand (QoD) API](https://github.com/camaraproject/QualityOnDemand) - For prioritizing emergency traffic.
+* **IEEE 802.11s**: Wireless Mesh Networking standard (comparison vs BATMAN-ADV).
+  * [IEEE Standard](https://standards.ieee.org/standard/802_11s-2011.html)
 
 ### Safety & Fail-Safe Design
-*   **IEEE P7009**: Standard for Fail-Safe Design of Autonomous and Semi-Autonomous Systems.
-    *   [IEEE Standards Association](https://standards.ieee.org/project/7009.html)
-    *   *Note: Used for the "Return-to-Base" and Kill-Switch implementations.*
+
+* **IEEE P7009**: Standard for Fail-Safe Design of Autonomous and Semi-Autonomous Systems.
+  * [IEEE Standards Association](https://standards.ieee.org/project/7009.html)
+  * _Note: Used for the "Return-to-Base" and Kill-Switch implementations._
 
 ---
 
 ## 2. Research & Academic Literature
 
 ### Swarm Intelligence & Mesh Networks
-*   **BATMAN-ADV vs 802.11s**: Performance comparisons in dynamic environments.
-    *   *Comparisons of Mesh Routing Protocols in Indoor and Outdoor Scenarios* (ResearchGate).
-    *   *Performance Analysis of BATMAN-ADV and IEEE 802.11s in Underground Mines*, MDPI (2024). [Link](https://www.mdpi.com/1424-8220/24/5/1689)
-*   **Swarm Intelligence in 6G**:
-    *   *The 6G Mobile Network as a Smart Sensor Platform*, IEEE Xplore. [Link](https://ieeexplore.ieee.org/abstract/document/10209)
-    *   *Why Swarm Intelligence Will Revolutionize 6G Networks*, 6G Academy. [Link](https://www.6gacademy.com/why-swarm-intelligence-will-revolutionize-6g-networks/)
+
+* **BATMAN-ADV vs 802.11s**: Performance comparisons in dynamic environments.
+  * _Comparisons of Mesh Routing Protocols in Indoor and Outdoor Scenarios_ (ResearchGate).
+  * _Performance Analysis of BATMAN-ADV and IEEE 802.11s in Underground Mines_, MDPI (2024). [Link](https://www.mdpi.com/1424-8220/24/5/1689)
+* **Swarm Intelligence in 6G**:
+  * _The 6G Mobile Network as a Smart Sensor Platform_, IEEE Xplore. [Link](https://ieeexplore.ieee.org/abstract/document/10209)
+  * _Why Swarm Intelligence Will Revolutionize 6G Networks_, 6G Academy. [Link](https://www.6gacademy.com/why-swarm-intelligence-will-revolutionize-6g-networks/)
 
 ### AI & Edge Computing
-*   **Federated Learning for Disaster Response**:
-    *   *Federated Learning — Enabling Swarm Intelligence*, Bosch Research. [Link](https://www.bosch.com/research/news/federated-learning/)
-    *   *An IoT-Based Sensor Mesh Network Architecture for Waste Management in Smart Cities* (Swarm Logic application), Journal of Communications. [Link](https://www.jocm.us/2025/JCM-V20N2-153.pdf)
-*   **Environmental Monitoring**:
-    *   *Optimized Wireless Sensor Network Architecture for AI-Based Wildfire Detection*, MDPI (2025). [Link](https://www.mdpi.com/2571-6255/8/7/245)
-    *   *Post-Disaster Recovery Monitoring with Google Earth Engine*, MDPI. [Link](https://www.mdpi.com/2076-3417/10/13/4574)
+
+* **Federated Learning for Disaster Response**:
+  * _Federated Learning — Enabling Swarm Intelligence_, Bosch Research. [Link](https://www.bosch.com/research/news/federated-learning/)
+  * _An IoT-Based Sensor Mesh Network Architecture for Waste Management in Smart Cities_ (Swarm Logic application), Journal of Communications. [Link](https://www.jocm.us/2025/JCM-V20N2-153.pdf)
+* **Environmental Monitoring**:
+  * _Optimized Wireless Sensor Network Architecture for AI-Based Wildfire Detection_, MDPI (2025). [Link](https://www.mdpi.com/2571-6255/8/7/245)
+  * _Post-Disaster Recovery Monitoring with Google Earth Engine_, MDPI. [Link](https://www.mdpi.com/2076-3417/10/13/4574)
 
 ---
 
@@ -61,71 +74,80 @@ This document serves as the authoritative source of truth for all external refer
 These real-world projects validatethe architectural choices made in the **Mobile Mesh EWS**.
 
 ### RainForest Connection (RFCx)
-*   **Relevance**: Validates the "Bio-logging" and "Edge AI" sensor concept.
-*   **Implementation**: Uses upcycled solar-powered phones ("Guardians") in tree canopies to detect illegal logging acoustics in real-time.
-*   **Documentation**: [RFCx Impact & Technology](https://rfcx.org/)
+
+* **Relevance**: Validates the "Bio-logging" and "Edge AI" sensor concept.
+* **Implementation**: Uses upcycled solar-powered phones ("Guardians") in tree canopies to detect illegal logging acoustics in real-time.
+* **Documentation**: [RFCx Impact & Technology](https://rfcx.org/)
 
 ### Airly
-*   **Relevance**: Validates the "High Density Deployment" business model for air quality.
-*   **Implementation**: A global network of 40,000+ small-form-factor PM2.5 sensors aimed at municipalities.
-*   **Documentation**: [Airly Sensor Network](https://airly.org/)
+
+* **Relevance**: Validates the "High Density Deployment" business model for air quality.
+* **Implementation**: A global network of 40,000+ small-form-factor PM2.5 sensors aimed at municipalities.
+* **Documentation**: [Airly Sensor Network](https://airly.org/)
 
 ### Red Hook Mesh (Brooklyn, NY)
-*   **Relevance**: Validates "Community-Owned Infrastructure" resilience during disasters (Hurricane Sandy).
-*   **Implementation**: A local mesh network that maintained connectivity when major ISPs failed.
-*   **Documentation**: [Red Hook WiFi](https://redhookwifi.org/)
+
+* **Relevance**: Validates "Community-Owned Infrastructure" resilience during disasters (Hurricane Sandy).
+* **Implementation**: A local mesh network that maintained connectivity when major ISPs failed.
+* **Documentation**: [Red Hook WiFi](https://redhookwifi.org/)
 
 ---
 
 ## 4. Technical Specifications & Documentation
 
 ### Cloud & AI Infrastructure
-*   **Google BigQuery AI**:
-    *   [BigQuery ML Introduction](https://cloud.google.com/bigquery/docs/bqml-introduction)
-    *   [Generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview)
-*   **Google Earth Engine**:
-    *   [Platform Documentation](https://earthengine.google.com/)
-    *   [Flood Prediction Case Study](https://www.youtube.com/watch?v=AbYB6DkQFq8)
-*   **NASA FIRMS (Fire Information for Resource Management System)**:
-    *   [API Documentation](https://firms.modaps.eosdis.nasa.gov/api/)
+
+* **Google BigQuery AI**:
+  * [BigQuery ML Introduction](https://cloud.google.com/bigquery/docs/bqml-introduction)
+  * [Generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview)
+* **Google Earth Engine**:
+  * [Platform Documentation](https://earthengine.google.com/)
+  * [Flood Prediction Case Study](https://www.youtube.com/watch?v=AbYB6DkQFq8)
+* **NASA FIRMS (Fire Information for Resource Management System)**:
+  * [API Documentation](https://firms.modaps.eosdis.nasa.gov/api/)
 
 ### AI Frameworks
-*   **OPEA (Open Platform for Enterprise AI)**: [https://opea.dev/](https://opea.dev/)
-*   **Haystack (LLM Orchestration)**: [https://haystack.deepset.ai/](https://haystack.deepset.ai/)
+
+* **OPEA (Open Platform for Enterprise AI)**: [https://opea.dev/](https://opea.dev/)
+* **Haystack (LLM Orchestration)**: [https://haystack.deepset.ai/](https://haystack.deepset.ai/)
 
 ---
 
 ## 5. Regulatory & Compliance
 
 ### EU AI Act
-*   **Classification**: "High-Risk AI Systems" (Annex III) - Critical Infrastructure & Emergency Services.
-*   **Text**: [The Artificial Intelligence Act](https://artificialintelligenceact.eu/)
-*   **Key Requirement**: Human oversight for critical decisions (Article 14).
+
+* **Classification**: "High-Risk AI Systems" (Annex III) - Critical Infrastructure & Emergency Services.
+* **Text**: [The Artificial Intelligence Act](https://artificialintelligenceact.eu/)
+* **Key Requirement**: Human oversight for critical decisions (Article 14).
 
 ### GDPR & Privacy
-*   **General Data Protection Regulation**: [Official Legal Text](https://gdpr-info.eu/)
-*   **Privacy by Design**: [ICO Guidelines](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-by-design-and-default/)
+
+* **General Data Protection Regulation**: [Official Legal Text](https://gdpr-info.eu/)
+* **Privacy by Design**: [ICO Guidelines](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-by-design-and-default/)
 
 ### Cybersecurity
-*   **NIST Cybersecurity Framework for IoT**:
-    *   [NIST IoT Program](https://www.nist.gov/internet-of-things-iot)
-*   **EU Cyber Resilience Act (CRA)**: [European Commission Proposal](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act)
+
+* **NIST Cybersecurity Framework for IoT**:
+  * [NIST IoT Program](https://www.nist.gov/internet-of-things-iot)
+* **EU Cyber Resilience Act (CRA)**: [European Commission Proposal](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act)
 
 ---
 
 ## 6. Project Internal References
-Links to key internal architecture documents:
-*   [Product Requirements (PRD)](./PRD_Swarm_System_Requirements_Specification.md)
-*   [System Architecture Diagrams](./ARCHITECTURE/System_Architectures.md)
-*   [Security Architecture](./ARCHITECTURE/Security.md)
-*   [Business Strategy](./Business_Strategy.md)
-*   [Compliance Report](./Compliance_and_Ethics.md)
-*   [Requirement Traceability Matrix](./Requirements_Traceability_Matrix.md)
 
+Links to key internal architecture documents:
+
+* [Product Requirements (PRD)](./PRD_Swarm_System_Requirements_Specification.md)
+* [System Architecture Diagrams](./ARCHITECTURE/System_Architectures.md)
+* [Security Architecture](./ARCHITECTURE/Security.md)
+* [Business Strategy](./Business_Strategy.md)
+* [Compliance Report](./Compliance_and_Ethics.md)
+* [Requirement Traceability Matrix](./Requirements_Traceability_Matrix.md)
 
 ---
 
-#### **Works cited PRD**
+### **Works cited PRD**
 
 1. Optimized Wireless Sensor Network Architecture for AI-Based Wildfire Detection in Remote Areas \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2571-6255/8/7/245](https://www.mdpi.com/2571-6255/8/7/245)  
 2. Recent Advances in Internet of Things Solutions for Early Warning Systems: A Review, accessed January 30, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC8954208/](https://pmc.ncbi.nlm.nih.gov/articles/PMC8954208/)  
@@ -171,7 +193,6 @@ Links to key internal architecture documents:
 42. The Modeling and Detection of Attacks in Role-Based Self-Organized Decentralized Wireless Sensor Networks \- MDPI, accessed January 30, 2026, [https://www.mdpi.com/2673-4001/5/1/8](https://www.mdpi.com/2673-4001/5/1/8)  
 43. UAV swarm communication and control architectures: a review, accessed January 30, 2026, [https://cdnsciencepub.com/doi/10.1139/juvs-2018-0009](https://cdnsciencepub.com/doi/10.1139/juvs-2018-0009)  
 44. AI-Automated Swarm Drone System with Advanced Targeting, Added Countermeasures, and Improved Stealth Technology \- Preprints.org, accessed January 30, 2026, [https://www.preprints.org/manuscript/202511.0792/v1](https://www.preprints.org/manuscript/202511.0792/v1)
-
 
 #### **Works cited PRD_Integrations**
 

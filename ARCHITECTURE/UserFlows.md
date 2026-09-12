@@ -1,5 +1,12 @@
 # User Flows and Scenarios - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## User Flows Overview
 
 This document describes the high-level user interactions, system state diagrams, and detailed scenarios for various disaster types supported by the SwarmSystem.
@@ -30,6 +37,7 @@ flowchart TB
 ```
 
 **Key Interactions:**
+
 - Intent-based commands: "Search Area A", "Monitor Perimeter B"
 - Swarm visualizations: Heatmaps, flow vectors (not individual dots)
 - Confidence metrics displayed for all AI predictions
@@ -58,6 +66,7 @@ flowchart TB
 ```
 
 **Key Features:**
+
 - AR overlay shows sensor data (radiation, heat, gas)
 - Mesh connection for local comms even without cell
 - Real-time guidance to survivors
@@ -87,6 +96,7 @@ flowchart TB
 ```
 
 **Key Features:**
+
 - Override Do Not Disturb for Immediate alerts
 - Multi-language support (auto-detect from device)
 - Offline cached maps and evacuation routes
@@ -549,4 +559,4 @@ sequenceDiagram
 
 ---
 
-*This document describes user flows, system states, and disaster scenarios for the SwarmSystem.*
+_This document describes user flows, system states, and disaster scenarios for the SwarmSystem._

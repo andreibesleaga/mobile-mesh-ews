@@ -1,5 +1,12 @@
 # Data Flow Architecture - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Data Flow Overview
 
 This document describes the complete data flow through the SwarmSystem, from edge sensor acquisition through processing, decision-making, and alert dissemination.
@@ -133,6 +140,7 @@ sequenceDiagram
 ```
 
 **Key Metrics:**
+
 - Edge preprocessing reduces bandwidth by ~80%
 - Cluster aggregation further reduces by ~50%
 - Target: Edge-to-Cloud latency <5 seconds
@@ -194,6 +202,7 @@ sequenceDiagram
 ```
 
 **Supported External Sources:**
+
 - NASA FIRMS (thermal anomalies)
 - Google Earth Engine (geospatial)
 - Weather APIs (OpenWeatherMap, etc.)
@@ -262,6 +271,7 @@ sequenceDiagram
 ```
 
 **Feedback Impact:**
+
 - "Confirmed" by multiple users → Escalate to "Observed"
 - "Denied" by multiple users → Flag for false positive review
 - Feeds into continuous reinforcement learning (REQ-AI-004)
@@ -290,6 +300,7 @@ sequenceDiagram
 ```
 
 **Command Types:**
+
 - High-level intent: "Cover Sector 4", "Monitor Perimeter B"
 - Swarm auto-translates to individual waypoints
 - Hot-swap logic without firmware updates
@@ -297,6 +308,7 @@ sequenceDiagram
 ## Data Schema Summary
 
 ### Sensor Data Event
+
 ```json
 {
   "event_id": "uuid",
@@ -315,6 +327,7 @@ sequenceDiagram
 ```
 
 ### CAP Alert Object
+
 ```json
 {
   "alert_id": "uuid",
@@ -346,4 +359,4 @@ sequenceDiagram
 
 ---
 
-*This document describes the complete data flow architecture of the SwarmSystem.*
+_This document describes the complete data flow architecture of the SwarmSystem._

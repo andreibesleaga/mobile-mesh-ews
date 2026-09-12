@@ -1,5 +1,12 @@
 # Deployment Architecture - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Deployment Overview
 
 The SwarmSystem follows a multi-tier deployment model spanning edge devices, communication infrastructure, and cloud services. This document describes the physical and logical deployment topology.
@@ -160,16 +167,19 @@ flowchart TB
 ## Environment Configuration
 
 ### Development
+
 - GCP Project: `swarm-dev`
 - Single region, scaled-down resources
 - Synthetic sensor data from simulators
 
 ### Staging
+
 - GCP Project: `swarm-staging`
 - Multi-region, production-like
 - Limited real sensors + synthetic traffic
 
 ### Production
+
 - GCP Project: `swarm-prod`
 - Full multi-region deployment
 - All real sensors, full redundancy
@@ -187,4 +197,4 @@ flowchart TB
 
 ---
 
-*This document describes the physical deployment architecture of the SwarmSystem.*
+_This document describes the physical deployment architecture of the SwarmSystem._

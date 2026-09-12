@@ -1,5 +1,12 @@
 # C4 Component Diagram - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Component Architecture Overview
 
 This document details the key components within each major container of the SwarmSystem, showing internal structure and responsibilities.
@@ -237,4 +244,4 @@ flowchart TB
 
 ---
 
-*Diagram follows C4 Model Level 3 (Component) - shows internal structure of each container.*
+_Diagram follows C4 Model Level 3 (Component) - shows internal structure of each container._

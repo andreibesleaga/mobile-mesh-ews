@@ -1,5 +1,12 @@
 # C4 Container Diagram - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Container Architecture Overview
 
 The SwarmSystem is composed of multiple containers (deployable units) that work together to provide distributed climate monitoring, AI-driven decision making, and multi-channel alerting capabilities.
@@ -16,7 +23,7 @@ C4Container
     System_Boundary(swarm_boundary, "SwarmSystem") {
         Container(mobile_mesh, "Mobile Sensor Mesh", "Edge Nodes, Drones, Vehicles, IoT", "Distributed network of heterogeneous sensors with local AI processing")
         
-        Container(comm_gateway, "Communication Gateway", "5G/6G, Satellite, Mesh Protocols", "Multi-modal connectivity layer with self-healing routing")
+        Container(comm_gateway, "Communication Gateway", "5G/6G, Satellite, Mesh Protocols", "Multi-modal connectivity layer; resilient routing is a design goal")
         
         Container(central_platform, "Central Platform", "Cloud Services, Event-Driven", "Data aggregation, streaming, and coordination hub")
         
@@ -72,7 +79,7 @@ C4Container
 
 | Container | Technology | Responsibilities |
 |-----------|------------|------------------|
-| **Communication Gateway** | 5G/6G NR, LoRaWAN, Satellite Modems | Multi-modal connectivity, self-healing routing (AODV/TORA), DTN store-and-forward |
+| **Communication Gateway** | 5G/6G NR, LoRaWAN, Satellite Modems | Multi-modal connectivity, adaptive mesh routing (AODV/TORA), DTN store-and-forward — all proposed |
 
 ### Platform Tier
 
@@ -94,28 +101,32 @@ C4Container
 ## Integration Points
 
 ### CAMARA Mobile Network APIs
+
 - **Purpose**: Urban emergency scenarios with population density awareness
 - **APIs Used**: Device Location, Geofencing, Network Status
 - **Container**: Communication Gateway queries CAMARA for context
 
 ### Framework AI (Chatbot & Learning)
+
 - **Purpose**: Natural language interaction with users, document ingestion, learning from any relevant data
 - **Protocols**: MCP (Model Context Protocol), A2A (Agent-to-Agent)
 - **Capabilities**: Ingest weather reports, news archives, research papers; learn patterns for prediction enhancement
 
 ### IoT Operations Layer  
+
 - **Purpose**: Universal edge device management
 - **Protocols**: CoAP, MQTT, LwM2M
 - **Container**: Central Platform manages device lifecycle, firmware updates
 
 ### Communications APIs
+
 - **Purpose**: Multi-channel notification delivery
 - **Channels**: SMS, Email, Push Notifications, Voice
 - **Container**: CAP Gateway and Central Platform utilize for admin/user/3rd-party communications
 
 ## Data Flow Summary
 
-```
+```text
 Mobile Sensors → Edge Preprocessing → Mesh Relay → Communication Gateway
        ↓                                                    ↓
 Local Swarm Decision                              Central Platform (Pub/Sub)
@@ -144,4 +155,4 @@ Immediate Alert                           BigData AI ←→ Framework AI (Learni
 
 ---
 
-*Diagram follows C4 Model Level 2 (Container) - shows major deployable units within the system.*
+_Diagram follows C4 Model Level 2 (Container) - shows major deployable units within the system._

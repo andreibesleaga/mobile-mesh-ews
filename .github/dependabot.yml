@@ -1,0 +1,37 @@
+version: 2
+updates:
+  # Python simulation dependencies. Grouped weekly so a single review covers
+  # the whole scientific stack (numpy, matplotlib, pillow) together.
+  - package-ecosystem: pip
+    directory: /Algorithms/Swarm-EWS-Simulation
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Bucharest
+    open-pull-requests-limit: 5
+    versioning-strategy: increase-if-necessary
+    groups:
+      python-scientific:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    labels: ["dependencies", "python"]
+    commit-message:
+      prefix: "deps(python)"
+
+  # Keep the CI actions themselves current and SHA-pinned.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Bucharest
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    labels: ["dependencies", "ci"]
+    commit-message:
+      prefix: "deps(actions)"

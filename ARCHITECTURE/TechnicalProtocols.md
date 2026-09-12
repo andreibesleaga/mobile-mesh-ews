@@ -1,5 +1,12 @@
 # Technical Protocols - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## Technical Protocols Overview
 
 This document details the specific technical protocols used throughout the SwarmSystem architecture, covering mesh networking, communication, and agent coordination.
@@ -37,13 +44,14 @@ flowchart TB
 **Use Case:** General monitoring phase with stable topology (>30 nodes)
 
 **Characteristics:**
+
 - Reactive protocol - routes discovered on-demand
 - Lower overhead in static networks
 - Best for backbone mesh during steady-state monitoring
 
 **PRD Reference:** REQ-COM-004
 
-```
+```text
 Route Discovery:
 Node A → RREQ broadcast → Intermediate nodes → Node D
 Node D → RREP unicast → Back to Node A
@@ -54,6 +62,7 @@ Node D → RREP unicast → Back to Node A
 **Use Case:** Active response phase with fast-moving UAV swarms
 
 **Characteristics:**
+
 - Link-reversal algorithm
 - High redundancy, rapid adaptation
 - Maintains multiple routes simultaneously
@@ -66,13 +75,13 @@ Node D → RREP unicast → Back to Node A
 **Use Case:** Resource optimization across entire mesh
 
 **Characteristics:**
+
 - Bio-inspired probabilistic routing
 - "Digital pheromones" track link quality + battery
 - Naturally load-balances across network
 - Runs as overlay optimization layer
 
 **PRD Reference:** REQ-COM-006
-
 
 ## Physical Layer Protocols
 
@@ -84,7 +93,7 @@ Node D → RREP unicast → Back to Node A
 
 **PRD Reference:** REQ-COM-008
 
-```
+```text
 OTFS vs OFDM Performance:
 +----------------+--------+--------+
 | Velocity       | OFDM   | OTFS   |
@@ -101,6 +110,7 @@ OTFS vs OFDM Performance:
 **Use Case:** 6G nodes using radio waves for both data AND sensing
 
 **Capabilities:**
+
 - Obstacle detection via RF radar
 - Terrain mapping in low-visibility (smoke/fog)
 - Works when optical sensors fail
@@ -110,9 +120,11 @@ OTFS vs OFDM Performance:
 ## Agent Coordination Protocols
 
 ### A2A (Agent-to-Agent Protocol)
+
 **Use Case:** Inter-agent capability discovery and coordination
 
 **Mechanism:**
+
 ```mermaid
 sequenceDiagram
     participant A as Agent A (Drone)
@@ -128,6 +140,7 @@ sequenceDiagram
 ```
 
 **Capability Schema:**
+
 ```json
 {
   "agent_id": "drone-alpha-7",
@@ -138,17 +151,21 @@ sequenceDiagram
   "version": "a2a-v2.1"
 }
 ```
+
 **PRD Reference:** PRD Other #5.2
 
 ### MCP (Model Context Protocol)
+
 **Use Case:** Context-aware data exchange between agents and AI systems
 
 **Mechanism:**
+
 - Every data point includes rich metadata
 - Context preserved from edge to cloud
 - Enables semantic understanding by AI
 
 **Context Schema:**
+
 ```json
 {
   "value": 45.2,
@@ -164,11 +181,14 @@ sequenceDiagram
   }
 }
 ```
+
 **PRD Reference:** PRD Other #5.2
 
 ### Version Compatibility
+
 **Requirement:** Forward and backward compatibility in multi-version mesh
 **Mechanism:**
+
 - Versioned message headers
 - Core payload always parseable
 - New metadata fields ignored by old nodes
@@ -176,7 +196,7 @@ sequenceDiagram
 
 **PRD Reference:** PRD Other #5.2
 
-```
+```text
 V1 Node receives V2 Message:
 ├── Parse header (version=2)
 ├── Extract core payload (always compatible)
@@ -187,8 +207,10 @@ V1 Node receives V2 Message:
 ## Safety Protocols
 
 ### Fail-Safe Design (IEEE P7009)
+
 **Use Case:** Loss of positive control or catastrophic jamming
 **Mechanism:**
+
 1. **Heartbeat Loss:** If C2 heartbeat missing > 120s
 2. **Safe State Transition:** Nodes enter `SAFE_MODE`
 3. **Action:** Execute "Return-to-Base" or "Land Immediately"
@@ -198,6 +220,7 @@ V1 Node receives V2 Message:
 ## Operational Support Protocols (Integrated Extensions)
 
 ### Messaging & Notification Protocols
+
 **Use Case:** Delivering low-latency alerts via civilian apps (Communications_APIs)
 **Integration:** Notification Service
 
@@ -208,11 +231,13 @@ V1 Node receives V2 Message:
 | **RCS** | UP 2.0 | Rich Card | Interactive alerts on Android |
 
 **Flow:**
-```
+
+```text
 Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 ```
 
 ### IoT Management Protocols
+
 **Use Case:** Managing SIM lifecycles and device configurations (IoT_Operations)
 **Integration:** IoT Manager
 
@@ -223,6 +248,7 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 | **MQTT-SN** | Telemetry | Low-bandwidth update of device health status |
 
 ### Blockchain/Ledger Protocols
+
 **Use Case:** Immutable audit logging for critical decisions (Distributed_Ledgers_Operations)
 **Integration:** Ledger Service
 
@@ -232,6 +258,7 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 | **Ethereum** | JSON-RPC (Web3) | Public anchor for transparency/verification |
 
 **Audit Log Schema Example:**
+
 ```json
 {
   "decision_id": "uuid",
@@ -258,6 +285,7 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 | **Physical** | 5G NR, OTFS, LoRa | Wireless |
 
 ### Binary Serialization
+
 **Requirement:** Minimize bandwidth in constrained environments
 **PRD Reference:** Constraint in #13.1
 
@@ -270,9 +298,11 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 ## Alert Protocols
 
 ### CAP v1.2 (Common Alerting Protocol)
+
 **Standard:** ITU-T X.1303, OASIS CAP v1.2
 
 **Structure:**
+
 ```xml
 <alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
   <identifier>uuid</identifier>
@@ -299,11 +329,14 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
   <!-- Additional <info> blocks for other languages -->
 </alert>
 ```
+
 **PRD Reference:** REQ-EXT-005, PRD Other #4.1
 
 ### WEA (Wireless Emergency Alerts)
+
 **Standard:** ATIS 07 000 10
 **Integration:**
+
 - CAP Gateway → IPAWS → Cell Carriers → WEA Broadcast
 - Polygon-based geo-targeting
 - 90/360 character limits per message class
@@ -312,7 +345,9 @@ Event Bus → Notification Service → Twilio/WhatsApp API → User Device
 ## Discovery Protocols
 
 ### Mesh Auto-Discovery
+
 **Mechanism:**
+
 1. New node broadcasts join request
 2. Nearby nodes respond with mesh info
 3. Cluster leader validates credentials
@@ -352,4 +387,4 @@ sequenceDiagram
 
 ---
 
-*This document details the technical protocols used in the SwarmSystem.*
+_This document details the technical protocols used in the SwarmSystem._

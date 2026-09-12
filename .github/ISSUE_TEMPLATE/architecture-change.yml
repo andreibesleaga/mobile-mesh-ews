@@ -1,0 +1,49 @@
+name: Architecture change proposal
+description: Propose a change to requirements, architecture, risk treatment, or a decision record.
+title: "[design] "
+labels: ["design"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Material architecture changes are discussed before drafting. See
+        [CONTRIBUTING.md](https://github.com/andreibesleaga/mobile-mesh-ews/blob/main/CONTRIBUTING.md).
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What design gap or risk does this address? Reference requirement and risk IDs.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The change in outline, including affected documents and decision records.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact assessment
+      description: Safety, privacy, security, accessibility, dual-use, jurisdiction, and cost effects.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How the change would be verified
+      description: Acceptance criterion, test method, and evidence that would close the gap.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Boundary check
+      options:
+        - label: The proposal keeps public warning and physical action behind an authorised human authority.
+          required: true
+        - label: The proposal does not add surveillance, targeting, or defence capability.
+          required: true
+        - label: The proposal separates proposals, assumptions, and targets from verified results.
+          required: true

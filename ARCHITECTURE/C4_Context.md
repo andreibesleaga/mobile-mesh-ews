@@ -1,8 +1,15 @@
 # C4 Context Diagram - SwarmSystem
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## System Context Overview
 
-The **Live Mobile Edge Sensors Swarm System (SwarmSystem)** is a decentralized, autonomous climate monitoring and early warning platform. It integrates mobile sensor networks, AI-driven decision making, and multi-channel alerting to provide real-time environmental awareness and disaster response capabilities.
+The **Live Mobile Edge Sensors Swarm System (SwarmSystem)** is a _proposed_ decentralized climate-monitoring and early-warning design. It is intended to combine mobile sensor networks, analytical decision support, and multi-channel notification. No capability shown here is implemented or verified, and public warning and physical action remain with an authorised human authority.
 
 ## Context Diagram
 
@@ -33,11 +40,11 @@ C4Context
 
     Rel(swarm_system, nasa, "Ingests satellite imagery and climate data", "REST API")
     Rel(swarm_system, google_earth, "Queries geospatial models", "Earth Engine API")
-    Rel(swarm_system, ipaws, "Publishes CAP alerts", "XML/HTTPS")
+    Rel(swarm_system, ipaws, "Proposes CAP message for authority approval", "XML/HTTPS")
     Rel(swarm_system, satellite_net, "Backhaul from remote sensors", "LEO Satellite")
     Rel(swarm_system, telecom_5g6g, "Sensor data relay, CAMARA APIs", "5G/6G/CAMARA")
     Rel(swarm_system, external_data, "Ingests any relevant external data", "MCP/A2A/REST")
-    Rel(swarm_system, legacy_hardware, "Triggers physical alerts", "RS-485/IP")
+    Rel(swarm_system, legacy_hardware, "Hands alert to authorised operator", "RS-485/IP")
     Rel(swarm_system, blockchain, "Logs critical decisions", "Ledger API")
 
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
@@ -65,7 +72,7 @@ C4Context
 | **5G/6G Networks** | Primary data transport, CAMARA mobile network APIs for urban contexts | CAMARA/5G/6G |
 | **External Data Sources** | Weather APIs, seismic networks, social media, documents - ingested via AI learning | MCP, A2A, REST APIs |
 | **Legacy Hardware** | Fire control panels, public signage, sirens | RS-232/485, IP sockets |
-| **Distributed Ledger** | Immutable audit trail for all automated decisions | Blockchain API |
+| **Distributed Ledger** | Optional tamper-evident audit trail for decisions (not a committed dependency) | Blockchain API |
 
 ## Key Design Decisions
 
@@ -89,4 +96,4 @@ C4Context
 
 ---
 
-*Diagram follows C4 Model Level 1 (Context) - shows system boundary and external actors/systems.*
+_Diagram follows C4 Model Level 1 (Context) - shows system boundary and external actors/systems._

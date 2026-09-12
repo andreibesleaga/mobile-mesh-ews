@@ -1,31 +1,41 @@
 # General System Architecture: Mobile Mesh EWS
 
+> **Status: candidate design — not verified and not implemented.**
+> This document is a proposal for review. It does not describe a deployed
+> capability, it authorises no public alert or physical action, and it records
+> no verified result. Numeric figures are acceptance targets, not measurements.
+> See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for the claim policy and the document
+> precedence order.
+
 ## 1. High-Level System Context
 
 The Mobile Mesh Early Warning System (EWS) operates on a **Four-Tier Architecture**:
-1.  **Tier 1: The Edge (Swarm)** - Autonomous sensing and local actions.
-2.  **Tier 2: The Network (Nervous System)** - Resilient mesh and backhaul connectivity.
-3.  **Tier 3: The Core (Brain)** - Centralized AI, Big Data, and Orchestration.
-4.  **Tier 4: Action & Dissemination (Effectors)** - Alerts, Government Dashboards, and Public Interfaces.
+
+1. **Tier 1: The Edge (Swarm)** - Autonomous sensing and local actions.
+2. **Tier 2: The Network (Nervous System)** - Resilient mesh and backhaul connectivity.
+3. **Tier 3: The Core (Brain)** - Centralized AI, Big Data, and Orchestration.
+4. **Tier 4: Action & Dissemination (Effectors)** - Alerts, Government Dashboards, and Public Interfaces.
 
 ### Latency Service Level Objectives (SLOs)
+
 | Hazard Type | Detection-to-Alert Latency | Requirement |
 |-------------|---------------------------|-------------|
-| **Earthquake** | < 5 seconds | Real-time immediate automated alert |
+| **Earthquake** | < 5 seconds | Automated alert is a design target requiring authority approval |
 | **Flood** | < 60 seconds | Rapid validation and predictive modeling |
 | **Air Quality** | < 10 minutes | Trend analysis and verified dispersal pattern |
 
 ### AI/ML Model Architectures
+
 - **Edge AI**: TensorFlow Lite Micro running on local nodes for anomaly detection (One-Class SVM) and sensor validation.
 - **Core AI**:
-    - **Predictive Models**: BigQuery ML (ARIMA_PLUS, XGBoost) for time-series forecasting.
-    - **Generative AI**: GenieAI (Gemini Pro/Flash) for RAG-based query answering.
-    - **Vision AI**: CNNs (ResNet-50 optimized) on Border Drones for object classification.
+  - **Predictive Models**: BigQuery ML (ARIMA_PLUS, XGBoost) for time-series forecasting.
+  - **Generative AI**: GenieAI (Gemini Pro/Flash) for RAG-based query answering.
+  - **Vision AI**: CNNs (ResNet-50 optimized) on Border Drones for object classification.
 
 ### Hybrid Coordination Strategy
+
 - **Decentralized**: Local swarms use consensus (Raft-over-Mesh) for immediate collision avoidance and local data aggregation.
 - **Centralized**: The Core Cloud provides strategic directives (e.g., "Scan Sector 7") and long-term model retraining.
-
 
 ```mermaid
 graph TD
@@ -89,6 +99,7 @@ graph TD
 ## 2. Governmental Sector Architecture
 
 ### 2.1 National Disaster Management (Data Flow)
+
 **Problem**: Rapid alerting and situational awareness during infrastructure failure.
 **Flow**: Sensors detect hazard -> AI validates -> CAP Alert broadcast.
 
@@ -117,6 +128,7 @@ sequenceDiagram
 ```
 
 ### 2.2 Defense & Border Surveillance (Safe State)
+
 **Problem**: Passive surveillance with strict non-lethal, human-controlled intervention.
 
 ```mermaid
@@ -158,6 +170,7 @@ stateDiagram-v2
 ## 3. NGO Sector Architecture
 
 ### 3.1 Humanitarian Aid Supply Chain
+
 **Problem**: Verifying aid delivery in chaotic environments.
 **Solution**: Blockchain-backed tracking via mesh.
 
@@ -183,6 +196,7 @@ flowchart LR
 ```
 
 ### 3.2 Direct-to-Consumer Chatbot (GenieAI Integration)
+
 **Problem**: Citizens need specific answer ("Is my street safe?"), not raw data.
 
 ```mermaid
@@ -207,6 +221,7 @@ sequenceDiagram
 ## 4. For-Profit Sector Architecture
 
 ### 4.1 Parametric Insurance Oracle
+
 **Problem**: Slow claims processing due to manual verification.
 **Solution**: Automated payout based on trusted oracle data.
 
@@ -243,6 +258,7 @@ graph LR
 ```
 
 ### 4.2 Commercial Urban Analytics (CAMARA API)
+
 **Problem**: Monetizing data exhaust for retail/urban planning while preserving privacy.
 
 ```mermaid
@@ -275,8 +291,8 @@ graph TD
 ```
 
 ## 5. Architectural Weaknesses and Gaps
-*   **Data Flow Specifics**: The high-level architecture requires more detailed data pipeline diagrams specifying message formats (Protobuf/Avro) and error handling queues (Dead Letter Queues).
-*   **Security Boundaries**: Explicit trust zones and authentication flows between the Mesh and Cloud need stricter definition (Zero Trust implementation).
-*   **Failover Mechanisms**: While Swarm is resilient, the Cloud Core needs explicit Multi-Region Disaster Recovery (DR) and High Availability (HA) strategies documented.
-*   **Requirements Traceability**: Mapping system requirements to specific architectural components is currently high-level and needs a detailed RTM.
 
+- **Data Flow Specifics**: The high-level architecture requires more detailed data pipeline diagrams specifying message formats (Protobuf/Avro) and error handling queues (Dead Letter Queues).
+- **Security Boundaries**: Explicit trust zones and authentication flows between the Mesh and Cloud need stricter definition (Zero Trust implementation).
+- **Failover Mechanisms**: While Swarm is resilient, the Cloud Core needs explicit Multi-Region Disaster Recovery (DR) and High Availability (HA) strategies documented.
+- **Requirements Traceability**: Mapping system requirements to specific architectural components is currently high-level and needs a detailed RTM.
