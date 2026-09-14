@@ -57,7 +57,7 @@ jobs:
                       ./
             - name: Upload SARIF
               if: always() && hashFiles('results.sarif') != ''
-              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
               with:
                   sarif_file: results.sarif
 
@@ -83,7 +83,7 @@ jobs:
                   exit-code: "0"
             - name: Upload SARIF
               if: always() && hashFiles('trivy.sarif') != ''
-              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
               with:
                   sarif_file: trivy.sarif
 
@@ -123,7 +123,7 @@ jobs:
                   publish_results: true
             - name: Upload SARIF
               if: always() && hashFiles('scorecard.sarif') != ''
-              uses: github/codeql-action/upload-sarif@faaca9a8f6edddba5725ffe5adefdab6669a2eca # v3
+              uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
               with:
                   sarif_file: scorecard.sarif
             - name: Upload Scorecard results
