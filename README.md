@@ -12,7 +12,7 @@ The design assumes that any future deployment is owned and operated by a compete
 
 The included Python simulation and BigQuery-oriented SQL are demonstrations, not validation evidence or a production baseline. They must not be interpreted as proof of availability, latency, accuracy, coverage, interoperability, privacy, security, or regulatory compliance.
 
-(Another Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge: [Browser-based Emergency Awareness & Coordination Open Network](https://github.com/andreibesleaga/Quest-beacon) - open-source, local-first, near-real-time, Common Operating Picture, for wildfires and floods).
+(Another Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge: [Browser-based Emergency Awareness & Coordination Open Network](https://github.com/andreibesleaga/Quest-beacon) - Common Operating Picture, for wildfires and floods, open-source, local-first, near-real-time).
 
 ## What is in scope
 
