@@ -53,5 +53,4 @@ Part of this system has been presented as a [final project for University of Hel
 ## Public-repository practices
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [LICENSES_AND_ATTRIBUTION.md](LICENSES_AND_ATTRIBUTION.md), and [References.md](References.md) before reusing or contributing material. Documentation changes are reviewed against [DOCUMENTATION_REVIEW_CHECKLIST.md](DOCUMENTATION_REVIEW_CHECKLIST.md), and the set of changes is tracked in [CHANGELOG.md](CHANGELOG.md). The repository licence is CC BY-NC-ND 4.0; it does not grant rights in third-party material, data, services, standards, trademarks, or images.
-
 If you cite this work, use [CITATION.cff](CITATION.cff).
