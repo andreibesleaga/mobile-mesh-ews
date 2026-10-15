@@ -10,9 +10,9 @@ Mobile Mesh EWS is a public architecture and research repository for a possible 
 
 The design assumes that any future deployment is owned and operated by a competent authority with jurisdiction over the area and hazard. Automated analysis may produce evidence or recommendations only. A designated human authority must independently verify the evidence and authorise every external warning and every physical actuation. The design does not grant access to WEA, IPAWS, CAP feeds, satellite data, telecom APIs, radio spectrum, or any other third-party service.
 
-The included Python simulation and BigQuery-oriented SQL are demonstrations, not validation evidence or a production baseline. They must not be interpreted as proof of availability, latency, accuracy, coverage, interoperability, privacy, security, or regulatory compliance.
+The included Python [Swarm EWS Simulation](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/Algorithms/Swarm-EWS-Simulation) and [BigQuery AI oriented SQL](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData_AI_Decision_System) are demonstrations, not validation evidence or a production baseline. They must not be interpreted as proof of availability, latency, accuracy, coverage, interoperability, privacy, security, or regulatory compliance, but full proof-of-concepts.
 
-(Another Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge: [Browser-based Emergency Awareness & Coordination Open Network](https://github.com/andreibesleaga/Quest-beacon) - Common Operating Picture, for wildfires and floods, open-source, local-first, near-real-time).
+(Another Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge: [Browser-based Emergency Awareness & Coordination Open Network - Common Operating Picture](https://github.com/andreibesleaga/Quest-beacon) for wildfires and floods, open-source, local-first, near-real-time, with remote APIs integration, local Database, SitRep, Logistics, and optional AI).
 
 ## What is in scope
 
