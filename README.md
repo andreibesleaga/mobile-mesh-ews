@@ -2,6 +2,9 @@
 
 Mobile Mesh EWS is a public architecture and research repository for a possible multi-hazard early-warning system that combines field sensors, resilient communications, analytical services, and authorized warning operations, in new types of architectures and innovative ways, as swarm mesh networks based on live mobile devices and sensors.
 
+(Another working Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge, with demo: [Browser-based Emergency Awareness & Coordination Open Network - Common Operating Picture](https://github.com/andreibesleaga/Quest-beacon) for wildfires and floods, open-source, local-first, near-real-time, with remote APIs integration, local Database, SitRep, Logistics, and optional AI)
+
+System Overview:
 ![System Overview](SwarmSystem.png)
 
 ## Status and safety boundary
@@ -11,8 +14,6 @@ Mobile Mesh EWS is a public architecture and research repository for a possible 
 The design assumes that any future deployment is owned and operated by a competent authority with jurisdiction over the area and hazard. Automated analysis may produce evidence or recommendations only. A designated human authority must independently verify the evidence and authorise every external warning and every physical actuation. The design does not grant access to WEA, IPAWS, CAP feeds, satellite data, telecom APIs, radio spectrum, or any other third-party service.
 
 The included Python [Swarm EWS Simulation](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/Algorithms/Swarm-EWS-Simulation) and [BigQuery AI oriented SQL](https://github.com/andreibesleaga/mobile-mesh-ews/tree/main/BigData_AI_Decision_System) are demonstrations, not validation evidence or a production baseline. They must not be interpreted as proof of availability, latency, accuracy, coverage, interoperability, privacy, security, or regulatory compliance, but full proof-of-concepts.
-
-(Another Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge: [Browser-based Emergency Awareness & Coordination Open Network - Common Operating Picture](https://github.com/andreibesleaga/Quest-beacon) for wildfires and floods, open-source, local-first, near-real-time, with remote APIs integration, local Database, SitRep, Logistics, and optional AI).
 
 ## What is in scope
 
