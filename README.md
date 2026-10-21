@@ -2,7 +2,7 @@
 
 Mobile Mesh EWS is a public architecture and research repository for a possible multi-hazard early-warning system that combines field sensors, resilient communications, analytical services, and authorized warning operations, in new types of architectures and innovative ways, as swarm mesh networks based on live mobile devices and sensors.
 
-(Another working Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge, with demo: [Browser-based Emergency Awareness & Coordination Open Network - Common Operating Picture](https://github.com/andreibesleaga/Quest-beacon) for wildfires and floods, open-source, local-first, near-real-time, with remote APIs integration, local Database, SitRep, Logistics, and optional AI)
+(A working Emergency Warning and Management System was implemented and submitted to the IEEE Response Quest 2026 challenge, with Live Demo: [Browser-based Emergency Awareness & Coordination Open Network - Common Operating Picture](https://github.com/andreibesleaga/Quest-beacon) for wildfires and floods, open-source, local-first, near-real-time, with remote APIs integration, local Database, SitRep, Logistics, and optional AI)
 
 System Overview:
 ![System Overview](SwarmSystem.png)
