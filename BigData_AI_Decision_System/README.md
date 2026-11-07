@@ -116,6 +116,15 @@ The system includes comprehensive development tools:
 - **Earth Engine Tutorial**: Complete step-by-step guide in `earthAI.md` for satellite data integration
 - **Performance Monitoring**: Built-in checks for out-of-range values, alert distribution analysis, and system health monitoring
 
+## Google Cloud BigQueryAI Console Screenshots
+
+![Screen1](GCPscreens/Screenshot1.png)
+![Screen2](GCPscreens/Screenshot2.png)
+![Screen3](GCPscreens/Screenshot3.png)
+![Screen4](GCPscreens/Screenshot4.png)
+![Screen5](GCPscreens/Screenshot5.png)
+![Screen6](GCPscreens/Screenshot6.png)
+
 ---
 
 _This system is a demo and not tested in the wild (only on limited GCP account with live BigQuery AI and mock datasets) and is designed for scalable, real-time environmental monitoring and can be adapted for various climate and weather-related early warning applications._
